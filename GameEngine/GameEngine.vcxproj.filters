@@ -1,0 +1,1228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{d93afeb1-9b9c-448b-b989-2fc3e654e6b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode">
+      <UniqueIdentifier>{533ff4d8-63d7-446b-bb4f-24c105471ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\WindowApp">
+      <UniqueIdentifier>{ddb16f08-c648-42fc-9352-2667f95615fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\WindowApp\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="GameEngine\DataFormat">
+      <UniqueIdentifier>{1f27599e-9f14-46a7-b0b9-b5691d0e7ab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\ImGui">
+      <UniqueIdentifier>{4a56dbbe-415e-432b-97c3-27b0b80d49d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\MyMath">
+      <UniqueIdentifier>{05a77e0b-dbd8-4fd1-82af-4d9a514ad1da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameActor">
+      <UniqueIdentifier>{b1cbb2e4-4b1d-4cb1-9902-1293e8e13bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\DataBase">
+      <UniqueIdentifier>{5896b328-2376-4d34-87c9-eed75f7e9e30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Collision">
+      <UniqueIdentifier>{571a004a-cad8-4d29-b64d-edb676dd58b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Character">
+      <UniqueIdentifier>{0f624c13-8b6a-4bb0-856f-22fb02ed9bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Button">
+      <UniqueIdentifier>{0c8d0466-30ef-4ec1-9004-3b37a143da7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\BackGround">
+      <UniqueIdentifier>{0c46358a-20c5-4f0a-a2ac-b11155dbb048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Button\Button2D">
+      <UniqueIdentifier>{025be329-850f-44ec-ad03-98d1c3163875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EffectSeer">
+      <UniqueIdentifier>{ef2158f4-9efb-4976-b329-f23f88b30482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Character\Enemy">
+      <UniqueIdentifier>{849b169a-e5b8-4b97-982b-eec2ec82aa95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Character\Player">
+      <UniqueIdentifier>{82308b71-934f-43f7-8592-8a1df2e1a7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\DesignPatern">
+      <UniqueIdentifier>{a23aece1-0a7f-413d-8dc8-0d13c89e464d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines">
+      <UniqueIdentifier>{f200b1bd-b988-42e1-b968-fd1e8459ec49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AudioEngine">
+      <UniqueIdentifier>{7affd109-17c6-43f9-b23e-4c7273b82d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AudioEngine\AudioManager">
+      <UniqueIdentifier>{a80c8869-f1bf-4e55-b640-1a037d4d57a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine">
+      <UniqueIdentifier>{6c52c0e2-0e11-4622-a6cc-5cd4fca02aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framework">
+      <UniqueIdentifier>{13057f01-709a-4ad6-b788-fb3ef77bf895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\DrawState">
+      <UniqueIdentifier>{92f123d9-fc7a-472f-ae48-8047f851a63c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\DrawState\SamplerState">
+      <UniqueIdentifier>{b96fafa0-a3c0-4240-a893-ccdf9064f025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\DrawState\BlendState">
+      <UniqueIdentifier>{e8922d8b-0088-4204-8f17-f242882aaaef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\DrawState\DepthStencilState">
+      <UniqueIdentifier>{62e8975e-ad4b-4ace-9443-875499d73400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\DrawState\Rasterizer">
+      <UniqueIdentifier>{b59209a0-2b1c-4d30-99b6-0b39410b8465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\ConstantBuffer">
+      <UniqueIdentifier>{07c89651-92bf-4fa0-acb8-a49e906f3bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\ConstantBuffer\LightConstant">
+      <UniqueIdentifier>{21313566-3597-4e6a-8c2c-cf9ca35309b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\FullscreenQuad">
+      <UniqueIdentifier>{270d6b35-5750-4a6c-85b2-ec3279136b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\CameraManager">
+      <UniqueIdentifier>{76ece850-cda5-4bae-b8f2-f8feacccfc7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\GeometricPrimitive">
+      <UniqueIdentifier>{092f794d-3bfe-413a-bbc7-b7942ffe5aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LightManager">
+      <UniqueIdentifier>{953ee3be-c669-49af-9c09-d305af24deaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LightManager\SpotLight">
+      <UniqueIdentifier>{0ea0a111-47b3-4ed9-a887-3a21e25fd434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LightManager\PointLight">
+      <UniqueIdentifier>{0709d60d-e833-4e4d-95e5-4fdb4ac6fffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LoaderResouceManager">
+      <UniqueIdentifier>{f8b07f95-c2aa-4234-a7eb-a58a0af63dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh">
+      <UniqueIdentifier>{581b2ccf-3c3e-442c-a6ee-98f726b691a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\SkinnedMesh">
+      <UniqueIdentifier>{4c02f176-c277-4436-8370-ebe7cec46a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\StaticMesh">
+      <UniqueIdentifier>{0202eee6-5050-498c-9ec6-310b8958034b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader">
+      <UniqueIdentifier>{994e6ec5-be4f-4a0d-9898-d871bd83c4b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad">
+      <UniqueIdentifier>{569268f3-fbd3-4a25-8565-46539787d23d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\MSAA">
+      <UniqueIdentifier>{834172b0-9686-45a6-a17b-5c99049e71b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh">
+      <UniqueIdentifier>{3183e90c-c97f-47b8-af7d-557d4796ddac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow">
+      <UniqueIdentifier>{de4fa9f0-8cf5-4994-8cbb-c20ec609698e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow">
+      <UniqueIdentifier>{7d328fca-7d52-45c6-9240-72785360dcca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\UseShadow">
+      <UniqueIdentifier>{eaa5d3cf-7fa9-441c-877c-b4e0fb31880b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive">
+      <UniqueIdentifier>{32574c97-e0cd-4445-8a54-23ad079248b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Debuger">
+      <UniqueIdentifier>{38ac5c18-44f6-4043-bc4f-1cf5c68c8bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Sprite">
+      <UniqueIdentifier>{25ded3b9-6636-4666-ab46-77c533dff749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Sprite\2D">
+      <UniqueIdentifier>{416a442b-715b-40bc-bf59-14c6e099bd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Sprite\3D">
+      <UniqueIdentifier>{9361b031-1d77-47df-a985-f676d2496a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\ColorFilter">
+      <UniqueIdentifier>{87123983-6ff4-4106-ae0a-ea2ca7daaee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Functions">
+      <UniqueIdentifier>{014ede0b-15ec-4279-b03c-5423a51808f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Light">
+      <UniqueIdentifier>{5f0ab6ca-7e86-4e97-a8f1-d7842748d2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Sprite">
+      <UniqueIdentifier>{bbaa5e32-012b-4345-8cdc-37d457ce3f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Sprite\Sprite3D">
+      <UniqueIdentifier>{32c9c7ec-e882-4b94-a4b8-0947c4760385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\InputEngine">
+      <UniqueIdentifier>{3ea06388-206d-4a1f-9f63-78b92fd93302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\InputEngine\InputManager">
+      <UniqueIdentifier>{ad648a84-85dc-4167-9df9-e4f237a6c002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\InputEngine\InputManager\ControlPad">
+      <UniqueIdentifier>{af89d04a-7d17-4077-9089-541e544b7c1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\InputEngine\InputManager\MousePoint">
+      <UniqueIdentifier>{47645671-c60f-482e-a5fb-4854b12c60ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LightManager\Shadow">
+      <UniqueIdentifier>{837f4d49-b378-4f3e-9742-32d014c79099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\SceneManager">
+      <UniqueIdentifier>{cc160607-77d8-480f-bb17-d3814f282381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\SceneManager\Scene">
+      <UniqueIdentifier>{e6f37c3d-dc79-47e6-8111-49f67ead5c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameActor\OBJ2D">
+      <UniqueIdentifier>{021efc70-900c-40c6-9961-49518546905a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameActor\OBJ3D">
+      <UniqueIdentifier>{0a26d76d-3c1f-4d3f-bd63-e360df238386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\ActorManager">
+      <UniqueIdentifier>{0722980f-e72a-4405-9988-500f848549d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger">
+      <UniqueIdentifier>{3f9d1131-f95a-48f9-89cd-40ae6b316c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\CameraManager\Camera">
+      <UniqueIdentifier>{d68aebd9-aee1-4e34-9a91-08cfd3f4b7c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Debug">
+      <UniqueIdentifier>{77ca1809-0287-4182-ba13-f99b356a42bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Game">
+      <UniqueIdentifier>{81e8bf87-08bf-4c3c-86cf-5bf164e4e866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer">
+      <UniqueIdentifier>{640d30b6-b387-4173-a0f0-fdb77c8a1808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA">
+      <UniqueIdentifier>{b5cbca39-1412-417e-b680-a16a133213ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D">
+      <UniqueIdentifier>{ed14d48e-c047-43f5-b4f6-2ba96c8124dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug">
+      <UniqueIdentifier>{6b88c333-4599-470b-8dd2-56ef229b1f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect">
+      <UniqueIdentifier>{7f3137ef-10d7-4834-ba8e-419fb57eed62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameLastMain">
+      <UniqueIdentifier>{197f438b-1edb-4909-ae05-8d041f775d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\DebugEngine">
+      <UniqueIdentifier>{eee7905d-4420-42fb-88c2-6eec6d771290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameThumbnails">
+      <UniqueIdentifier>{61a59a6c-1259-4894-b898-24201faa5573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger\Thumbnail">
+      <UniqueIdentifier>{96c924b5-9cc2-46a1-921b-d7396534bd0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\Skeleton">
+      <UniqueIdentifier>{e3866070-1ad0-4816-b6c6-f49fb76601ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager">
+      <UniqueIdentifier>{406ac312-72de-4626-8837-14b0fe48fd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager\Material">
+      <UniqueIdentifier>{2a02eb8b-097c-4da3-9b5a-6216ca768a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\ImGuizmo">
+      <UniqueIdentifier>{6c9a02bf-b670-4392-991c-c4e185546fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\Sprite3DLoadManager">
+      <UniqueIdentifier>{f046ada9-eb7e-475a-9150-1e8ded63a18c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\MeshLightWithEmission">
+      <UniqueIdentifier>{f597a281-8744-480d-ac66-e97ee505edf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSample">
+      <UniqueIdentifier>{7f1ec2e7-c867-4d1a-a6a9-067314832099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\FullScreenQuadVolumetricLightScattering">
+      <UniqueIdentifier>{98e6ed8f-7549-4e57-85f2-0e72e97ea9f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\MeshWithBlackNONTexture">
+      <UniqueIdentifier>{2634625a-af45-4325-98cc-02f80fa724c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\AddColorTwoFramebuffer">
+      <UniqueIdentifier>{b6f4ff25-40a2-4c4b-b2b1-e513b64f585c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Skybox">
+      <UniqueIdentifier>{1f2bf324-7076-4761-8e22-3cd8c440d4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\CubeMap">
+      <UniqueIdentifier>{4b894381-e616-45d9-9299-a3ff8803ac51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap">
+      <UniqueIdentifier>{df54c384-26e5-4c7a-a739-abe5c719163c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap\Debug">
+      <UniqueIdentifier>{2a53bbc6-685f-4b4f-b184-892981aadac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport">
+      <UniqueIdentifier>{446b4d36-b0ef-4392-9438-91ae4c080529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Skymap">
+      <UniqueIdentifier>{6c972f94-11b2-4580-93a2-62da525ce224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Environment">
+      <UniqueIdentifier>{54b3b849-5a74-44f2-b8c2-89ff6208cd57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\CorrectColor">
+      <UniqueIdentifier>{ce69f78a-39a9-4f10-9218-b490b6aa734d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Model">
+      <UniqueIdentifier>{0ec53b88-6414-4c72-a18d-b78672b8c829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\GlTFModel">
+      <UniqueIdentifier>{2646cf58-0842-4138-9f48-92b0ab31c46b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\NoLighting">
+      <UniqueIdentifier>{d00145a6-96be-46e1-a68b-e1d33ccded82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Bloom">
+      <UniqueIdentifier>{ad56d008-dff6-4e83-87d2-f5b8d5702060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SamplerState">
+      <UniqueIdentifier>{8e380606-37a2-45ae-b3fb-bba0f9ce95cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\ConstantBuffer\Bloom">
+      <UniqueIdentifier>{8e1de7c0-fd45-4928-8433-68aefe5be784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\ShadowApply">
+      <UniqueIdentifier>{6fea90e0-7922-49b1-ab10-3796d827d390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\SceneManager\StageManager">
+      <UniqueIdentifier>{8ac5dccf-e64d-40eb-80d8-a0c7fe22a8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\SceneManager\StageManager\Stage">
+      <UniqueIdentifier>{7efa23ed-0ea8-4e51-b7c2-424a119d939c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow\PointLight">
+      <UniqueIdentifier>{2a51a236-cb0d-4a55-aa5f-898360eb79b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\Light\Shadow">
+      <UniqueIdentifier>{8bdd5bf5-029f-4aad-9d04-26f1e5e1ed54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\Animation">
+      <UniqueIdentifier>{206decef-daaa-48b8-aaa3-abb965c95955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\Animation\Animator">
+      <UniqueIdentifier>{de21889f-02a7-435f-941b-a44336ad8913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\AnimatorManager">
+      <UniqueIdentifier>{4c9c0fb4-eece-4e57-8345-4d5d60f9c607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem">
+      <UniqueIdentifier>{e82cdf71-1360-41c9-b826-1203679e1f64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem\StateMachine">
+      <UniqueIdentifier>{4d852714-9b04-478a-b731-048b3bc3d3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\Node">
+      <UniqueIdentifier>{5e29396c-b0be-4d8c-84b1-5a83765746a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State">
+      <UniqueIdentifier>{605de4d3-f312-4511-a048-c811874ca4f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State\Player">
+      <UniqueIdentifier>{80e79727-cff8-4194-b68a-e4b97214ab97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State\Player\Idle">
+      <UniqueIdentifier>{a986470b-f381-439b-94ff-10ae87fccb3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State\Player\Walk">
+      <UniqueIdentifier>{a6007ed2-3bbb-4875-833d-f2a6dbd52154}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngine\Framework.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\WindowApp.h">
+      <Filter>GameEngine\WindowApp</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Resource.h">
+      <Filter>GameEngine\WindowApp\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\targetver.h">
+      <Filter>GameEngine\WindowApp\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\DataFormat.h">
+      <Filter>GameEngine\DataFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\HighResolutionTimer.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\SamplerStateManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\SamplerState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\SingletonPatternTemplate.h">
+      <Filter>GameEngine\DesignPatern</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\DepthStencilStateManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\DepthStencilState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\BlendStateManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\BlendState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\RasterizerStateManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\Rasterizer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GraphicEngine.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ConstantBuffer.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ConstantBufferManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\CameraManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ShaderManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\TextureManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\MyMath.h">
+      <Filter>GameEngine\MyMath</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\SkinnedMesh.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\SkinnedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\SpriteBatch.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Sprite.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GeometricPrimitive.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\GeometricPrimitive</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ControlPad.h">
+      <Filter>GameEngine\1_Engines\InputEngine\InputManager\ControlPad</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\BoundingSphere.h">
+      <Filter>GameEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\BoundingCapsule.h">
+      <Filter>GameEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\BoundingInfor.h">
+      <Filter>GameEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Ray.h">
+      <Filter>GameEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\InputManager.h">
+      <Filter>GameEngine\1_Engines\InputEngine\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Sprite3D.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Sprite\Sprite3D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\LightManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Collision.h">
+      <Filter>GameEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\StaticMesh.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\EffectSeerManager.h">
+      <Filter>GameEngine\EffectSeer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Effect.h">
+      <Filter>GameEngine\EffectSeer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\AudioManager.h">
+      <Filter>GameEngine\1_Engines\AudioEngine\AudioManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Button3D.h">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Button3DManager.h">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Button2DManager.h">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameBuffer.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameBufferManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FullscreenQuad.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\FullscreenQuad</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\SpotLight.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager\SpotLight</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\LightConstant.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer\LightConstant</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\PointLight.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager\PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\MousePoint.h">
+      <Filter>GameEngine\1_Engines\InputEngine\InputManager\MousePoint</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\AudioEngine.h">
+      <Filter>GameEngine\1_Engines\AudioEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ShadowManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\ActorManager.h">
+      <Filter>GameCode\ActorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Player.h">
+      <Filter>GameCode\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Charater.h">
+      <Filter>GameCode\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\SpawnEnemyManager.h">
+      <Filter>GameCode\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Background.h">
+      <Filter>GameCode\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\DataBase.h">
+      <Filter>GameCode\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\SceneManager.h">
+      <Filter>GameCode\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\StageManager.h">
+      <Filter>GameCode\SceneManager\StageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Stage.h">
+      <Filter>GameCode\SceneManager\StageManager\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCode\Button.h">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GameEngine.h">
+      <Filter>GameEngine\1_Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Actor.h">
+      <Filter>GameEngine\GameActor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Camera.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GameCamera.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\DebugCamera.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameMSAA.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameSprite2D.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameMainBlit.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameLastMain</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameDebug.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameEffect.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\ImGuiFileDialog.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\ImGuiFileDialogConfig.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ContentBrowser.h">
+      <Filter>GameEngine\1_Engines\DebugEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ActorDebug.h">
+      <Filter>GameEngine\1_Engines\DebugEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Log.h">
+      <Filter>GameEngine\1_Engines\DebugEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\UsesImGui_h.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameThumbnail.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameThumbnails</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\MeshLoaderManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FramebufferNumName.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\MaterialManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Material.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\MeshRaw.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Skeleton.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuizmo\ImGuizmo.h">
+      <Filter>GameEngine\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Scene.h">
+      <Filter>GameCode\SceneManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Animation.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Sprite3DLoadManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\Sprite3DLoadManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameSample.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\CubeMap.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CubeMap</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Skymap.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Skymap</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FrameTempSupport.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GltfModel.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ConstantBloom.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer\Bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Animator.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Cereal.h">
+      <Filter>GameEngine\DataFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\AnimatorManager.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\AnimatorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\PlayerAnimator.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\OBJ3D.h">
+      <Filter>GameEngine\GameActor\OBJ3D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\OBJ2D.h">
+      <Filter>GameEngine\GameActor\OBJ2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\StateMachine.h">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\StateNode.h">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\PlayerIdleState.h">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\PLayerWalkState.h">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Walk</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameEngine\Framework.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\WindowApp.cpp">
+      <Filter>GameEngine\WindowApp</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\DataFormat.cpp">
+      <Filter>GameEngine\DataFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\SamplerStateManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\SamplerState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\DepthStencilStateManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\DepthStencilState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\BlendStateManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\BlendState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\RasterizerStateManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\DrawState\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GraphicEngine.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ConstantBuffer.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ConstantBufferManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\CameraManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ShaderManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\TextureManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\MyMath.cpp">
+      <Filter>GameEngine\MyMath</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\SkinnedMesh.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\SkinnedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Sprite.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\SpriteBatch.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GeometricPrimitive.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\GeometricPrimitive</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ControlPad.cpp">
+      <Filter>GameEngine\1_Engines\InputEngine\InputManager\ControlPad</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\BoundingSphere.cpp">
+      <Filter>GameEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Ray.cpp">
+      <Filter>GameEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\InputManager.cpp">
+      <Filter>GameEngine\1_Engines\InputEngine\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Sprite3D.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Sprite\Sprite3D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\LightManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\SpotLight.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager\SpotLight</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\PointLight.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager\PointLight</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Collision.cpp">
+      <Filter>GameEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\StaticMesh.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Effect.cpp">
+      <Filter>GameEngine\EffectSeer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\EffectSeerManager.cpp">
+      <Filter>GameEngine\EffectSeer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\AudioManager.cpp">
+      <Filter>GameEngine\1_Engines\AudioEngine\AudioManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\BoundingCapsule.cpp">
+      <Filter>GameEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Button3D.cpp">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Button3DManager.cpp">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Button2DManager.cpp">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameBuffer.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameBufferManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FullscreenQuad.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\FullscreenQuad</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\LightConstant.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer\LightConstant</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\MousePoint.cpp">
+      <Filter>GameEngine\1_Engines\InputEngine\InputManager\MousePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\AudioEngine.cpp">
+      <Filter>GameEngine\1_Engines\AudioEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ShadowManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LightManager\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\ActorManager.cpp">
+      <Filter>GameCode\ActorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\Player.cpp">
+      <Filter>GameCode\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\Charater.cpp">
+      <Filter>GameCode\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\SpawnEnemyManager.cpp">
+      <Filter>GameCode\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\Background.cpp">
+      <Filter>GameCode\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\DataBase.cpp">
+      <Filter>GameCode\DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\SceneManager.cpp">
+      <Filter>GameCode\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GameEngine.cpp">
+      <Filter>GameEngine\1_Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\StageManager.cpp">
+      <Filter>GameCode\SceneManager\StageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\Stage.cpp">
+      <Filter>GameCode\SceneManager\StageManager\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCode\Button.cpp">
+      <Filter>GameCode\Button\Button2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Actor.cpp">
+      <Filter>GameEngine\GameActor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\OBJ2D.cpp">
+      <Filter>GameEngine\GameActor\OBJ2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\OBJ3D.cpp">
+      <Filter>GameEngine\GameActor\OBJ3D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Camera.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GameCamera.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\DebugCamera.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_ja_gryph_ranges.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameMSAA1.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameMSAA2.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameMSAA3.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameSprite2DEarly.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameSprite2DLate.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameSkinnedMeshDebug.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameGeometricDebug.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectBlur.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectSoftShadowMap.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameMainBlit.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameLastMain</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameMSAATempSupport.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameSceneDebug.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\ImGuiFileDialog.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ContentBrowser.cpp">
+      <Filter>GameEngine\1_Engines\DebugEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ActorDebug.cpp">
+      <Filter>GameEngine\1_Engines\DebugEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameThumbnail.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameThumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Log.cpp">
+      <Filter>GameEngine\1_Engines\DebugEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\MeshLoaderManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\MaterialManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Material.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\MeshRaw.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
+      <Filter>GameEngine\ImGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Scene.cpp">
+      <Filter>GameCode\SceneManager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Animation.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Sprite3DLoadManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\Sprite3DLoadManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameSample.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\CubeMap.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CubeMap</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Skymap.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Skymap</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectMotionBlur.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectSupport.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameDummySupport.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GltfModel.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectBloom.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ConstantBloom.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer\Bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectPSShadowMap.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffect.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectPointLightShadowMap.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Animator.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\FrameEffectVolumetricLightScattering.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\AnimatorManager.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\AnimatorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\PlayerAnimator.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\StateMachine.cpp">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\StateNode.cpp">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\PlayerIdleState.cpp">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\PLayerWalkState.cpp">
+      <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Walk</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameEngine.rc">
+      <Filter>GameEngine\WindowApp\Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="ShaderResource\Resolve.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\MSAA</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\FullscreenQuad_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\FullscreenQuad_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\sprite_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Sprite\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\sprite_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Sprite\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\geometric_primitive_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\geometric_primitive_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\GeometricPrimitiveDebugShader_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Debuger</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\GeometricPrimitiveDebugShader_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Debuger</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\Sprite3D_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Sprite\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\Sprite3D_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Sprite\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\skinned_mesh_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\skinned_mesh_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshWithShadow_PS.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\UseShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshWithShadow_VS.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\UseShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshOfShadow_VS.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshCreateSoftShadow_PS.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\NoLightingSkinnedMesh_PS.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\NoLighting</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\FullscreenQuadWithMotionBlur_PS.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshDebug_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshDebug_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshDebugThumbnail_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger\Thumbnail</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMeshDebugThumbnail_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger\Thumbnail</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\FullScreenQuadVolumetricLightScattering_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\FullScreenQuadVolumetricLightScattering</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\MeshLightWithEmission_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\MeshLightWithEmission</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\MeshWithBlackNONTexture_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\MeshWithBlackNONTexture</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\AddColorTwoFramebuffer_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\AddColorTwoFramebuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\Skybox_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Skybox</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\Skybox_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Skybox</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\Skymap_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkymapDebug_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap\Debug</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\IrradianceEnvironment.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Environment</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\AddColorTwoFramebufferDepthStencil_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\AddColorTwoFramebuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\gltfModel_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GlTFModel</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\gltfModel_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GlTFModel</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\BlackgltfModel_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GlTFModel</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\glowExtraction_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Bloom</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\gaussianBlurDownsampling_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Bloom</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\gaussianBlurHorizontal_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Bloom</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\gaussianBlurVertical_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Bloom</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\gaussianBlurUpsampling_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Bloom</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\AddColorVolumetricLightScatteringFullScreenQuad_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\AddColorTwoFramebuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\CSMSkinnedMesh_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\CSMSkinnedMesh_gs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\CSMSkinnedMesh_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\shadowApply_ps.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\ShadowApply</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\SkinnedMesh_PointLight_vs.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow\PointLight</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderResource\GeometryShader.hlsl">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow\PointLight</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderResource\FullscreenQuad.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad</Filter>
+    </None>
+    <None Include="ShaderResource\sprite.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Sprite\2D</Filter>
+    </None>
+    <None Include="ShaderResource\geometric_primitive.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive</Filter>
+    </None>
+    <None Include="ShaderResource\ColorFilterFunctions.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\ColorFilter</Filter>
+    </None>
+    <None Include="ShaderResource\Sprite3D.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Sprite\3D</Filter>
+    </None>
+    <None Include="ShaderResource\skinned_mesh.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh</Filter>
+    </None>
+    <None Include="ShaderResource\Lights.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Light</Filter>
+    </None>
+    <None Include="ShaderResource\ConstantBuffer.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader</Filter>
+    </None>
+    <None Include="ShaderResource\Skymap_h.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap</Filter>
+    </None>
+    <None Include="ShaderResource\gltfModel_h.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\GlTFModel</Filter>
+    </None>
+    <None Include="ShaderResource\ImageBasedLighting.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Environment</Filter>
+    </None>
+    <None Include="ShaderResource\bidirectional_reflectance_distribution_function.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Environment</Filter>
+    </None>
+    <None Include="ShaderResource\ShadingFunctions.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Functions</Filter>
+    </None>
+    <None Include="ShaderResource\samplerStateSlotNum.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SamplerState</Filter>
+    </None>
+    <None Include="ShaderResource\CSMSkinnedMesh_h.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Shadow\CreateShadow</Filter>
+    </None>
+    <None Include="ShaderResource\Shadow.hlsli">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Shader\Light\Shadow</Filter>
+    </None>
+  </ItemGroup>
+</Project>

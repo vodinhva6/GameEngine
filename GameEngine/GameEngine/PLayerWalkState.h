@@ -9,18 +9,17 @@ class PLayerWalkState :
 public:
     PLayerWalkState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void Exit() override;
     ~PLayerWalkState() {}
 private:
     std::string StateMoving();
-    std::shared_ptr<StateNode> SearchNode(std::string name);
-    bool UpdateState(std::string result);
+   
+   
 
     std::string oldstate;
 private:
-    std::shared_ptr<StateNode> runningSubNode;
-    std::shared_ptr<StateNode> runOldSubNode;
+   
     float frontPivot;
     float backPivot;
     float leftPivot;
@@ -33,7 +32,7 @@ class PlayerWalkForwardState : public StateNode
 public:
     PlayerWalkForwardState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void UpdateList(float elapsedTime, float speed) override;
     void Exit() override;
     ~PlayerWalkForwardState() {}
@@ -48,7 +47,7 @@ class PlayerWalkBackState :
 public:
     PlayerWalkBackState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void UpdateList(float elapsedTime, float speed) override;
     void Exit() override;
     ~PlayerWalkBackState() {}
@@ -63,7 +62,7 @@ class PlayerWalkStrafeLeftState :
 public:
     PlayerWalkStrafeLeftState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void UpdateList(float elapsedTime, float speed) override;
     void Exit() override;
     ~PlayerWalkStrafeLeftState() {}
@@ -77,7 +76,7 @@ class PlayerWalkStrafeRightState :
 public:
     PlayerWalkStrafeRightState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void UpdateList(float elapsedTime, float speed) override;
     void Exit() override;
     ~PlayerWalkStrafeRightState() {}
@@ -92,7 +91,7 @@ class PlayerWalkLeftFrontState : public StateNode
 public:
     PlayerWalkLeftFrontState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void UpdateList(float elapsedTime, float speed) override;
     void Exit() override;
     ~PlayerWalkLeftFrontState() {}
@@ -105,7 +104,7 @@ class PlayerWalkRightFrontState : public StateNode
 public:
     PlayerWalkRightFrontState(Character* owner);
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void UpdateList(float elapsedTime, float speed) override;
     void Exit() override;
     ~PlayerWalkRightFrontState() {}
@@ -118,7 +117,7 @@ class PlayerWalkRightBackState : public StateNode
 public:
     PlayerWalkRightBackState(Character* owner) : StateNode(owner) {}
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void Exit() override;
     ~PlayerWalkRightBackState() {}
 
@@ -130,7 +129,7 @@ class PlayerWalkLeftBackState : public StateNode
 public:
     PlayerWalkLeftBackState(Character* owner) : StateNode(owner) {}
     void Enter() override;
-    void Run(float elapedTime) override;
+    void Run(float elapsedTime) override;
     void Exit() override;
     ~PlayerWalkLeftBackState() {}
 

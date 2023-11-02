@@ -16,12 +16,13 @@ void PLayerWalkState::Enter()
     runOldSubNode = nullptr;
     runningSubNode = nullptr;
 
+    
     UpdateState(StateMoving());
 
     stateStep = 0;
 }
 
-void PLayerWalkState::Run(float elapedTime)
+void PLayerWalkState::Run(float elapsedTime)
 {
     switch (stateStep)
     {
@@ -29,26 +30,19 @@ void PLayerWalkState::Run(float elapedTime)
         if (runOldSubNode.get())
             runOldSubNode->Exit();
         if (runningSubNode.get())
-        runningSubNode->Enter();
+            runningSubNode->Enter();
       
         stateStep++;
     case 1:
         if (owner->GetBlending())
         {
             if (runOldSubNode.get())
-            {
-                runOldSubNode->UpdateList(elapedTime, 1.5f);
-                //owner->meshInfor.animator_->SetOldBlendAnimation(&runOldSubNode->listQua, &runOldSubNode->listNodeIndex, &runOldSubNode->listValue);
-            }
+                runOldSubNode->UpdateList(elapsedTime, 0.01f);
               
             if (runningSubNode.get())
-            {
-                runningSubNode->UpdateList(elapedTime, 1.5f);
-            }
-               
-            
+                runningSubNode->UpdateList(elapsedTime, 0.01f);
 
-            owner->UpdateAnimation(elapedTime);
+            owner->UpdateAnimation(elapsedTime);
             break;
         }
         else
@@ -57,9 +51,18 @@ void PLayerWalkState::Run(float elapedTime)
             stateStep++;
         }
     case 2:
-        if (UpdateState(StateMoving())) return;
-        runningSubNode->Run(elapedTime);
+    {
+        std::string result = StateMoving();
+        if (result == "IDLE")
+        {
+            owner->getStateMachine()->ChangeState("IDLE");
+            return;
+        }
+        if (UpdateState(result))return;
+        runningSubNode->Run(elapsedTime);
         break;
+    }
+        
     default:
         break;
     }
@@ -166,33 +169,13 @@ std::string PLayerWalkState::StateMoving()
     return result;
 }
 
-std::shared_ptr<StateNode> PLayerWalkState::SearchNode(std::string name)
-{
-    auto it = subNodes.find(name);
-    return it->second;
-}
 
-bool PLayerWalkState::UpdateState(std::string result)
-{
-    if (result == "IDLE")
-    {
-        owner->getStateMachine()->ChangeState("IDLE");
-        return true;
-    }
-    auto t = SearchNode(result);
-    if (t.get() != runningSubNode.get())
-    {
-        runningSubNode = t;
-        stateStep = 0;
-        return true;
-    }
-    return false;
-}
+
 
 
 PlayerWalkForwardState::PlayerWalkForwardState(Character* owner) : StateNode(owner)
 {
-    moveSpeed = 0.1f;
+    moveSpeed = 0.01f;
     {
         DirectX::XMVECTOR V = DirectX::XMQuaternionIdentity();
         DirectX::XMVECTOR rotV = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(1, 0, 0, 0), DirectX::XMConvertToRadians(0));
@@ -226,12 +209,12 @@ void PlayerWalkForwardState::Enter()
 {
     stateStep = 0;
     owner->SetAnimation("WALK", "WALK_FORWARD");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 
 }
 
-void PlayerWalkForwardState::Run(float elapedTime)
+void PlayerWalkForwardState::Run(float elapsedTime)
 {
     /*
     ImGui::Begin("adaa");
@@ -240,10 +223,10 @@ void PlayerWalkForwardState::Run(float elapedTime)
     ImGui::End(); 
     */
    
-    UpdateList(elapedTime, 0.0f);
+    UpdateList(elapsedTime, 0.0f);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    //owner->impluseMoveSpeed(elapsedTime);
     //int frameNow = owner->getFrameAnimationNow();
     //if (fabs(frameNow - 100) < 5  || fabs(frameNow - 115) < 5  || fabs(frameNow - 130) < 5)
     //    owner->addSpeed(sp*0.1f);
@@ -279,13 +262,13 @@ void PlayerWalkForwardState::Exit()
 void PlayerWalkBackState::Enter()
 {
     owner->SetAnimation("WALK", "WALK_BACK");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
 PlayerWalkBackState::PlayerWalkBackState(Character* owner) : StateNode(owner)
 {
-    moveSpeed = 0.09f;
+    moveSpeed = 0.01f;
     {
         DirectX::XMVECTOR V = DirectX::XMQuaternionIdentity();
         DirectX::XMVECTOR rotV = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(1, 0, 0, 0), DirectX::XMConvertToRadians(0));
@@ -315,13 +298,13 @@ PlayerWalkBackState::PlayerWalkBackState(Character* owner) : StateNode(owner)
     }
 }
 
-void PlayerWalkBackState::Run(float elapedTime)
+void PlayerWalkBackState::Run(float elapsedTime)
 {
    
-    UpdateList(elapedTime, 0.0f);
+    UpdateList(elapsedTime, 0.0f);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    ////owner->impluseMoveSpeed(elapsedTime);
     //int frameNow = owner->getFrameAnimationNow();
     //if (fabs(frameNow - 100) < 5 || fabs(frameNow - 115) < 5 || fabs(frameNow - 130) < 5)
     //    owner->addSpeed(sp * 0.1f);
@@ -356,7 +339,7 @@ void PlayerWalkBackState::Exit()
 
 PlayerWalkStrafeLeftState::PlayerWalkStrafeLeftState(Character* owner) : StateNode(owner) 
 {
-    moveSpeed = 0.09f;
+    moveSpeed = 0.01f;
     {
         DirectX::XMVECTOR V = DirectX::XMQuaternionIdentity();
         DirectX::XMVECTOR rotV = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(1, 0, 0, 0), DirectX::XMConvertToRadians(-5));
@@ -389,16 +372,16 @@ PlayerWalkStrafeLeftState::PlayerWalkStrafeLeftState(Character* owner) : StateNo
 void PlayerWalkStrafeLeftState::Enter()
 {
     owner->SetAnimation("WALK", "WALK_STRAFELEFT");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
-void PlayerWalkStrafeLeftState::Run(float elapedTime)
+void PlayerWalkStrafeLeftState::Run(float elapsedTime)
 {
-    UpdateList(elapedTime, 0.0f);
+    UpdateList(elapsedTime, 0.0f);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    ////owner->impluseMoveSpeed(elapsedTime);
 }
 
 void PlayerWalkStrafeLeftState::UpdateList(float elapsedTime, float speed)
@@ -427,7 +410,7 @@ void PlayerWalkStrafeLeftState::Exit()
 
 PlayerWalkStrafeRightState::PlayerWalkStrafeRightState(Character* owner) : StateNode(owner) 
 {
-    moveSpeed = 0.09f;
+    moveSpeed = 0.01f;
     {
         DirectX::XMVECTOR V = DirectX::XMQuaternionIdentity();
         DirectX::XMVECTOR rotV = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(1, 0, 0, 0), DirectX::XMConvertToRadians(-5));
@@ -460,16 +443,16 @@ PlayerWalkStrafeRightState::PlayerWalkStrafeRightState(Character* owner) : State
 void PlayerWalkStrafeRightState::Enter()
 {
     owner->SetAnimation("WALK", "WALK_STRAFERIGHT");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
-void PlayerWalkStrafeRightState::Run(float elapedTime)
+void PlayerWalkStrafeRightState::Run(float elapsedTime)
 {
-    UpdateList(elapedTime, 0.0f);
+    UpdateList(elapsedTime, 0.0f);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    ////owner->impluseMoveSpeed(elapsedTime);
   
 }
 
@@ -498,7 +481,7 @@ void PlayerWalkStrafeRightState::Exit()
 
 PlayerWalkLeftFrontState::PlayerWalkLeftFrontState(Character* owner) : StateNode(owner)
 {
-    moveSpeed = 0.09f;
+    moveSpeed = 0.01f;
     {
         DirectX::XMVECTOR V = DirectX::XMQuaternionIdentity();
         DirectX::XMVECTOR rotV = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(1, 0, 0, 0), DirectX::XMConvertToRadians(0));
@@ -530,19 +513,19 @@ PlayerWalkLeftFrontState::PlayerWalkLeftFrontState(Character* owner) : StateNode
 
 void PlayerWalkLeftFrontState::Enter()
 {
-    moveSpeed = 0.1f;
+    moveSpeed = 0.01f;
     owner->SetAnimation("WALK", "WALK_LEFTFRONT");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
-void PlayerWalkLeftFrontState::Run(float elapedTime)
+void PlayerWalkLeftFrontState::Run(float elapsedTime)
 {
    
-    UpdateList(elapedTime, 0.0f);
+    UpdateList(elapsedTime, 0.0f);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    //owner->impluseMoveSpeed(elapsedTime);
 }
 
 void PlayerWalkLeftFrontState::UpdateList(float elapsedTime, float speed)
@@ -571,7 +554,7 @@ void PlayerWalkLeftFrontState::Exit()
 
 PlayerWalkRightFrontState::PlayerWalkRightFrontState(Character* owner) : StateNode(owner) 
 {
-    moveSpeed = 0.09f;
+    moveSpeed = 0.01f;
     {
         DirectX::XMVECTOR V = DirectX::XMQuaternionIdentity();
         DirectX::XMVECTOR rotV = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(1, 0, 0, 0), DirectX::XMConvertToRadians(0));
@@ -603,19 +586,19 @@ PlayerWalkRightFrontState::PlayerWalkRightFrontState(Character* owner) : StateNo
 
 void PlayerWalkRightFrontState::Enter()
 {
-    moveSpeed = 0.1f;
+    moveSpeed = 0.01f;
     owner->SetAnimation("WALK", "WALK_RIGHTFRONT");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
-void PlayerWalkRightFrontState::Run(float elapedTime)
+void PlayerWalkRightFrontState::Run(float elapsedTime)
 {
    
-    UpdateList(elapedTime, 0.0f);
+    UpdateList(elapsedTime, 0.0f);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    //owner->impluseMoveSpeed(elapsedTime);
 
 }
 
@@ -644,18 +627,18 @@ void PlayerWalkRightFrontState::Exit()
 
 void PlayerWalkRightBackState::Enter()
 {
-    moveSpeed = 0.1f;
+    moveSpeed = 0.01f;
     owner->SetAnimation("WALK", "WALK_RIGHTBACK");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
-void PlayerWalkRightBackState::Run(float elapedTime)
+void PlayerWalkRightBackState::Run(float elapsedTime)
 {
-    owner->UpdateMove(moveSpeed, elapedTime);
+    owner->UpdateMove(moveSpeed, elapsedTime);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    //owner->impluseMoveSpeed(elapsedTime);
 }
 
 void PlayerWalkRightBackState::Exit()
@@ -665,18 +648,18 @@ void PlayerWalkRightBackState::Exit()
 
 void PlayerWalkLeftBackState::Enter()
 {
-    moveSpeed = 0.1f;
+    moveSpeed = 0.01f;
     owner->SetAnimation("WALK", "WALK_LEFTBACK");
-    owner->BeginBlendingAnimation();
+    owner->BeginBlendingAnimation(0.13f);
     owner->meshInfor.animator_->SetNextBlendAnimation(&listQua, &listNodeIndex, &listValue);
 }
 
-void PlayerWalkLeftBackState::Run(float elapedTime)
+void PlayerWalkLeftBackState::Run(float elapsedTime)
 {
-    owner->UpdateMove(moveSpeed, elapedTime);
+    owner->UpdateMove(moveSpeed, elapsedTime);
     owner->meshInfor.animator_->SetNowBlendAnimation(&listQua, &listNodeIndex, &listValue);
-    owner->UpdateAnimation(elapedTime);
-    owner->impluseMoveSpeed(elapedTime);
+    owner->UpdateAnimation(elapsedTime);
+    //owner->impluseMoveSpeed(elapsedTime);
 }
 
 void PlayerWalkLeftBackState::Exit()

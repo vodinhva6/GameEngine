@@ -164,7 +164,7 @@ void GameCamera::GameCameraThirdPerson()
     VECTOR3 plPos = player->getPosition();
     plPos.y = 0;
     spherePivot = MyMath::get()->Lerp(spherePivot, plPos + MyMath::get()->ScaleVector3(MyMath::get()->Normalize(vectorToSpherePivot), distanceFromPlayer),0.15f);
-    spherePivot.y = distanceUpFromPlayerPos + plPos.y;
+    spherePivot.y = MyMath::get()->Lerp(spherePivot.y, distanceUpFromPlayerPos, 0.15f);
     vectorSphereToCameraPos = MyMath::get()->Vector3Rotation(vectorSphereToCameraPos, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity));
     
     

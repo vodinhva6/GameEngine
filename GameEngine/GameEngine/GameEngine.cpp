@@ -220,16 +220,17 @@ void GameEngine::LoadAnimationThumbnail(std::filesystem::path fileName, pSmartVo
 	*result = GraphicEngine::get()->LoadAnimation(fileName, *Animation);
 }
 
-bool GameEngine::CreateCapsuleDebug(void* cap, const float& height, const float& weight, const VECTOR3& offset)
+bool GameEngine::CreateCapsuleDebug(pSmartVoid& cap, const float& height, const float& weight, const VECTOR3& offset)
 {
-	BoundingCapsule* pCap = static_cast<BoundingCapsule*>(cap);
+	BoundingCapsule* pCap = std::static_pointer_cast<BoundingCapsule>(cap).get();
 	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
+	cap.reset(pCap);
 	return true;
 }
 
-bool GameEngine::createSphereDebug(void* sphere, const float& radius, const VECTOR3& offset)
+bool GameEngine::createSphereDebug(pSmartVoid& sphere, const float& radius, const VECTOR3& offset)
 {
-	BoundingSphere* pSphere = static_cast<BoundingSphere*>(sphere);
+	BoundingSphere* pSphere = std::static_pointer_cast<BoundingSphere>(sphere).get();
 	pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
 	return true;
 }
@@ -268,9 +269,9 @@ void GameEngine::DrawSprite3D(pSmartVoid sprite3D, const DirectX::XMFLOAT4X4 wor
 	GraphicEngine::get()->drawSprite3D(pSprite3D, world, color, drawTurn, name);
 }
 
-void GameEngine::DrawDebugBounding(void* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
+void GameEngine::DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
 {
-	GeometricPrimitive* pGeo = static_cast<GeometricPrimitive*>(geo);
+	GeometricPrimitive* pGeo = std::static_pointer_cast<GeometricPrimitive>(geo).get();
 	GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
 }
 

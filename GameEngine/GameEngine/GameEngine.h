@@ -56,8 +56,8 @@ public:
 
 
     void LoadAnimationThumbnail(std::filesystem::path fileName, pSmartVoid* Animation, bool* result);
-    bool CreateCapsuleDebug(void* cap, const float& height, const float& weight, const VECTOR3& offset);
-    bool createSphereDebug(void* sphere, const float& radius, const VECTOR3& offset);
+    bool CreateCapsuleDebug(pSmartVoid& cap, const float& height, const float& weight, const VECTOR3& offset);
+    bool createSphereDebug(pSmartVoid& sphere, const float& radius, const VECTOR3& offset);
     bool CreateSprite3D(std::filesystem::path local, pSmartVoid& sprite3D);
 
 
@@ -85,7 +85,7 @@ public:
         const VECTOR4& color, const int& drawTurn, DrawStates& drawStates, pVoid keyFrame, FrameBufferName name);
     void DrawSpriteLate(void* sprite,const VECTOR2& position, const VECTOR2& scale,const VECTOR4& color,const VECTOR2& texture_position, const VECTOR2& texture_size,const float& angle, const int& drawTurn);
     void DrawSprite3D(pSmartVoid sprite3D, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, int drawTurn, FrameBufferName name);
-    void DrawDebugBounding(void* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type);
+    void DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type);
 
 
     void LoadTextureFromFileMultiThread(std::wstring fileName, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>* shader_resource_view, bool* result = nullptr);

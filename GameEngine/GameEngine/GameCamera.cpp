@@ -3,6 +3,7 @@
 #include "MousePoint.h"
 #include "ControlPad.h"
 #include "ActorManager.h"
+#include "Collision.h"
 void GameCamera::Init()
 {
     Camera::Init();
@@ -12,8 +13,14 @@ void GameCamera::Init()
     saveDistanceUpFromPlayerPos = 10;
 
     SetDefault();
-    
-
+    if (!boundingHit_.capsule_.get())
+    {
+        pSmartVoid p;
+        GameEngine::get()->CreateCapsuleDebug(p, 2, 1, { 1,0,1 });
+        boundingHit_.capsule_ = std::static_pointer_cast<BoundingCapsule>(p);
+        p.reset();
+    }
+        //OBJ3D::CreateBoundingCapsule(5, 5, { 1,1,1 });
     projection2DViewNow = false;
     changeToProjection = nullptr;
     speedChange = 0;
@@ -110,6 +117,12 @@ void GameCamera::SetDefault()
     distanceFromPlayer = saveDistanceFromPlayer;
 }
 
+GameCamera::~GameCamera()
+{
+    int a = 1;
+    a = 2;
+}
+
 
 
 void GameCamera::GameCameraFirstPerson()
@@ -185,7 +198,7 @@ void GameCamera::GameCameraThirdPerson()
         //rightJoy = { 0,0 };
     vectorToSpherePivot = MyMath::get()->Normalize(MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity)));
     static VECTOR3 temp;
-    temp = MyMath::get()->Lerp(temp, plPos + MyMath::get()->ScaleVector3(vectorToSpherePivot, distanceFromPlayer), 0.3f);
+    temp = MyMath::get()->Lerp(temp, plPos + MyMath::get()->ScaleVector3(vectorToSpherePivot, distanceFromPlayer), 0.7f);
     spherePivot.x = temp.x;
     spherePivot.z = temp.z;
     spherePivot.y = MyMath::get()->Lerp(spherePivot.y, plPos.y + distanceUpFromPlayerPos, 0.3f);

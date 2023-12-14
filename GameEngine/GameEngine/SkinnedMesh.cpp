@@ -169,12 +169,6 @@ SkinnedMesh::~SkinnedMesh()
 
 }
 
-void SkinnedMesh::SetDefaultTransform(DirectX::XMFLOAT4X4& tfDefault)
-{
-    defaultTransform = tfDefault;
-    UpdateVertexMaxMinInfor();
-}
-
 void SkinnedMesh::UpdateVertexMaxMinInfor()
 {
     for (auto& mesh : meshes)
@@ -192,6 +186,8 @@ void SkinnedMesh::UpdateVertexMaxMinInfor()
     V = DirectX::XMLoadFloat3(&VertexMinMaxInfor[1]);
     DirectX::XMStoreFloat3(&VertexMinMaxInfor[1], DirectX::XMVector3TransformCoord(V, M));
 }
+
+
 
 void SkinnedMesh::CreateNewCereal()
 {

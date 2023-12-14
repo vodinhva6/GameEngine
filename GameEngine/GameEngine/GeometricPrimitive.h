@@ -3,7 +3,7 @@
 #include <d3d11.h>
 #include <directxmath.h>
 #include <MeshRaw.h>
-class GeometricPrimitive : public MeshRaw
+class GeometricPrimitive : public StaticMesh
 {
  
 public:

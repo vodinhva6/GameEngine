@@ -57,11 +57,14 @@ void FrameThumbnail::ClearRenderTarget(ID3D11DeviceContext* immediateContext, fl
 void FrameThumbnail::SettingCamera(SkinnedMesh* mesh)
 {
     float angle = camera.get()->getPerspectiveInforNow().angleFovY;
-    float height = (fabsf(mesh->VertexMinMaxInfor[0].y) + fabsf(mesh->VertexMinMaxInfor[1].y));
-    float width = (fabsf(mesh->VertexMinMaxInfor[0].x) + fabsf(mesh->VertexMinMaxInfor[1].x));
-    VECTOR3 pivot = { (mesh->VertexMinMaxInfor[0].x + mesh->VertexMinMaxInfor[1].x) / 2 ,
-        (mesh->VertexMinMaxInfor[0].y + mesh->VertexMinMaxInfor[1].y) / 2,
-        (mesh->VertexMinMaxInfor[0].z + mesh->VertexMinMaxInfor[1].z) / 2 };
+    VECTOR3 vertexMin = mesh->getVertexMin();
+    VECTOR3 vertexMax = mesh->getVertexMax();
+
+    float height = (fabsf(vertexMax.y) + fabsf(vertexMin.y));
+    float width = (fabsf(vertexMax.x) + fabsf(vertexMin.x));
+    VECTOR3 pivot = { (vertexMax.x + vertexMin.x) / 2 ,
+        (vertexMax.y + vertexMin.y) / 2,
+        (vertexMax.z + vertexMin.z) / 2 };
     float length;
     if (height > width)
         length = height;

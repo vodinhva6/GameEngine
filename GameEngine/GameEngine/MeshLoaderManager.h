@@ -21,7 +21,7 @@ private:
     void FetchSkeleton(FbxMesh* fbx_mesh, Skeleton& bind_pose);
     void FetchBoneInfluences(const FbxMesh* fbx_mesh, std::vector<std::vector<Skeleton::BoneInfluence>>& bone_influences);
     void FetchMaterials(FbxScene* fbx_scene, std::filesystem::path local, std::unordered_map<int64_t, std::shared_ptr<Material>>& listMaterial);
-    void FetchBouding(FbxMesh* fbx_mesh, MeshRaw& mesh);
+    void FetchBouding(FbxMesh* fbx_mesh, BaseMesh& mesh);
 private:
     SceneMesh* sceneView;
     std::map<std::filesystem::path, std::shared_ptr<SkinnedMesh>> skinnedMeshes;

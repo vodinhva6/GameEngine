@@ -19,7 +19,7 @@ FrameThumbnail::FrameThumbnail(IDXGISwapChain* swapChain, ID3D11Device* device, 
     hr = device->CreateBuffer(&buffer_desc, nullptr, constantBuffer.GetAddressOf());
     _ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
     
-   
+    DirectX::XMStoreFloat4x4(&thumbnailSceneConstant.viewProjectionThumbnail,DirectX::XMMatrixIdentity());
     PSSlotNum = 1;
     VSSlotNum = 1;
 }

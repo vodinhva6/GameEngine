@@ -28,16 +28,16 @@ public:
     {
         archive(cereal::base_class<RawVertex>(this), boneWeights, boneIndices);
     }
-    float boneWeights[MAX_BONE_INFLUENCES]{ 1, 0, 0, 0 };
+    float boneWeights[MAX_BONE_INFLUENCES] = { 1, 0, 0, 0 };
     uint32_t boneIndices[MAX_BONE_INFLUENCES]{};
 };
 
 class Subset
 {
 public:
-    uint64_t materialUniqueId{ 0 };
-    uint32_t startIndexLocation{ 0 };
-    uint32_t indexCount{ 0 };
+    uint64_t materialUniqueId = 0;
+    uint32_t startIndexLocation = 0;
+    uint32_t indexCount = 0;
     template < class T>
     void serialize(T& archive)
     {
@@ -45,34 +45,28 @@ public:
     }
 };
 
-class MeshRaw
+class BaseMesh
 {
 public:
+    BaseMesh();
     virtual void CreateCOM(ID3D11Device* device) = 0;
 public:
-    DirectX::XMFLOAT3 boundingBox[2]
-    {
-        { +D3D11_FLOAT32_MAX, +D3D11_FLOAT32_MAX, +D3D11_FLOAT32_MAX },
-        { -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX }
-    };
-    uint64_t uniqueId{ 0 };
-    std::string name;
-    int64_t nodeIndex{ 0 };
+    DirectX::XMFLOAT3 boundingBox[2];
+    DirectX::XMFLOAT4X4 defaultGlobalTransform;
 
-   
+    int64_t nodeIndex;
+    uint64_t uniqueId;
+
+    std::string name;
     std::vector<uint32_t> indices;
+    std::vector<Subset> subsets;
+
 
     Microsoft::WRL::ComPtr<ID3D11Buffer> vertexBuffer;
     Microsoft::WRL::ComPtr<ID3D11Buffer> indexBuffer;
     
-    std::vector<Subset> subsets;
    
-
-    DirectX::XMFLOAT4X4 defaultGlobalTransform{   1, 0, 0, 0,
-                                                  0, 1, 0, 0,
-                                                  0, 0, 1, 0,
-                                                  0, 0, 0, 1  };
-
+public:
     template < class T>
     void serialize(T& archive)
     {
@@ -82,7 +76,7 @@ public:
     
 };
 
-class StaticMesh : public MeshRaw
+class RawMesh : public BaseMesh
 {
 public:
     void CreateCOM(ID3D11Device* device) override;
@@ -91,13 +85,13 @@ public:
     template < class T>
     void serialize(T& archive)
     {
-        archive(cereal::base_class<MeshRaw>(this), vertices);
+        archive(cereal::base_class<BaseMesh>(this), vertices);
     }
 
 };
 
 
-class SkeletonMesh : public MeshRaw
+class SkeletonMesh : public BaseMesh
 {
 public:
     void CreateCOM(ID3D11Device* device) override;
@@ -106,7 +100,7 @@ public:
     template < class T>
     void serialize(T& archive)
     {
-        archive(cereal::base_class<MeshRaw>(this), bindPose, vertices);
+        archive(cereal::base_class<BaseMesh>(this), bindPose, vertices);
     }
     Skeleton bindPose;
 

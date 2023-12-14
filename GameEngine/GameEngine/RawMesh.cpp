@@ -1,7 +1,7 @@
-#include "MeshRaw.h"
-#include "Misc.h"
+#include <RawMesh.h>
+#include <Misc.h>
 
-void StaticMesh::CreateCOM(ID3D11Device* device)
+void RawMesh::CreateCOM(ID3D11Device* device)
 {
     HRESULT hr{ S_OK };
     D3D11_BUFFER_DESC buffer_desc{};
@@ -54,4 +54,15 @@ void SkeletonMesh::CreateCOM(ID3D11Device* device)
     hr = device->CreateBuffer(&buffer_desc, &subresource_data,
         indexBuffer.ReleaseAndGetAddressOf());
     _ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
+}
+
+BaseMesh::BaseMesh()
+{
+    boundingBox[0] = { +D3D11_FLOAT32_MAX, +D3D11_FLOAT32_MAX, +D3D11_FLOAT32_MAX };
+    boundingBox[1] = { -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX };
+    uniqueId = 0;
+    name = "";
+    nodeIndex = 0;
+    DirectX::XMStoreFloat4x4(&defaultGlobalTransform, DirectX::XMMatrixIdentity());
+
 }

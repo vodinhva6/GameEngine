@@ -5,9 +5,9 @@
 #include <vector>
 #include <unordered_map>
 #include <Animator.h>
-#include "DataFormat.h"
-#include "Material.h"
-#include "MeshRaw.h"
+#include <DataFormat.h>
+#include <Material.h>
+#include <RawMesh.h>
 
 class Mesh
 {

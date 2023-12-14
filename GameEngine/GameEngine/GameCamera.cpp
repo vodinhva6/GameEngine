@@ -13,13 +13,13 @@ void GameCamera::Init()
     saveDistanceUpFromPlayerPos = 10;
 
     SetDefault();
-    if (!boundingHit_.capsule_.get())
-    {
-        pSmartVoid p;
-        GameEngine::get()->CreateCapsuleDebug(p, 2, 1, { 1,0,1 });
-        boundingHit_.capsule_ = std::static_pointer_cast<BoundingCapsule>(p);
-        p.reset();
-    }
+    //if (!boundingHit_.capsule_.get())
+    //{
+    //    pSmartVoid p;
+    //    GameEngine::get()->CreateCapsuleDebug(p, 2, 1, { 1,0,1 });
+    //    boundingHit_.capsule_ = std::static_pointer_cast<BoundingCapsule>(p);
+    //    p.reset();
+    //}
         //OBJ3D::CreateBoundingCapsule(5, 5, { 1,1,1 });
     projection2DViewNow = false;
     changeToProjection = nullptr;
@@ -393,56 +393,56 @@ void GameCamera::PerspectiveFovInforUpdate()
 
 void GameCamera::CreateViewPortRay()
 {
-    boundingHit_.raylist.clear();
+    //boundingHit_.raylist.clear();
 
-    float angleFovX = perspectiveInforNow.angleFovY * perspectiveInforNow.aspectRatio;
-    VECTOR3 begin = {};
-    VECTOR3 forward = cameraTarget - position_;
-    VECTOR3 right = getCameraRight();
-    VECTOR3 up = getCameraUp();
-    pSmartVoid pRayVoid;
-    std::shared_ptr<Ray> ray;
-
-    VECTOR3 viewTopLeft = MyMath::get()->Vector3Rotation(forward, right, perspectiveInforNow.angleFovY / 2);
-    viewTopLeft = MyMath::get()->Vector3Rotation(viewTopLeft, up, -angleFovX / 2);
-    VECTOR3 end = MyMath::get()->PointTransform(position_, viewTopLeft, perspectiveInforNow.farDis);
-   
-    GameEngine::get()->CreateRay(pRayVoid, begin, -end, {1,0,0,1});
-    ray = std::static_pointer_cast<Ray>(pRayVoid);
-    boundingHit_.raylist.push_back(ray);
-    pRayVoid.reset();
-    ray.reset();
-   
-
-    VECTOR3 viewTopRight = MyMath::get()->Vector3Rotation(viewTopLeft, up, angleFovX);
-    end = MyMath::get()->PointTransform(position_, viewTopRight, perspectiveInforNow.farDis);
-
-    GameEngine::get()->CreateRay(pRayVoid, begin, -end, { 1,0,0,1 });
-    ray = std::static_pointer_cast<Ray>(pRayVoid);
-    boundingHit_.raylist.push_back(ray);
-    pRayVoid.reset();
-    ray.reset();
-  
-
-    VECTOR3 viewBottomLeft = MyMath::get()->Vector3Rotation(forward, right, -perspectiveInforNow.angleFovY / 2);
-    viewBottomLeft = MyMath::get()->Vector3Rotation(viewBottomLeft, up, -angleFovX / 2);
-    end = MyMath::get()->PointTransform(position_, viewBottomLeft, perspectiveInforNow.farDis);
-
-    GameEngine::get()->CreateRay(pRayVoid, begin, -end, { 1,0,0,1 });
-    ray = std::static_pointer_cast<Ray>(pRayVoid);
-    boundingHit_.raylist.push_back(ray);
-    pRayVoid.reset();
-    ray.reset();
-
-
-    VECTOR3 viewBottomRight = MyMath::get()->Vector3Rotation(forward, right, -perspectiveInforNow.angleFovY / 2);
-    viewBottomRight = MyMath::get()->Vector3Rotation(viewBottomRight, up, angleFovX / 2);
-    end = MyMath::get()->PointTransform(position_, viewBottomRight, perspectiveInforNow.farDis);
-
-    GameEngine::get()->CreateRay(pRayVoid, begin, -end, { 1,0,0,1 });
-    ray = std::static_pointer_cast<Ray>(pRayVoid);
-    boundingHit_.raylist.push_back(ray);
-    pRayVoid.reset();
-    ray.reset();
+    //float angleFovX = perspectiveInforNow.angleFovY * perspectiveInforNow.aspectRatio;
+    //VECTOR3 begin = {};
+    //VECTOR3 forward = cameraTarget - position_;
+    //VECTOR3 right = getCameraRight();
+    //VECTOR3 up = getCameraUp();
+    //pSmartVoid pRayVoid;
+    //std::shared_ptr<Ray> ray;
+    //
+    //VECTOR3 viewTopLeft = MyMath::get()->Vector3Rotation(forward, right, perspectiveInforNow.angleFovY / 2);
+    //viewTopLeft = MyMath::get()->Vector3Rotation(viewTopLeft, up, -angleFovX / 2);
+    //VECTOR3 end = MyMath::get()->PointTransform(position_, viewTopLeft, perspectiveInforNow.farDis);
+    //
+    //GameEngine::get()->CreateRay(pRayVoid, begin, -end, {1,0,0,1});
+    //ray = std::static_pointer_cast<Ray>(pRayVoid);
+    //boundingHit_.raylist.push_back(ray);
+    //pRayVoid.reset();
+    //ray.reset();
+    //
+    //
+    //VECTOR3 viewTopRight = MyMath::get()->Vector3Rotation(viewTopLeft, up, angleFovX);
+    //end = MyMath::get()->PointTransform(position_, viewTopRight, perspectiveInforNow.farDis);
+    //
+    //GameEngine::get()->CreateRay(pRayVoid, begin, -end, { 1,0,0,1 });
+    //ray = std::static_pointer_cast<Ray>(pRayVoid);
+    //boundingHit_.raylist.push_back(ray);
+    //pRayVoid.reset();
+    //ray.reset();
+    //
+    //
+    //VECTOR3 viewBottomLeft = MyMath::get()->Vector3Rotation(forward, right, -perspectiveInforNow.angleFovY / 2);
+    //viewBottomLeft = MyMath::get()->Vector3Rotation(viewBottomLeft, up, -angleFovX / 2);
+    //end = MyMath::get()->PointTransform(position_, viewBottomLeft, perspectiveInforNow.farDis);
+    //
+    //GameEngine::get()->CreateRay(pRayVoid, begin, -end, { 1,0,0,1 });
+    //ray = std::static_pointer_cast<Ray>(pRayVoid);
+    //boundingHit_.raylist.push_back(ray);
+    //pRayVoid.reset();
+    //ray.reset();
+    //
+    //
+    //VECTOR3 viewBottomRight = MyMath::get()->Vector3Rotation(forward, right, -perspectiveInforNow.angleFovY / 2);
+    //viewBottomRight = MyMath::get()->Vector3Rotation(viewBottomRight, up, angleFovX / 2);
+    //end = MyMath::get()->PointTransform(position_, viewBottomRight, perspectiveInforNow.farDis);
+    //
+    //GameEngine::get()->CreateRay(pRayVoid, begin, -end, { 1,0,0,1 });
+    //ray = std::static_pointer_cast<Ray>(pRayVoid);
+    //boundingHit_.raylist.push_back(ray);
+    //pRayVoid.reset();
+    //ray.reset();
 
 }

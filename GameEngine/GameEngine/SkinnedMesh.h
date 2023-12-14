@@ -14,7 +14,7 @@ class SkinnedMesh
 public:
  
 
-    struct constants
+    struct Constants
     {
         DirectX::XMFLOAT4X4 world = 
         {
@@ -39,9 +39,9 @@ public:
         { -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX }
     };
 protected:
-    std::vector<MeshRaw> meshes;
+    std::vector<SkeletonMesh> meshes;
 protected:
-    Microsoft::WRL::ComPtr<ID3D11Buffer> constant_buffer;
+    Microsoft::WRL::ComPtr<ID3D11Buffer> constantBuffer;
     std::string fileLocal;
 
 
@@ -87,7 +87,7 @@ public:
 
 public:
     std::string& getLocalPath() { return fileLocal; }
-    std::vector<MeshRaw>& getMeshRawList() { return meshes; }
+    std::vector<SkeletonMesh>& getMeshRawList() { return meshes; }
     DirectX::XMFLOAT4X4& getDefaultTransform() { return defaultTransform; }
 
 

@@ -48,7 +48,7 @@ void GraphicEngine::Init()
 	std::shared_ptr<SkinnedMesh>& mesh1 = std::dynamic_pointer_cast<OBJ3D>(aac)->meshInfor.mesh_;
 	
 	pSmartVoid pMesh = SetToPoint(mesh1);
-	createSkinnedMesh("Data/Asset/3DObject/Player/Lich/FreeLich.fbx", pMesh);
+	CreateSkinnedMesh("Data/Asset/3DObject/Player/Lich/FreeLich.fbx", pMesh);
 	mesh1 = GetFromPoint<SkinnedMesh>(pMesh);
 	//dd->append_animations("./Data/Asset/3DObject/Player/Lich/Animation/Walk.fbx", 60, false);
 	//aac->getOBJ3DActor()->setAnimat(AnimatNum::Idle, 1);
@@ -73,7 +73,7 @@ void GraphicEngine::Init()
 	test2.reset(new OBJ3D);
 	std::shared_ptr<SkinnedMesh>& mesh2 = std::dynamic_pointer_cast<OBJ3D>(test2)->meshInfor.mesh_;
 	pMesh = SetToPoint(mesh2);
-	createSkinnedMesh("Data/Asset/3DObject/Player/DemonGirl/DemonGirlMesh.fbx", pMesh);
+	CreateSkinnedMesh("Data/Asset/3DObject/Player/DemonGirl/DemonGirlMesh.fbx", pMesh);
 	mesh2 = GetFromPoint<SkinnedMesh>(pMesh);
 	test2->setScale({ 1,1,1 });
 	test2->setColor({ 1,1,1,1 });
@@ -187,7 +187,7 @@ GraphicEngine::~GraphicEngine()
 	test2.reset();
 }
 
-void GraphicEngine::drawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 world,
+void GraphicEngine::DrawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 world,
 	std::unordered_map<int64_t, std::shared_ptr<Material>>* materialList,
 	const VECTOR4& color, const int& drawTurn, DrawStates& drawStates,
 	Animation::Keyframe* keyFrame, FrameBufferName slotFrameBuffer)
@@ -196,7 +196,7 @@ void GraphicEngine::drawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 
 }
 
 
-void GraphicEngine::drawEffect(std::string effName, const VECTOR3& position, const int& drawTurn, int slotFrameBuffer, float size, VECTOR3 rotation, float angle, VECTOR4 color)
+void GraphicEngine::DrawEffect(std::string effName, const VECTOR3& position, const int& drawTurn, int slotFrameBuffer, float size, VECTOR3 rotation, float angle, VECTOR4 color)
 {
 	std::map<std::string, Effect*>::iterator fi = effects.find(effName);
 	if (fi == effects.end())
@@ -211,7 +211,7 @@ void GraphicEngine::drawEffect(std::string effName, const VECTOR3& position, con
 
 }
 
-void GraphicEngine::drawSprite3D(Sprite3D* sprite3D, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, int drawTurn, FrameBufferName slotFrameBuffer)
+void GraphicEngine::DrawSprite3D(Sprite3D* sprite3D, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, int drawTurn, FrameBufferName slotFrameBuffer)
 {
 	DrawStates drawState;
 	drawState.blendState = BlendStates::Alpha;
@@ -222,7 +222,7 @@ void GraphicEngine::drawSprite3D(Sprite3D* sprite3D, const DirectX::XMFLOAT4X4 w
 	uninvisibleDataObjectsFrameBuffer[(int)slotFrameBuffer].push_back(new Sprite3DData(sprite3D, world, color, drawTurn, drawState));
 }
 
-void GraphicEngine::drawSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn, DrawStates& drawStates)
+void GraphicEngine::DrawSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn, DrawStates& drawStates)
 {
 	const VECTOR2& size = { texture_size.x * scale.x,texture_size.y * scale.y };
 	std::string contents = "";
@@ -232,7 +232,7 @@ void GraphicEngine::drawSpriteLate(Sprite* sprite, const VECTOR2& position, cons
 
 }
 
-void GraphicEngine::drawSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn, DrawStates& drawStates)
+void GraphicEngine::DrawSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn, DrawStates& drawStates)
 {
 	const VECTOR2& size = { texture_size.x * scale.x,texture_size.y * scale.y };
 	std::string contents = "";
@@ -242,7 +242,7 @@ void GraphicEngine::drawSpriteEarly(Sprite* sprite, const VECTOR2& position, con
 
 }
 
-void GraphicEngine::drawSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn)
+void GraphicEngine::DrawSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn)
 {
 	const VECTOR2& size = { texture_size.x * scale.x,texture_size.y * scale.y };
 	std::string contents = "";
@@ -257,7 +257,7 @@ void GraphicEngine::drawSpriteLate(Sprite* sprite, const VECTOR2& position, cons
 
 }
 
-void GraphicEngine::drawSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn)
+void GraphicEngine::DrawSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color, const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn)
 {
 	const VECTOR2& size = { texture_size.x * scale.x,texture_size.y * scale.y };
 	std::string contents = "";
@@ -273,7 +273,7 @@ void GraphicEngine::drawSpriteEarly(Sprite* sprite, const VECTOR2& position, con
 
 }
 
-void GraphicEngine::drawBackgroudSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn)
+void GraphicEngine::DrawBackgroudSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn)
 {
 	VECTOR4 color = { 1,1,1,1 };
 	VECTOR2 texture_position = { 0,0 };
@@ -290,7 +290,7 @@ void GraphicEngine::drawBackgroudSpriteLate(Sprite* sprite, const VECTOR2& posit
 
 }
 
-void GraphicEngine::drawBackgroudSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn)
+void GraphicEngine::DrawBackgroudSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn)
 {
 	VECTOR4 color = { 1,1,1,1 };
 	VECTOR2 texture_position = { 0,0 };
@@ -307,7 +307,7 @@ void GraphicEngine::drawBackgroudSpriteEarly(Sprite* sprite, const VECTOR2& posi
 
 }
 
-void GraphicEngine::textOut(int textNo, const std::string contents, const VECTOR2& position, const float& size, const VECTOR4& color, const int& drawTurn, bool late)
+void GraphicEngine::TextOut(int textNo, const std::string contents, const VECTOR2& position, const float& size, const VECTOR4& color, const int& drawTurn, bool late)
 {
 	if (textNo > 7) return;
 	std::shared_ptr<Sprite> sprite = sprites[textNo];
@@ -329,15 +329,15 @@ void GraphicEngine::textOut(int textNo, const std::string contents, const VECTOR
 
 }
 
+//
+//void GraphicEngine::drawDebugBounding(GeometricPrimitive* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
+//{
+//	DrawStates drawStates;
+//	drawStates.drawType = DrawType::BOUDING;
+//	uninvisibleDataObjectsFrameBuffer[(int)(FrameBufferName::FRAMEGEOMETRICDEBUGER)].push_back(new GeometricPrimitiveData(geo, world, color, drawStates, type));
+//}
 
-void GraphicEngine::drawDebugBounding(GeometricPrimitive* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
-{
-	DrawStates drawStates;
-	drawStates.drawType = DrawType::BOUDING;
-	uninvisibleDataObjectsFrameBuffer[(int)(FrameBufferName::FRAMEGEOMETRICDEBUGER)].push_back(new GeometricPrimitiveData(geo, world, color, drawStates, type));
-}
-
-Sprite* GraphicEngine::createSprite(const wchar_t* filename, ShaderData* shaderData)
+Sprite* GraphicEngine::CreateSprite(const wchar_t* filename, ShaderData* shaderData)
 {
 	std::shared_ptr<Sprite> sp;
 	if (shaderData == nullptr)
@@ -347,7 +347,7 @@ Sprite* GraphicEngine::createSprite(const wchar_t* filename, ShaderData* shaderD
 	return sprites.back().get();
 }
 
-bool GraphicEngine::createSprite3D(std::filesystem::path local, pSmartVoid& sprite3D)
+bool GraphicEngine::CreateSprite3D(std::filesystem::path local, pSmartVoid& sprite3D)
 {
 	std::shared_ptr<Sprite3D> pSprite3D = GetFromPoint<Sprite3D>(sprite3D);
 	bool result = sprite3DLoadManager->CreateSprite3D(local, pSprite3D);
@@ -366,30 +366,30 @@ void GraphicEngine::createEffect(const char* filename, std::string effName)
 }
 
 
-BoundingCapsule* GraphicEngine::createCapsuleDebug(const float& height, const float& weight, const VECTOR3& offset)
-{
-	BoundingCapsule* capsule = nullptr;
-	capsule = new BoundingCapsule(GameEngine::get()->getDevice(), height, weight, offset);
-	geometricPrimitive.push_back(std::shared_ptr<BoundingCapsule>(capsule));
-	return capsule;
-}
+//BoundingCapsule* GraphicEngine::createCapsuleDebug(const float& height, const float& weight, const VECTOR3& offset)
+//{
+//	BoundingCapsule* capsule = nullptr;
+//	capsule = new BoundingCapsule(GameEngine::get()->getDevice(), height, weight, offset);
+//	geometricPrimitive.push_back(std::shared_ptr<BoundingCapsule>(capsule));
+//	return capsule;
+//}
+//
+//BoundingSphere* GraphicEngine::createSphereDebug(const float& radius, const VECTOR3& offset)
+//{
+//	BoundingSphere* sphere = nullptr;
+//	sphere = new BoundingSphere(GameEngine::get()->getDevice(), radius, offset);
+//	geometricPrimitive.push_back(std::shared_ptr<BoundingSphere>(sphere));
+//	return sphere;
+//}
+//Ray* GraphicEngine::createRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type)
+//{
+//	Ray* ray = nullptr;
+//	ray = new Ray(GameEngine::get()->getDevice(), begin, end, color, Type);
+//	return ray;
+//}
 
-BoundingSphere* GraphicEngine::createSphereDebug(const float& radius, const VECTOR3& offset)
-{
-	BoundingSphere* sphere = nullptr;
-	sphere = new BoundingSphere(GameEngine::get()->getDevice(), radius, offset);
-	geometricPrimitive.push_back(std::shared_ptr<BoundingSphere>(sphere));
-	return sphere;
-}
-Ray* GraphicEngine::createRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type)
-{
-	Ray* ray = nullptr;
-	ray = new Ray(GameEngine::get()->getDevice(), begin, end, color, Type);
-	return ray;
-}
 
-
-bool GraphicEngine::createSkinnedMesh(std::filesystem::path fileLocal, pSmartVoid& mesh)
+bool GraphicEngine::CreateSkinnedMesh(std::filesystem::path fileLocal, pSmartVoid& mesh)
 {
 	return meshLoaderManager.get()->CreateMesh(mesh, fileLocal);
 }
@@ -654,21 +654,21 @@ void GraphicEngine::DrawAllUninvisibleObject(int frameBufferSlot, DrawType type)
 
 			break;
 		}
-		case DrawType::BOUDING:
-		{
-			GeometricPrimitiveData* data = objDrawData->getGeometricPrimitiveData();
-			const VECTOR4& color = data->color_;
-			switch (data->type_)
-			{
-			case 2:
-				data->geometric_->renderPointStrip(immediateContext.Get(), data->world_, data->color_);
-				break;
-
-			case 3:
-				data->geometric_->renderPointList(immediateContext.Get(), data->world_, data->color_);
-				break;
-			}
-		}
+		//case DrawType::BOUDING:
+		//{
+		//	GeometricPrimitiveData* data = objDrawData->getGeometricPrimitiveData();
+		//	const VECTOR4& color = data->color_;
+		//	switch (data->type_)
+		//	{
+		//	case 2:
+		//		data->geometric_->renderPointStrip(immediateContext.Get(), data->world_, data->color_);
+		//		break;
+		//
+		//	case 3:
+		//		data->geometric_->renderPointList(immediateContext.Get(), data->world_, data->color_);
+		//		break;
+		//	}
+		//}
 		}
 
 	}
@@ -828,7 +828,7 @@ void GraphicEngine::CreateTextFont()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		createSprite(textFonts[i]);
+		CreateSprite(textFonts[i]);
 	}
 }
 

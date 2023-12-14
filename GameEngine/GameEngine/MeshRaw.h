@@ -3,68 +3,111 @@
 #include "Material.h"
 #include <wrl.h>
 #include <memory>
-class MeshRawVertex
+class RawVertex
 {
 public:
     template < class T>
     void serialize(T& archive)
     {
-        archive(position, normal, tangent, texcoord, bone_weights, bone_indices);
+        archive(position, normal, tangent, texcoord);
     }
 
     DirectX::XMFLOAT3 position = { 0,0,0 };
     DirectX::XMFLOAT3 normal = { 1,0,0 };
     DirectX::XMFLOAT4 tangent = { 1,0,0,0 };
     DirectX::XMFLOAT2 texcoord = { 0,0 };
-    float bone_weights[MAX_BONE_INFLUENCES]{ 1, 0, 0, 0 };
-    uint32_t bone_indices[MAX_BONE_INFLUENCES]{};
+  
    
+};
+
+class BoneVertex : public RawVertex
+{
+public:
+    template < class T>
+    void serialize(T& archive)
+    {
+        archive(cereal::base_class<RawVertex>(this), boneWeights, boneIndices);
+    }
+    float boneWeights[MAX_BONE_INFLUENCES]{ 1, 0, 0, 0 };
+    uint32_t boneIndices[MAX_BONE_INFLUENCES]{};
 };
 
 class Subset
 {
 public:
-    uint64_t material_unique_id{ 0 };
-    uint32_t start_index_location{ 0 };
-    uint32_t index_count{ 0 };
+    uint64_t materialUniqueId{ 0 };
+    uint32_t startIndexLocation{ 0 };
+    uint32_t indexCount{ 0 };
     template < class T>
     void serialize(T& archive)
     {
-        archive(material_unique_id, start_index_location, index_count);
+        archive(materialUniqueId, startIndexLocation, indexCount);
     }
 };
 
 class MeshRaw
 {
 public:
-    DirectX::XMFLOAT3 bounding_box[2]
+    virtual void CreateCOM(ID3D11Device* device) = 0;
+public:
+    DirectX::XMFLOAT3 boundingBox[2]
     {
         { +D3D11_FLOAT32_MAX, +D3D11_FLOAT32_MAX, +D3D11_FLOAT32_MAX },
         { -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX, -D3D11_FLOAT32_MAX }
     };
-    uint64_t unique_id{ 0 };
+    uint64_t uniqueId{ 0 };
     std::string name;
-    int64_t node_index{ 0 };
+    int64_t nodeIndex{ 0 };
 
-    std::vector<MeshRawVertex> vertices;
+   
     std::vector<uint32_t> indices;
 
-    Microsoft::WRL::ComPtr<ID3D11Buffer> vertex_buffer;
-    Microsoft::WRL::ComPtr<ID3D11Buffer> index_buffer;
+    Microsoft::WRL::ComPtr<ID3D11Buffer> vertexBuffer;
+    Microsoft::WRL::ComPtr<ID3D11Buffer> indexBuffer;
     
     std::vector<Subset> subsets;
-    Skeleton bind_pose;
-    DirectX::XMFLOAT4X4 default_global_transform{ 1, 0, 0, 0,
+   
+
+    DirectX::XMFLOAT4X4 defaultGlobalTransform{   1, 0, 0, 0,
                                                   0, 1, 0, 0,
                                                   0, 0, 1, 0,
-                                                  0, 0, 0, 1 };
+                                                  0, 0, 0, 1  };
 
     template < class T>
     void serialize(T& archive)
     {
-        archive(unique_id, name, node_index, subsets, default_global_transform,
-            bind_pose, bounding_box, vertices, indices);
+        archive(uniqueId, name, nodeIndex, subsets, defaultGlobalTransform,
+            boundingBox, indices);
     }
     
 };
 
+class StaticMesh : public MeshRaw
+{
+public:
+    void CreateCOM(ID3D11Device* device) override;
+    std::vector<RawVertex> vertices;
+public:
+    template < class T>
+    void serialize(T& archive)
+    {
+        archive(cereal::base_class<MeshRaw>(this), vertices);
+    }
+
+};
+
+
+class SkeletonMesh : public MeshRaw
+{
+public:
+    void CreateCOM(ID3D11Device* device) override;
+    std::vector<BoneVertex> vertices;
+public:
+    template < class T>
+    void serialize(T& archive)
+    {
+        archive(cereal::base_class<MeshRaw>(this), bindPose, vertices);
+    }
+    Skeleton bindPose;
+
+};

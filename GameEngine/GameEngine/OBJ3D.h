@@ -21,7 +21,7 @@ public:
     virtual ~OBJ3D();
     void CreateBoundingCapsule(const float& height, const float& weight, const VECTOR3& offset);
     void CreateBoundingSphere(const float& radius, const VECTOR3& offset);
-    void CreateRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type);
+    //void CreateRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type);
 public:
     template < class T>
     void serialize(T& archive)
@@ -65,7 +65,7 @@ public:
     };
     Animat animation;
     DrawStates drawStates_;
-    Bounding boundingHit_;
+    //Bounding boundingHit_;
 
     struct MeshInfor
     {

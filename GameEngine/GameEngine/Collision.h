@@ -11,8 +11,8 @@ class Collision : public SingletonPatternTemplate<Collision>
 {
     friend class SingletonPatternTemplate<Collision>;
 public:
-    VECTOR3 ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, RayType rayType, bool& hit) const;
-    VECTOR3 ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, Ray& ray, bool& hit) const;
+    //VECTOR3 ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, RayType rayType, bool& hit) const;
+    //VECTOR3 ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, Ray& ray, bool& hit) const;
     VECTOR3 RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VECTOR3& End, bool& hit) const;
     VECTOR3 SphereVsSphereReturnPoint(OBJ3D& objectA, OBJ3D& objectB, bool& hit) const;
     VECTOR3 CapsuleVsCapsuleReturnPoint(OBJ3D& objectA, OBJ3D& objectB, bool& hit) const;

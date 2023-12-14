@@ -37,56 +37,56 @@ public:
     void EditSkymap();
     ~GraphicEngine();
 public:
-    void drawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 world, 
+    void DrawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 world, 
         std::unordered_map<int64_t, std::shared_ptr<Material>>* materialList, 
         const VECTOR4& color, const int& drawTurn, DrawStates& drawStates, Animation::Keyframe* keyFrame, FrameBufferName slotFrameBuffer);
-    void drawEffect(std::string effName, const VECTOR3& position, const int& drawTurn, int slotFrameBuffer, float size = 1, VECTOR3 rotation = { 0,0,0 }, float angle = 0, VECTOR4 color = { 1,1,1,1 }
+    void DrawEffect(std::string effName, const VECTOR3& position, const int& drawTurn, int slotFrameBuffer, float size = 1, VECTOR3 rotation = { 0,0,0 }, float angle = 0, VECTOR4 color = { 1,1,1,1 }
     );
-    void drawSprite3D(Sprite3D* sprite3D, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, int drawTurn, FrameBufferName slotFrameBuffer);
-    void drawSpriteLate(Sprite* sprite,
+    void DrawSprite3D(Sprite3D* sprite3D, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, int drawTurn, FrameBufferName slotFrameBuffer);
+    void DrawSpriteLate(Sprite* sprite,
         const VECTOR2& position, const VECTOR2& scale,
         const VECTOR4& color,
         const VECTOR2& texture_position, const VECTOR2& texture_size,
         const float& angle, const int& drawTurn,
         DrawStates& drawStates
     );
-    void drawSpriteEarly(Sprite* sprite,
+    void DrawSpriteEarly(Sprite* sprite,
         const VECTOR2& position, const VECTOR2& scale,
         const VECTOR4& color,
         const VECTOR2& texture_position, const VECTOR2& texture_size,
         const float& angle, const int& drawTurn,
         DrawStates& drawStates
     );
-    void drawSpriteLate(Sprite* sprite,
+    void DrawSpriteLate(Sprite* sprite,
         const VECTOR2& position, const VECTOR2& scale,
         const VECTOR4& color,
         const VECTOR2& texture_position, const VECTOR2& texture_size,
         const float& angle, const int& drawTurn
     );
-    void drawSpriteEarly(Sprite* sprite,
+    void DrawSpriteEarly(Sprite* sprite,
         const VECTOR2& position, const VECTOR2& scale,
         const VECTOR4& color,
         const VECTOR2& texture_position, const VECTOR2& texture_size,
         const float& angle, const int& drawTurn
     );
-    void drawBackgroudSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn);
-    void drawBackgroudSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn);
-    void textOut(int textNo, const std::string contents, const VECTOR2& position, const float& size, const VECTOR4& color, const int& drawTurn, bool late = true);
+    void DrawBackgroudSpriteLate(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn);
+    void DrawBackgroudSpriteEarly(Sprite* sprite, const VECTOR2& position, const VECTOR2& size, const int& drawTurn);
+    void TextOut(int textNo, const std::string contents, const VECTOR2& position, const float& size, const VECTOR4& color, const int& drawTurn, bool late = true);
 
    
-    void drawDebugBounding(GeometricPrimitive* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type);
+    //void drawDebugBounding(GeometricPrimitive* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type);
 public:
-    Sprite* createSprite(const wchar_t* filename, ShaderData* shaderData = nullptr);
-    bool createSprite3D(std::filesystem::path local, pSmartVoid& sprite3D);
-    bool createSkinnedMesh(std::filesystem::path fileLocal, pSmartVoid& mesh);
+    Sprite* CreateSprite(const wchar_t* filename, ShaderData* shaderData = nullptr);
+    bool CreateSprite3D(std::filesystem::path local, pSmartVoid& sprite3D);
+    bool CreateSkinnedMesh(std::filesystem::path fileLocal, pSmartVoid& mesh);
     bool LoadMaterial(std::filesystem::path fileName, pSmartVoid& material);
     bool LoadAnimator(std::filesystem::path fileName, pSmartVoid& animator);
     bool LoadAnimation(std::filesystem::path fileName, pSmartVoid& animation);
 
     void createEffect(const char* filename, std::string effName);
-    BoundingCapsule* createCapsuleDebug(const float& height, const float& weight, const VECTOR3& offset);
-    BoundingSphere* createSphereDebug(const float& radius, const VECTOR3& offset);
-    Ray* createRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type = NON);
+    //BoundingCapsule* createCapsuleDebug(const float& height, const float& weight, const VECTOR3& offset);
+    //BoundingSphere* createSphereDebug(const float& radius, const VECTOR3& offset);
+    //Ray* createRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type = NON);
 
 public:
 
@@ -273,7 +273,7 @@ private:
 
         ~SpritesData() override {}
     };
-    class GeometricPrimitiveData : public ObjectDrawData
+    /*class GeometricPrimitiveData : public ObjectDrawData
     {
     public:
         GeometricPrimitiveData* getGeometricPrimitiveData() override { return this; }
@@ -301,7 +301,7 @@ private:
         int type_;
 
         ~GeometricPrimitiveData() {}
-    };
+    };*/
     class StaticMeshData :public ObjectDrawData
     {
     public:
@@ -448,7 +448,7 @@ private:
     std::map<std::string, Effect*> effects;
    
     std::vector<std::shared_ptr<Sprite>> sprites;
-    std::vector<std::shared_ptr<GeometricPrimitive>> geometricPrimitive;
+    //std::vector<std::shared_ptr<GeometricPrimitive>> geometricPrimitive;
 
 
     std::vector<std::vector<ObjectDrawData*>> uninvisibleDataObjectsFrameBuffer;

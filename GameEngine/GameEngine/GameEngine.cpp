@@ -224,14 +224,9 @@ bool GameEngine::CreateCapsuleDebug(void* cap, const float& height, const float&
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 	//BoundingCapsule* pCap = std::static_pointer_cast<BoundingCapsule>(cap).get();
 	//pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
 	//cap.reset(pCap);
-=======
-	BoundingCapsule* pCap = static_cast<BoundingCapsule*>(cap);
-	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
->>>>>>> parent of a31de18 (dda)
 =======
 	BoundingCapsule* pCap = static_cast<BoundingCapsule*>(cap);
 	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
@@ -247,12 +242,9 @@ bool GameEngine::createSphereDebug(void* sphere, const float& radius, const VECT
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 	//BoundingSphere* pSphere = std::static_pointer_cast<BoundingSphere>(sphere).get();
 	//pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
 =======
-=======
->>>>>>> parent of a31de18 (dda)
 =======
 >>>>>>> parent of a31de18 (dda)
 	BoundingSphere* pSphere = static_cast<BoundingSphere*>(sphere);
@@ -299,12 +291,9 @@ void GameEngine::DrawDebugBounding(void* geo, const DirectX::XMFLOAT4X4 world, c
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 	//GeometricPrimitive* pGeo = std::static_pointer_cast<GeometricPrimitive>(geo).get();
 	//GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
 =======
-=======
->>>>>>> parent of a31de18 (dda)
 =======
 >>>>>>> parent of a31de18 (dda)
 	GeometricPrimitive* pGeo = static_cast<GeometricPrimitive*>(geo);

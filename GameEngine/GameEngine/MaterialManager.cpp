@@ -51,7 +51,7 @@ void MaterialManager::RegisterAllMaterialsFromMeshData(pSmartVoid& mesh, std::un
     for (MeshRaw& mesh : pSkinnedMesh->getMeshRawList())
         for (auto& subset : mesh.subsets)
         {
-            auto it = materialMap.find(subset.materialUniqueId);
+            auto it = materialMap.find(subset.material_unique_id);
             if (it == materialMap.end())
             {
                 continue;
@@ -249,7 +249,7 @@ void MaterialManager::CreateFolder(std::filesystem::path local, std::filesystem:
         std::filesystem::create_directory(fixLocal);
     }
 }
-
+std::mutex fileMutex;
 void MaterialManager::BuildNewMaterialCereal(std::shared_ptr<Material>& material)
 {
     material->CreateNewCereal();

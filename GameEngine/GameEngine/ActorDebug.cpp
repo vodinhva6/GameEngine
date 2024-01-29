@@ -213,8 +213,8 @@ void ActorDebug::UpdateDebugMaterial(OBJ3D* obj)
     int i = 0;
     for (auto& subset : mesh->subsets)
     {
-        ImGui::Text(std::string("Subset Material Id : " + std::to_string(subset.materialUniqueId)).c_str());
-        auto it = obj->meshInfor.materials_.find(subset.materialUniqueId);
+        ImGui::Text(std::string("Subset Material Id : " + std::to_string(subset.material_unique_id)).c_str());
+        auto it = obj->meshInfor.materials_.find(subset.material_unique_id);
         std::shared_ptr<Material> material;
         if (it == obj->meshInfor.materials_.end())
             material = obj->meshInfor.materials_.at(0);
@@ -281,7 +281,7 @@ void ActorDebug::UpdateDebugMeshes(OBJ3D* obj)
 #ifdef USE_IMGUI
     ImGui::Indent();
     ContentBrowser* contentBrowser = GetFrom<ContentBrowser>(GameEngine::get()->getContentBrowser());
-    auto& listMesh = obj->meshInfor.mesh_->getMeshRawList();
+    std::vector<MeshRaw>& listMesh = obj->meshInfor.mesh_->getMeshRawList();
 
     int i = 0;
     int size = (int)listMesh.size();
@@ -311,7 +311,7 @@ void ActorDebug::UpdateDebugMeshes(OBJ3D* obj)
         pSmartVoid mesh;
         GameEngine::get()->LoadSkinnedMesh(meshLocal, mesh);
         std::shared_ptr<SkinnedMesh> pMesh = GetFromPoint<SkinnedMesh>(mesh);
-        auto& pMeshRawList = pMesh->getMeshRawList();
+        std::vector<MeshRaw>& pMeshRawList = pMesh->getMeshRawList();
         for (auto& meshRaw : pMeshRawList)
         {
             MeshRaw& raw = listMesh.emplace_back();

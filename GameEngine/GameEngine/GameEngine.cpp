@@ -170,13 +170,13 @@ void GameEngine::CreatePS(ID3D11Device* device, const char* cso_name, ID3D11Pixe
 
 bool GameEngine::CreateRay(pSmartVoid& ray, const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, int rayType)
 {
-	//ray.reset(GraphicEngine::get()->createRay(begin, end, color, (RayType)(rayType)));
+	ray.reset(GraphicEngine::get()->createRay(begin, end, color, (RayType)(rayType)));
 	return true;
 }
 
 bool GameEngine::LoadSkinnedMesh(std::filesystem::path fileLocal, pSmartVoid& mesh)
 {
-	return GraphicEngine::get()->CreateSkinnedMesh(fileLocal, mesh);
+	return GraphicEngine::get()->createSkinnedMesh(fileLocal, mesh);
 }
 
 bool GameEngine::CreateSkinnedMeshThumbnail(std::filesystem::path fileName, pSmartVoid* mesh, bool* result)
@@ -225,6 +225,7 @@ bool GameEngine::CreateCapsuleDebug(pSmartVoid& cap, const float& height, const 
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//BoundingCapsule* pCap = std::static_pointer_cast<BoundingCapsule>(cap).get();
 	//pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
 	//cap.reset(pCap);
@@ -241,11 +242,17 @@ bool GameEngine::CreateCapsuleDebug(pSmartVoid& cap, const float& height, const 
 	//pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
 	//cap.reset(pCap);
 >>>>>>> parent of 97e62d9 (qd)
+=======
+	BoundingCapsule* pCap = std::static_pointer_cast<BoundingCapsule>(cap).get();
+	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
+	cap.reset(pCap);
+>>>>>>> parent of 3687b95 (fixx)
 	return true;
 }
 
 bool GameEngine::createSphereDebug(pSmartVoid& sphere, const float& radius, const VECTOR3& offset)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -261,18 +268,22 @@ bool GameEngine::createSphereDebug(pSmartVoid& sphere, const float& radius, cons
 	//BoundingSphere* pSphere = std::static_pointer_cast<BoundingSphere>(sphere).get();
 	//pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
 >>>>>>> parent of 97e62d9 (qd)
+=======
+	BoundingSphere* pSphere = std::static_pointer_cast<BoundingSphere>(sphere).get();
+	pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
+>>>>>>> parent of 3687b95 (fixx)
 	return true;
 }
 
 bool GameEngine::CreateSprite3D(std::filesystem::path local, pSmartVoid& sprite3D)
 {
-	return 	GraphicEngine::get()->CreateSprite3D(local, sprite3D);
+	return 	GraphicEngine::get()->createSprite3D(local, sprite3D);
 }
 
 void GameEngine::SpriteTextOutScreen(int textNo, const std::string contents, const VECTOR2& position,
 	const float& size, const VECTOR4& color, const int& drawTurn, bool late)
 {
-	GraphicEngine::get()->TextOut(textNo, contents, position, size, color, drawTurn, late);
+	GraphicEngine::get()->textOut(textNo, contents, position, size, color, drawTurn, late);
 }
 
 void GameEngine::DrawSkinnedMesh(pSmartVoid mesh, const DirectX::XMFLOAT4X4 world,
@@ -282,24 +293,25 @@ void GameEngine::DrawSkinnedMesh(pSmartVoid mesh, const DirectX::XMFLOAT4X4 worl
 	SkinnedMesh* rMesh = GetFrom<SkinnedMesh>(mesh);
 	std::unordered_map<int64_t, std::shared_ptr<Material>>* pMaterialList = GetFrom<std::unordered_map<int64_t, std::shared_ptr<Material>>>(materialList);
 	Animation::Keyframe* pKeyFrame = GetFrom<Animation::Keyframe>(keyFrame);
-	GraphicEngine::get()->DrawSkinnedMesh(rMesh, world, pMaterialList, color, drawTurn, drawStates, pKeyFrame, name);
+	GraphicEngine::get()->drawSkinnedMesh(rMesh, world, pMaterialList, color, drawTurn, drawStates, pKeyFrame, name);
 }
 
 void GameEngine::DrawSpriteLate(void* sprite, const VECTOR2& position, const VECTOR2& scale, const VECTOR4& color,
 	const VECTOR2& texture_position, const VECTOR2& texture_size, const float& angle, const int& drawTurn)
 {
 	Sprite* pSprite = static_cast<Sprite*>(sprite);
-	GraphicEngine::get()->DrawSpriteLate(pSprite, position, scale, color, texture_position, texture_size, angle, drawTurn);
+	GraphicEngine::get()->drawSpriteLate(pSprite, position, scale, color, texture_position, texture_size, angle, drawTurn);
 }
 
 void GameEngine::DrawSprite3D(pSmartVoid sprite3D, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, int drawTurn, FrameBufferName name)
 {
 	Sprite3D* pSprite3D = GetFrom<Sprite3D>(sprite3D);
-	GraphicEngine::get()->DrawSprite3D(pSprite3D, world, color, drawTurn, name);
+	GraphicEngine::get()->drawSprite3D(pSprite3D, world, color, drawTurn, name);
 }
 
 void GameEngine::DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -315,6 +327,10 @@ void GameEngine::DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 wor
 	//GeometricPrimitive* pGeo = std::static_pointer_cast<GeometricPrimitive>(geo).get();
 	//GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
 >>>>>>> parent of 97e62d9 (qd)
+=======
+	GeometricPrimitive* pGeo = std::static_pointer_cast<GeometricPrimitive>(geo).get();
+	GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
+>>>>>>> parent of 3687b95 (fixx)
 }
 
 void GameEngine::LoadTextureFromFileMultiThread(std::wstring fileName, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>* shader_resource_view, bool* result)

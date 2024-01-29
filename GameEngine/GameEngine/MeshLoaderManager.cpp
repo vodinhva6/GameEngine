@@ -239,7 +239,7 @@ bool MeshLoaderManager::IsCanToLoadMesh(std::filesystem::path local, pSmartVoid&
     return Ismesh;
 }
 
-void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMesh>& meshes)
+void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<MeshRaw>& meshes)
 {
     for (const SceneMesh::Node& node : sceneView->nodes)
     {
@@ -254,14 +254,14 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
         {
             continue;
         }
-        auto& mesh{ meshes.emplace_back() };
-        mesh.uniqueId = fbx_mesh->GetNode()->GetUniqueID();
+        MeshRaw& mesh{ meshes.emplace_back() };
+        mesh.unique_id = fbx_mesh->GetNode()->GetUniqueID();
         mesh.name = fbx_mesh->GetNode()->GetName();
-        mesh.nodeIndex = sceneView->indexof(mesh.uniqueId);
-        mesh.defaultGlobalTransform = to_xmfloat4x4(fbx_mesh->GetNode()->EvaluateGlobalTransform());
+        mesh.node_index = sceneView->indexof(mesh.unique_id);
+        mesh.default_global_transform = to_xmfloat4x4(fbx_mesh->GetNode()->EvaluateGlobalTransform());
         std::vector<std::vector<Skeleton::BoneInfluence>> bone_influences;
         FetchBoneInfluences(fbx_mesh, bone_influences);
-        FetchSkeleton(fbx_mesh, mesh.bindPose);
+        FetchSkeleton(fbx_mesh, mesh.bind_pose);
 
         std::vector<Subset>& subsets{ mesh.subsets };
         const int material_count{ fbx_mesh->GetNode()->GetMaterialCount() };
@@ -271,7 +271,7 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
         for (int material_index = 0; material_index < material_count; ++material_index)
         {
             const FbxSurfaceMaterial* fbx_material{ fbx_mesh->GetNode()->GetMaterial(material_index) };
-            subsets.at(material_index).materialUniqueId = fbx_material->GetUniqueID();
+            subsets.at(material_index).material_unique_id = fbx_material->GetUniqueID();
         }
         if (material_count > 0)
         {
@@ -279,15 +279,15 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
             for (int polygon_index = 0; polygon_index < polygon_count; ++polygon_index)
             {
                 const int material_index{ fbx_mesh->GetElementMaterial()->GetIndexArray().GetAt(polygon_index) };
-                subsets.at(material_index).indexCount += 3;
+                subsets.at(material_index).index_count += 3;
             }
             uint32_t offset{ 0 };
             for (Subset& subset : subsets)
             {
-                subset.startIndexLocation = offset;
-                offset += subset.indexCount;
+                subset.start_index_location = offset;
+                offset += subset.index_count;
                 // This will be used as counter in the following procedures, reset to zero
-                subset.indexCount = 0;
+                subset.index_count = 0;
             }
         }
 
@@ -307,13 +307,13 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
         {
             const int material_index{ material_count > 0 ? fbx_mesh->GetElementMaterial()->GetIndexArray().GetAt(polygon_index) : 0 };
             Subset& subset{ subsets.at(material_index) };
-            const uint32_t offset{ subset.startIndexLocation + subset.indexCount };
+            const uint32_t offset{ subset.start_index_location + subset.index_count };
 
             for (int position_in_polygon = 0; position_in_polygon < 3; ++position_in_polygon)
             {
                 const int vertex_index{ polygon_index * 3 + position_in_polygon };
 
-                BoneVertex vertex;
+                MeshRawVertex vertex;
                 const int polygon_vertex{ fbx_mesh->GetPolygonVertex(polygon_index, position_in_polygon) };
                 vertex.position.x = static_cast<float>(control_points[polygon_vertex][0]);
                 vertex.position.y = static_cast<float>(control_points[polygon_vertex][1]);
@@ -328,23 +328,23 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
                 {
                     if (influence_index < MAX_BONE_INFLUENCES)
                     {
-                        total_weight += influences_per_control_point.at(influence_index).boneWeight;
-                        vertex.boneWeights[influence_index] =
-                            influences_per_control_point.at(influence_index).boneWeight;
-                        vertex.boneIndices[influence_index] =
-                            influences_per_control_point.at(influence_index).boneIndex;
+                        total_weight += influences_per_control_point.at(influence_index).bone_weight;
+                        vertex.bone_weights[influence_index] =
+                            influences_per_control_point.at(influence_index).bone_weight;
+                        vertex.bone_indices[influence_index] =
+                            influences_per_control_point.at(influence_index).bone_index;
                     }
                     else
                     {
-                        total_weight += influences_per_control_point.at(influence_index).boneWeight;
+                        total_weight += influences_per_control_point.at(influence_index).bone_weight;
                         int i = 0;
                         for (int j = 0; j < 4; j++)
                         {
-                            if (vertex.boneWeights[i] < vertex.boneWeights[j])
+                            if (vertex.bone_weights[i] < vertex.bone_weights[j])
                                 i = j;
                         }
-                        vertex.boneWeights[i] += influences_per_control_point.at(influence_index).boneWeight;
-                        vertex.boneIndices[i] = influences_per_control_point.at(influence_index).boneIndex;
+                        vertex.bone_weights[i] += influences_per_control_point.at(influence_index).bone_weight;
+                        vertex.bone_indices[i] = influences_per_control_point.at(influence_index).bone_index;
 
                        /* vertex.bone_weights[0] += influences_per_control_point.at(influence_index).bone_weight / 4;
                         vertex.bone_weights[1] += influences_per_control_point.at(influence_index).bone_weight / 4;
@@ -356,7 +356,7 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
                 if(total_weight != 0)
                 for (size_t i = 0; i < MAX_BONE_INFLUENCES; ++i)
                 {
-                    vertex.boneWeights[i] /= total_weight;
+                    vertex.bone_weights[i] /= total_weight;
                 }
                 if (fbx_mesh->GetElementNormalCount() > 0)
                 {
@@ -388,7 +388,7 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
                 mesh.indices.at(static_cast<size_t>(offset) + position_in_polygon) = vertex_index;
 
 
-                subset.indexCount++;
+                subset.index_count++;
             }
         }
 
@@ -411,9 +411,9 @@ void MeshLoaderManager::FetchSkeleton(FbxMesh* fbx_mesh, Skeleton& bind_pose)
 
             Skeleton::Bone& bone{ bind_pose.bones.at(cluster_index) };
             bone.name = cluster->GetLink()->GetName();
-            bone.uniqueId = cluster->GetLink()->GetUniqueID();
-            bone.parentIndex = bind_pose.indexof(cluster->GetLink()->GetParent()->GetUniqueID());
-            bone.nodeIndex = sceneView->indexof(bone.uniqueId);
+            bone.unique_id = cluster->GetLink()->GetUniqueID();
+            bone.parent_index = bind_pose.indexof(cluster->GetLink()->GetParent()->GetUniqueID());
+            bone.node_index = sceneView->indexof(bone.unique_id);
 
             //'reference_global_init_position' is used to convert from local space of model(mesh) to
              // global space of scene.
@@ -430,7 +430,7 @@ void MeshLoaderManager::FetchSkeleton(FbxMesh* fbx_mesh, Skeleton& bind_pose)
            // the transformation.
            // Compose 'bone.offset_transform' matrix that trnasforms position from mesh space to bone space.
                // This matrix is called the offset matrix.
-            bone.offsetTransform
+            bone.offset_transform
                 = to_xmfloat4x4(cluster_global_init_position.Inverse() * reference_global_init_position);
 
         }
@@ -462,8 +462,8 @@ void MeshLoaderManager::FetchBoneInfluences(const FbxMesh* fbx_mesh, std::vector
                 double control_point_weight
                 { fbx_cluster->GetControlPointWeights()[control_point_indices_index] };
                 Skeleton::BoneInfluence& bone_influence{ bone_influences.at(control_point_index).emplace_back() };
-                bone_influence.boneIndex = static_cast<uint32_t>(cluster_index);
-                bone_influence.boneWeight = static_cast<float>(control_point_weight);
+                bone_influence.bone_index = static_cast<uint32_t>(cluster_index);
+                bone_influence.bone_weight = static_cast<float>(control_point_weight);
             }
         }
     }
@@ -593,15 +593,15 @@ void MeshLoaderManager::FetchBouding(FbxMesh* fbx_mesh, MeshRaw& mesh)
     fbx_mesh->ComputeBBox();
     const FbxDouble3 bbMax = fbx_mesh->BBoxMax;
     const FbxDouble3 bbMin = fbx_mesh->BBoxMin;
-    mesh.boundingBox[0].x = std::min<float>(mesh.boundingBox[0].x, static_cast<float>(bbMin.mData[0]));
-    mesh.boundingBox[0].y = std::min<float>(mesh.boundingBox[0].y, static_cast<float>(bbMin.mData[1]));
-    mesh.boundingBox[0].z = std::min<float>(mesh.boundingBox[0].z, static_cast<float>(bbMin.mData[2]));
-    mesh.boundingBox[1].x = std::max<float>(mesh.boundingBox[1].x, static_cast<float>(bbMax.mData[0]));
-    mesh.boundingBox[1].y = std::max<float>(mesh.boundingBox[1].y, static_cast<float>(bbMax.mData[1]));
-    mesh.boundingBox[1].z = std::max<float>(mesh.boundingBox[1].z, static_cast<float>(bbMax.mData[2]));
-    DirectX::XMVECTOR V = DirectX::XMLoadFloat3(&mesh.boundingBox[0]);
-    DirectX::XMMATRIX M = DirectX::XMLoadFloat4x4(&mesh.defaultGlobalTransform);
-    DirectX::XMStoreFloat3(&mesh.boundingBox[0], DirectX::XMVector3TransformCoord(V, M));
-    V = DirectX::XMLoadFloat3(&mesh.boundingBox[1]);
-    DirectX::XMStoreFloat3(&mesh.boundingBox[1], DirectX::XMVector3TransformCoord(V, M));
+    mesh.bounding_box[0].x = std::min<float>(mesh.bounding_box[0].x, static_cast<float>(bbMin.mData[0]));
+    mesh.bounding_box[0].y = std::min<float>(mesh.bounding_box[0].y, static_cast<float>(bbMin.mData[1]));
+    mesh.bounding_box[0].z = std::min<float>(mesh.bounding_box[0].z, static_cast<float>(bbMin.mData[2]));
+    mesh.bounding_box[1].x = std::max<float>(mesh.bounding_box[1].x, static_cast<float>(bbMax.mData[0]));
+    mesh.bounding_box[1].y = std::max<float>(mesh.bounding_box[1].y, static_cast<float>(bbMax.mData[1]));
+    mesh.bounding_box[1].z = std::max<float>(mesh.bounding_box[1].z, static_cast<float>(bbMax.mData[2]));
+    DirectX::XMVECTOR V = DirectX::XMLoadFloat3(&mesh.bounding_box[0]);
+    DirectX::XMMATRIX M = DirectX::XMLoadFloat4x4(&mesh.default_global_transform);
+    DirectX::XMStoreFloat3(&mesh.bounding_box[0], DirectX::XMVector3TransformCoord(V, M));
+    V = DirectX::XMLoadFloat3(&mesh.bounding_box[1]);
+    DirectX::XMStoreFloat3(&mesh.bounding_box[1], DirectX::XMVector3TransformCoord(V, M));
 }

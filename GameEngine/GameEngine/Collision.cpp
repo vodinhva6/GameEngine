@@ -2,62 +2,62 @@
 #include "GameEngine.h"
 #include "Ray.h"
 #include "CameraManager.h"
-//VECTOR3 Collision::ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, RayType rayType, bool& hit) const
-//{
-//    VECTOR3 pos = {};
-//    for (size_t i = 0; i < objectA.boundingHit_.raylist.size(); i++)
-//    {
-//        Ray* ray = objectA.boundingHit_.raylist.at(i).get();
-//        if (ray->getType() != rayType) continue;
-//        DirectX::XMVECTOR Begin = DirectX::XMLoadFloat3(&ray->getBeginPos());
-//        DirectX::XMVECTOR End = DirectX::XMLoadFloat3(&ray->getEndPos());
-//        DirectX::XMMATRIX Transform = DirectX::XMLoadFloat4x4(&objectA.worldTransform);
-//        Begin = DirectX::XMVector3TransformCoord(Begin, Transform);
-//        End = DirectX::XMVector3TransformCoord(End, Transform);
-//        VECTOR3 begin;
-//        VECTOR3 end;
-//        DirectX::XMStoreFloat3(&begin, Begin);
-//        DirectX::XMStoreFloat3(&end, End);
-//        pos = this->RayCastReturnPoint(objectB, begin, end, hit);
-//        if (hit)
-//        {
-//            DirectX::XMVECTOR Pos = DirectX::XMLoadFloat3(&pos);
-//            DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(Pos, End);
-//            float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(Vec));
-//            Vec = DirectX::XMVector3Normalize(Vec);
-//            Pos = DirectX::XMLoadFloat3(&objectA.getPosition());
-//            DirectX::XMStoreFloat3(&pos,DirectX::XMVectorAdd(Pos, DirectX::XMVectorScale(Vec, dis - 0.05f)));
-//            break;
-//        }
-//    }
-//    return pos;
-//}
-//
-//VECTOR3 Collision::ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, Ray& ray, bool& hit) const
-//{
-//    VECTOR3 pos = {};
-//    DirectX::XMVECTOR Begin = DirectX::XMLoadFloat3(&ray.getBeginPos());
-//    DirectX::XMVECTOR End = DirectX::XMLoadFloat3(&ray.getEndPos());
-//    DirectX::XMMATRIX Transform = DirectX::XMLoadFloat4x4(&objectA.worldTransform);
-//    Begin = DirectX::XMVector3TransformCoord(Begin, Transform);
-//    End = DirectX::XMVector3TransformCoord(End, Transform);
-//    VECTOR3 begin;
-//    VECTOR3 end;
-//    DirectX::XMStoreFloat3(&begin, Begin);
-//    DirectX::XMStoreFloat3(&end, End);
-//    pos = this->RayCastReturnPoint(objectB, begin, end, hit);
-//    if (hit)
-//    {
-//        DirectX::XMVECTOR Pos = DirectX::XMLoadFloat3(&pos);
-//        DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(Pos, End);
-//        float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(Vec));
-//        Vec = DirectX::XMVector3Normalize(Vec);
-//        Pos = DirectX::XMLoadFloat3(&objectA.getPosition());
-//        DirectX::XMStoreFloat3(&pos, DirectX::XMVectorAdd(Pos, DirectX::XMVectorScale(Vec, dis)));
-//    }
-//
-//    return pos;
-//}
+VECTOR3 Collision::ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, RayType rayType, bool& hit) const
+{
+    VECTOR3 pos = {};
+    for (size_t i = 0; i < objectA.boundingHit_.raylist.size(); i++)
+    {
+        Ray* ray = objectA.boundingHit_.raylist.at(i).get();
+        if (ray->getType() != rayType) continue;
+        DirectX::XMVECTOR Begin = DirectX::XMLoadFloat3(&ray->getBeginPos());
+        DirectX::XMVECTOR End = DirectX::XMLoadFloat3(&ray->getEndPos());
+        DirectX::XMMATRIX Transform = DirectX::XMLoadFloat4x4(&objectA.worldTransform);
+        Begin = DirectX::XMVector3TransformCoord(Begin, Transform);
+        End = DirectX::XMVector3TransformCoord(End, Transform);
+        VECTOR3 begin;
+        VECTOR3 end;
+        DirectX::XMStoreFloat3(&begin, Begin);
+        DirectX::XMStoreFloat3(&end, End);
+        pos = this->RayCastReturnPoint(objectB, begin, end, hit);
+        if (hit)
+        {
+            DirectX::XMVECTOR Pos = DirectX::XMLoadFloat3(&pos);
+            DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(Pos, End);
+            float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(Vec));
+            Vec = DirectX::XMVector3Normalize(Vec);
+            Pos = DirectX::XMLoadFloat3(&objectA.getPosition());
+            DirectX::XMStoreFloat3(&pos,DirectX::XMVectorAdd(Pos, DirectX::XMVectorScale(Vec, dis - 0.05f)));
+            break;
+        }
+    }
+    return pos;
+}
+
+VECTOR3 Collision::ObjectAVsObjectBRaycastReturnPoint(OBJ3D& objectA, OBJ3D& objectB, Ray& ray, bool& hit) const
+{
+    VECTOR3 pos = {};
+    DirectX::XMVECTOR Begin = DirectX::XMLoadFloat3(&ray.getBeginPos());
+    DirectX::XMVECTOR End = DirectX::XMLoadFloat3(&ray.getEndPos());
+    DirectX::XMMATRIX Transform = DirectX::XMLoadFloat4x4(&objectA.worldTransform);
+    Begin = DirectX::XMVector3TransformCoord(Begin, Transform);
+    End = DirectX::XMVector3TransformCoord(End, Transform);
+    VECTOR3 begin;
+    VECTOR3 end;
+    DirectX::XMStoreFloat3(&begin, Begin);
+    DirectX::XMStoreFloat3(&end, End);
+    pos = this->RayCastReturnPoint(objectB, begin, end, hit);
+    if (hit)
+    {
+        DirectX::XMVECTOR Pos = DirectX::XMLoadFloat3(&pos);
+        DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(Pos, End);
+        float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(Vec));
+        Vec = DirectX::XMVector3Normalize(Vec);
+        Pos = DirectX::XMLoadFloat3(&objectA.getPosition());
+        DirectX::XMStoreFloat3(&pos, DirectX::XMVectorAdd(Pos, DirectX::XMVectorScale(Vec, dis)));
+    }
+
+    return pos;
+}
 
 VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VECTOR3& End, bool& hit) const
 {
@@ -75,7 +75,7 @@ VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VE
     if(pSkinnedMesh)
     for (auto& mesh : pSkinnedMesh->getMeshRawList())
     {
-        DirectX::XMMATRIX WorldTransform = DirectX::XMLoadFloat4x4(&mesh.defaultGlobalTransform) * DirectX::XMLoadFloat4x4(&pSkinnedMesh->getDefaultTransform()) * DirectX::XMLoadFloat4x4(&obj.worldTransform);
+        DirectX::XMMATRIX WorldTransform = DirectX::XMLoadFloat4x4(&mesh.default_global_transform) * DirectX::XMLoadFloat4x4(&pSkinnedMesh->getDefaultTransform()) * DirectX::XMLoadFloat4x4(&obj.worldTransform);
         DirectX::XMMATRIX InverseWorldTransform = DirectX::XMMatrixInverse(nullptr, WorldTransform);
     
         DirectX::XMVECTOR S = DirectX::XMVector3TransformCoord(beginWorld, InverseWorldTransform);
@@ -87,7 +87,7 @@ VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VE
         float neart;
         DirectX::XMStoreFloat(&neart, Length);
     
-        const auto& vertices = mesh.vertices;
+        const std::vector<MeshRawVertex>& vertices = mesh.vertices;
         const std::vector<UINT> indices = mesh.indices;
     
         int64_t materialIndex = -1;
@@ -95,12 +95,12 @@ VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VE
         //DirectX::XMVECTOR HitNormal;
         for (auto& subset : mesh.subsets)
         {
-            for (UINT i = 0; i < subset.indexCount; i += 3)
+            for (UINT i = 0; i < subset.index_count; i += 3)
             {
-                UINT index = subset.startIndexLocation + i;
-                const RawVertex& a = vertices.at(indices.at(index));
-                const RawVertex& b = vertices.at(indices.at(index + 1));
-                const RawVertex& c = vertices.at(indices.at(index + 2));
+                UINT index = subset.start_index_location + i;
+                const MeshRawVertex& a = vertices.at(indices.at(index));
+                const MeshRawVertex& b = vertices.at(indices.at(index + 1));
+                const MeshRawVertex& c = vertices.at(indices.at(index + 2));
     
                 DirectX::XMVECTOR A = DirectX::XMLoadFloat3(&a.position);
                 DirectX::XMVECTOR B = DirectX::XMLoadFloat3(&b.position);
@@ -158,7 +158,7 @@ VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VE
                 neart = x;
                 HitPosition = P;
                 //HitNormal = N;
-                materialIndex = subset.materialUniqueId;
+                materialIndex = subset.material_unique_id;
             }
         }
         if (materialIndex >= 0)
@@ -256,215 +256,214 @@ VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VE
 
 VECTOR3 Collision::SphereVsSphereReturnPoint(OBJ3D& objectA, OBJ3D& objectB, bool& hit) const
 {
-    //float radiA = objectA.boundingHit_.sphere_->getRadius();
-    //float radiB = objectB.boundingHit_.sphere_->getRadius();
-    //
-    //
-    //DirectX::XMVECTOR PointA = DirectX::XMLoadFloat3(&objectA.getPosition());
-    //DirectX::XMVECTOR PointB = DirectX::XMLoadFloat3(&objectB.getPosition());
-    //DirectX::XMVECTOR BA = DirectX::XMVectorSubtract(PointA, PointB);
-    //float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(BA));
-    //
-    //if (radiA + radiB > dis)
-    //{
-    //    hit = true;
-    //    BA = DirectX::XMVector3Normalize(BA);
-    //    VECTOR3 pos;
-    //    DirectX::XMStoreFloat3(&pos,DirectX::XMVectorAdd(PointB, DirectX::XMVectorScale(BA, radiA + radiB + 0.01f)));
-    //    return pos;
-    //}
-    //hit = false;
+    float radiA = objectA.boundingHit_.sphere_->getRadius();
+    float radiB = objectB.boundingHit_.sphere_->getRadius();
+
+
+    DirectX::XMVECTOR PointA = DirectX::XMLoadFloat3(&objectA.getPosition());
+    DirectX::XMVECTOR PointB = DirectX::XMLoadFloat3(&objectB.getPosition());
+    DirectX::XMVECTOR BA = DirectX::XMVectorSubtract(PointA, PointB);
+    float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(BA));
+    
+    if (radiA + radiB > dis)
+    {
+        hit = true;
+        BA = DirectX::XMVector3Normalize(BA);
+        VECTOR3 pos;
+        DirectX::XMStoreFloat3(&pos,DirectX::XMVectorAdd(PointB, DirectX::XMVectorScale(BA, radiA + radiB + 0.01f)));
+        return pos;
+    }
+    hit = false;
     return VECTOR3();
 }
 
 VECTOR3 Collision::CapsuleVsCapsuleReturnPoint(OBJ3D& objectA, OBJ3D& objectB, bool& hit) const
 {
-    //BoundingCapsule& capsuleA = *objectA.boundingHit_.capsule_;
-    //BoundingCapsule& capsuleB = *objectB.boundingHit_.capsule_;
-    //
-    //VECTOR3 aStart = capsuleA.getOffset();
-    //VECTOR3 aEnd = capsuleA.getOffset();
-    //
-    //aStart.y -= capsuleA.getHeight();
-    //aEnd.y += capsuleA.getHeight();
-    //DirectX::XMVECTOR AStart = DirectX::XMLoadFloat3(&aStart);
-    //DirectX::XMVECTOR AEnd = DirectX::XMLoadFloat3(&aEnd);
-    //AStart = DirectX::XMVector3TransformCoord(AStart, DirectX::XMLoadFloat4x4(&objectA.worldTransform));
-    //AEnd = DirectX::XMVector3TransformCoord(AEnd, DirectX::XMLoadFloat4x4(&objectA.worldTransform));
-    //DirectX::XMVECTOR A = DirectX::XMVectorSubtract(AEnd, AStart);
-    //DirectX::XMVECTOR Va = DirectX::XMVector3Normalize(A);
-    //
-    //
-    //VECTOR3 bStart = capsuleB.getOffset();
-    //VECTOR3 bEnd = capsuleB.getOffset();
-    //
-    //bStart.y -= capsuleB.getHeight();
-    //bEnd.y += capsuleB.getHeight();
-    //DirectX::XMVECTOR BStart = DirectX::XMLoadFloat3(&bStart);
-    //DirectX::XMVECTOR BEnd = DirectX::XMLoadFloat3(&bEnd);
-    //BStart = DirectX::XMVector3TransformCoord(BStart, DirectX::XMLoadFloat4x4(&objectB.worldTransform));
-    //BEnd = DirectX::XMVector3TransformCoord(BEnd, DirectX::XMLoadFloat4x4(&objectB.worldTransform));
-    //DirectX::XMVECTOR B = DirectX::XMVectorSubtract(BEnd, BStart);
-    //DirectX::XMVECTOR Vb = DirectX::XMVector3Normalize(B);
-    //
-    //
-    //float angle;
-    //float distance = capsuleA.getWeight() + capsuleB.getWeight();
-    //DirectX::XMStoreFloat(&angle, DirectX::XMVector3AngleBetweenNormals(Va, Vb));
-    //if (angle == 0 || fabsf(angle - DirectX::XM_PI) <= 0.0001f )
-    //{
-    //    float dot;
-    //    DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(DirectX::XMVectorSubtract(BStart, AStart), Va));
-    //    DirectX::XMVECTOR Point = DirectX::XMVectorAdd(AStart, DirectX::XMVectorScale(Va, dot));
-    //    
-    //    float disPoint = DirectX::XMVectorGetX(
-    //        DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, AStart)), 
-    //            DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, AEnd)))
-    //    );
-    //    if (disPoint > capsuleA.getHeight() * 2)
-    //        if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, Point)))
-    //        > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, Point))))
-    //        {
-    //            Point = AStart;
-    //        }
-    //        else
-    //            Point = AEnd;
-    //
-    //    float dis1 = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, BStart)));
-    //    float dis2 = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, BEnd)));
-    //    float dis = 0;
-    //    (dis1 < dis2) ? dis = dis1 : dis = dis2;
-    //    if (dis < distance)
-    //    {
-    //        DirectX::XMVECTOR PosA = DirectX::XMLoadFloat3(&objectA.getPosition());
-    //        DirectX::XMVECTOR PointPosA = DirectX::XMVectorSubtract(PosA, Point);
-    //        float length = DirectX::XMVectorGetX(DirectX::XMVector3Length(PointPosA));
-    //        Point = DirectX::XMVectorAdd(BStart,
-    //            DirectX::XMVectorScale(DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(Point, BStart)), distance+0.01f));
-    //        PosA = DirectX::XMVectorAdd(Point, DirectX::XMVectorScale(DirectX::XMVector3Normalize(PointPosA), length));
-    //        VECTOR3 pos;
-    //        DirectX::XMStoreFloat3(&pos, PosA);
-    //        hit = true;
-    //        return pos;
-    //    }
-    //    else
-    //    {
-    //        hit = false;
-    //        return {};
-    //    }
-    //
-    //}
-    //
-    //float dot;
-    //DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(Va, Vb));
-    //float t;
-    //DirectX::XMStoreFloat(&t,
-    //    DirectX::XMVector3Dot(
-    //        DirectX::XMVectorSubtract(Va, DirectX::XMVectorScale(Vb, dot)),
-    //        DirectX::XMVectorSubtract(BStart, AStart)
-    //    ));
-    //
-    //t /= (1 - powf(dot, 2));
-    //DirectX::XMVECTOR APoint = DirectX::XMVectorAdd(AStart, DirectX::XMVectorScale(Va, t));
-    //
-    //
-    //float disPointA = DirectX::XMVectorGetX(
-    //    DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)),
-    //        DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint)))
-    //);
-    //float lengthA = capsuleA.getHeight() * 2;
-    //
-    //if (disPointA > lengthA)
-    //{
-    //
-    //    if (disPointA > lengthA)
-    //        if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)))
-    //        > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint))))
-    //        {
-    //            APoint = AStart;
-    //        }
-    //        else
-    //            APoint = AEnd;
-    //
-    //}
-    //
-    //
-    //
-    //
-    //
-    //DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(APoint, BStart);
-    //DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(Vec, Vb));
-    //DirectX::XMVECTOR BPoint = DirectX::XMVectorAdd(BStart, DirectX::XMVectorScale(Vb, dot));
-    //
-    //
-    //
-    //
-    //float disPointB = DirectX::XMVectorGetX(
-    //    DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BEnd, BPoint)),
-    //        DirectX::XMVector3Length(DirectX::XMVectorSubtract(BStart, BPoint)))
-    //);
-    //float lengthB = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BEnd, BStart)));
-    //
-    //if (disPointB > lengthB)
-    //{
-    //    if (disPointB > lengthB)
-    //        if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BEnd, BPoint)))
-    //        > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BStart, BPoint))))
-    //        {
-    //            BPoint = BStart;
-    //        }
-    //        else
-    //            BPoint = BEnd;
-    //    DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(BPoint, AStart);
-    //    DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(Vec, Va));
-    //    APoint = DirectX::XMVectorAdd(AStart, DirectX::XMVectorScale(Va, dot));
-    //    disPointA = DirectX::XMVectorGetX(
-    //        DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)),
-    //            DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint)))
-    //    );
-    //    
-    //    if (disPointA > lengthA)
-    //    {
-    //
-    //        if (disPointA > lengthA)
-    //            if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)))
-    //        > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint))))
-    //            {
-    //                APoint = AStart;
-    //            }
-    //            else
-    //                APoint = AEnd;
-    //
-    //    }
-    //
-    //
-    //}
-    //
-    //
-    //float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BPoint, APoint)));
-    //
-    //if (dis > distance)
-    //{
-    //    hit = false;
-    //    return {};
-    //}
-    //
-    //DirectX::XMVECTOR PosA = DirectX::XMLoadFloat3(&objectA.getPosition());
-    //DirectX::XMVECTOR APointPosA = DirectX::XMVectorSubtract(PosA, APoint);
-    //
-    //APoint = DirectX::XMVectorAdd(BPoint, 
-    //    DirectX::XMVectorScale(DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(APoint, BPoint)),distance +0.01f)
-    //);
-    //
-    //DirectX::XMVECTOR Point = DirectX::XMVectorAdd(APoint, 
-    //    DirectX::XMVectorScale(DirectX::XMVector3Normalize(APointPosA), DirectX::XMVectorGetX(DirectX::XMVector3Length(APointPosA)))
-    //);
-    //
-    //hit = true;
-    //VECTOR3 pos;
-    //DirectX::XMStoreFloat3(&pos, Point);
-    //return pos;
-    return VECTOR3{};
+    BoundingCapsule& capsuleA = *objectA.boundingHit_.capsule_;
+    BoundingCapsule& capsuleB = *objectB.boundingHit_.capsule_;
+
+    VECTOR3 aStart = capsuleA.getOffset();
+    VECTOR3 aEnd = capsuleA.getOffset();
+
+    aStart.y -= capsuleA.getHeight();
+    aEnd.y += capsuleA.getHeight();
+    DirectX::XMVECTOR AStart = DirectX::XMLoadFloat3(&aStart);
+    DirectX::XMVECTOR AEnd = DirectX::XMLoadFloat3(&aEnd);
+    AStart = DirectX::XMVector3TransformCoord(AStart, DirectX::XMLoadFloat4x4(&objectA.worldTransform));
+    AEnd = DirectX::XMVector3TransformCoord(AEnd, DirectX::XMLoadFloat4x4(&objectA.worldTransform));
+    DirectX::XMVECTOR A = DirectX::XMVectorSubtract(AEnd, AStart);
+    DirectX::XMVECTOR Va = DirectX::XMVector3Normalize(A);
+
+
+    VECTOR3 bStart = capsuleB.getOffset();
+    VECTOR3 bEnd = capsuleB.getOffset();
+
+    bStart.y -= capsuleB.getHeight();
+    bEnd.y += capsuleB.getHeight();
+    DirectX::XMVECTOR BStart = DirectX::XMLoadFloat3(&bStart);
+    DirectX::XMVECTOR BEnd = DirectX::XMLoadFloat3(&bEnd);
+    BStart = DirectX::XMVector3TransformCoord(BStart, DirectX::XMLoadFloat4x4(&objectB.worldTransform));
+    BEnd = DirectX::XMVector3TransformCoord(BEnd, DirectX::XMLoadFloat4x4(&objectB.worldTransform));
+    DirectX::XMVECTOR B = DirectX::XMVectorSubtract(BEnd, BStart);
+    DirectX::XMVECTOR Vb = DirectX::XMVector3Normalize(B);
+
+
+    float angle;
+    float distance = capsuleA.getWeight() + capsuleB.getWeight();
+    DirectX::XMStoreFloat(&angle, DirectX::XMVector3AngleBetweenNormals(Va, Vb));
+    if (angle == 0 || fabsf(angle - DirectX::XM_PI) <= 0.0001f )
+    {
+        float dot;
+        DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(DirectX::XMVectorSubtract(BStart, AStart), Va));
+        DirectX::XMVECTOR Point = DirectX::XMVectorAdd(AStart, DirectX::XMVectorScale(Va, dot));
+        
+        float disPoint = DirectX::XMVectorGetX(
+            DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, AStart)), 
+                DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, AEnd)))
+        );
+        if (disPoint > capsuleA.getHeight() * 2)
+            if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, Point)))
+            > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, Point))))
+            {
+                Point = AStart;
+            }
+            else
+                Point = AEnd;
+
+        float dis1 = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, BStart)));
+        float dis2 = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(Point, BEnd)));
+        float dis = 0;
+        (dis1 < dis2) ? dis = dis1 : dis = dis2;
+        if (dis < distance)
+        {
+            DirectX::XMVECTOR PosA = DirectX::XMLoadFloat3(&objectA.getPosition());
+            DirectX::XMVECTOR PointPosA = DirectX::XMVectorSubtract(PosA, Point);
+            float length = DirectX::XMVectorGetX(DirectX::XMVector3Length(PointPosA));
+            Point = DirectX::XMVectorAdd(BStart,
+                DirectX::XMVectorScale(DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(Point, BStart)), distance+0.01f));
+            PosA = DirectX::XMVectorAdd(Point, DirectX::XMVectorScale(DirectX::XMVector3Normalize(PointPosA), length));
+            VECTOR3 pos;
+            DirectX::XMStoreFloat3(&pos, PosA);
+            hit = true;
+            return pos;
+        }
+        else
+        {
+            hit = false;
+            return {};
+        }
+
+    }
+
+    float dot;
+    DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(Va, Vb));
+    float t;
+    DirectX::XMStoreFloat(&t,
+        DirectX::XMVector3Dot(
+            DirectX::XMVectorSubtract(Va, DirectX::XMVectorScale(Vb, dot)),
+            DirectX::XMVectorSubtract(BStart, AStart)
+        ));
+
+    t /= (1 - powf(dot, 2));
+    DirectX::XMVECTOR APoint = DirectX::XMVectorAdd(AStart, DirectX::XMVectorScale(Va, t));
+
+
+    float disPointA = DirectX::XMVectorGetX(
+        DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)),
+            DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint)))
+    );
+    float lengthA = capsuleA.getHeight() * 2;
+
+    if (disPointA > lengthA)
+    {
+
+        if (disPointA > lengthA)
+            if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)))
+            > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint))))
+            {
+                APoint = AStart;
+            }
+            else
+                APoint = AEnd;
+
+    }
+
+
+
+
+
+    DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(APoint, BStart);
+    DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(Vec, Vb));
+    DirectX::XMVECTOR BPoint = DirectX::XMVectorAdd(BStart, DirectX::XMVectorScale(Vb, dot));
+
+
+    
+
+    float disPointB = DirectX::XMVectorGetX(
+        DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BEnd, BPoint)),
+            DirectX::XMVector3Length(DirectX::XMVectorSubtract(BStart, BPoint)))
+    );
+    float lengthB = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BEnd, BStart)));
+   
+    if (disPointB > lengthB)
+    {
+        if (disPointB > lengthB)
+            if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BEnd, BPoint)))
+            > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BStart, BPoint))))
+            {
+                BPoint = BStart;
+            }
+            else
+                BPoint = BEnd;
+        DirectX::XMVECTOR Vec = DirectX::XMVectorSubtract(BPoint, AStart);
+        DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(Vec, Va));
+        APoint = DirectX::XMVectorAdd(AStart, DirectX::XMVectorScale(Va, dot));
+        disPointA = DirectX::XMVectorGetX(
+            DirectX::XMVectorAdd(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)),
+                DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint)))
+        );
+        
+        if (disPointA > lengthA)
+        {
+
+            if (disPointA > lengthA)
+                if (DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AEnd, APoint)))
+            > DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(AStart, APoint))))
+                {
+                    APoint = AStart;
+                }
+                else
+                    APoint = AEnd;
+
+        }
+
+
+    }
+
+
+    float dis = DirectX::XMVectorGetX(DirectX::XMVector3Length(DirectX::XMVectorSubtract(BPoint, APoint)));
+   
+    if (dis > distance)
+    {
+        hit = false;
+        return {};
+    }
+
+    DirectX::XMVECTOR PosA = DirectX::XMLoadFloat3(&objectA.getPosition());
+    DirectX::XMVECTOR APointPosA = DirectX::XMVectorSubtract(PosA, APoint);
+    
+    APoint = DirectX::XMVectorAdd(BPoint, 
+        DirectX::XMVectorScale(DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(APoint, BPoint)),distance +0.01f)
+    );
+
+    DirectX::XMVECTOR Point = DirectX::XMVectorAdd(APoint, 
+        DirectX::XMVectorScale(DirectX::XMVector3Normalize(APointPosA), DirectX::XMVectorGetX(DirectX::XMVector3Length(APointPosA)))
+    );
+
+    hit = true;
+    VECTOR3 pos;
+    DirectX::XMStoreFloat3(&pos, Point);
+    return pos;
 }
 
 VECTOR3 Collision::RayCastMousePointReturnPoint(const VECTOR2& mousePosition, OBJ3D& obj, bool& hit) const

@@ -58,17 +58,17 @@ OBJ3DType OBJ3D::getTypeOBJ3D()
 
 void OBJ3D::DrawDebug()
 {
-    //if (boundingHit_.sphere_)
-    //    GameEngine::get()->DrawDebugBounding(boundingHit_.sphere_, worldTransform, color_,2);
-    //if (boundingHit_.capsule_)
-    //    GameEngine::get()->DrawDebugBounding(boundingHit_.capsule_, worldTransform, color_,3);
-    //for (auto& ray : boundingHit_.raylist)
-    //{
-    //    if (ray.get())
-    //    {
-    //        GameEngine::get()->DrawDebugBounding(ray, worldTransform, ray->color, 3);
-    //    }
-    //}
+    if (boundingHit_.sphere_)
+        GameEngine::get()->DrawDebugBounding(boundingHit_.sphere_, worldTransform, color_,2);
+    if (boundingHit_.capsule_)
+        GameEngine::get()->DrawDebugBounding(boundingHit_.capsule_, worldTransform, color_,3);
+    for (auto& ray : boundingHit_.raylist)
+    {
+        if (ray.get())
+        {
+            GameEngine::get()->DrawDebugBounding(ray, worldTransform, ray->color, 3);
+        }
+    }
 }
 
 OBJ3D::~OBJ3D()
@@ -76,25 +76,25 @@ OBJ3D::~OBJ3D()
 }
 
 
-//void OBJ3D::CreateBoundingCapsule(const float& height, const float& weight, const VECTOR3& offset)
-//{
-//    pSmartVoid p = SetToPoint(boundingHit_.capsule_);
-//    GameEngine::get()->CreateCapsuleDebug(p, height, weight, offset);
-//    boundingHit_.capsule_ = GetFromPoint<BoundingCapsule>(p);
-//}
-//
-//void OBJ3D::CreateBoundingSphere(const float& radius, const VECTOR3& offset)
-//{
-//    pSmartVoid p = SetToPoint(boundingHit_.sphere_);
-//    GameEngine::get()->createSphereDebug(p, radius, offset);
-//    boundingHit_.sphere_ = GetFromPoint<BoundingSphere>(p);
-//}
+void OBJ3D::CreateBoundingCapsule(const float& height, const float& weight, const VECTOR3& offset)
+{
+    pSmartVoid p = SetToPoint(boundingHit_.capsule_);
+    GameEngine::get()->CreateCapsuleDebug(p, height, weight, offset);
+    boundingHit_.capsule_ = GetFromPoint<BoundingCapsule>(p);
+}
 
-//void OBJ3D::CreateRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type)
-//{
-//    std::shared_ptr<void> pRayVoid;
-//    GameEngine::get()->CreateRay(pRayVoid, begin, end, color, Type);
-//    std::shared_ptr<Ray> ray(nullptr);
-//    ray = std::static_pointer_cast<Ray>(pRayVoid);
-//    boundingHit_.raylist.push_back(ray);
-//}
+void OBJ3D::CreateBoundingSphere(const float& radius, const VECTOR3& offset)
+{
+    pSmartVoid p = SetToPoint(boundingHit_.sphere_);
+    GameEngine::get()->createSphereDebug(p, radius, offset);
+    boundingHit_.sphere_ = GetFromPoint<BoundingSphere>(p);
+}
+
+void OBJ3D::CreateRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type)
+{
+    std::shared_ptr<void> pRayVoid;
+    GameEngine::get()->CreateRay(pRayVoid, begin, end, color, Type);
+    std::shared_ptr<Ray> ray(nullptr);
+    ray = std::static_pointer_cast<Ray>(pRayVoid);
+    boundingHit_.raylist.push_back(ray);
+}

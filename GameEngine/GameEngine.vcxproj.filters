@@ -215,8 +215,29 @@
     <Filter Include="GameEngine\1_Engines\GraphicEngine\CameraManager\Camera\Game">
       <UniqueIdentifier>{81e8bf87-08bf-4c3c-86cf-5bf164e4e866}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer">
+      <UniqueIdentifier>{640d30b6-b387-4173-a0f0-fdb77c8a1808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA">
+      <UniqueIdentifier>{b5cbca39-1412-417e-b680-a16a133213ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D">
+      <UniqueIdentifier>{ed14d48e-c047-43f5-b4f6-2ba96c8124dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug">
+      <UniqueIdentifier>{6b88c333-4599-470b-8dd2-56ef229b1f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect">
+      <UniqueIdentifier>{7f3137ef-10d7-4834-ba8e-419fb57eed62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameLastMain">
+      <UniqueIdentifier>{197f438b-1edb-4909-ae05-8d041f775d6b}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameEngine\1_Engines\DebugEngine">
       <UniqueIdentifier>{eee7905d-4420-42fb-88c2-6eec6d771290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameThumbnails">
+      <UniqueIdentifier>{61a59a6c-1259-4894-b898-24201faa5573}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\Debuger\Thumbnail">
       <UniqueIdentifier>{96c924b5-9cc2-46a1-921b-d7396534bd0a}</UniqueIdentifier>
@@ -239,6 +260,9 @@
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\SkinnedMesh\MeshLightWithEmission">
       <UniqueIdentifier>{f597a281-8744-480d-ac66-e97ee505edf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSample">
+      <UniqueIdentifier>{7f1ec2e7-c867-4d1a-a6a9-067314832099}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\FullScreenQuadVolumetricLightScattering">
       <UniqueIdentifier>{98e6ed8f-7549-4e57-85f2-0e72e97ea9f4}</UniqueIdentifier>
     </Filter>
@@ -251,11 +275,17 @@
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\GeometricPrimitive\Skybox">
       <UniqueIdentifier>{1f2bf324-7076-4761-8e22-3cd8c440d4fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\CubeMap">
+      <UniqueIdentifier>{4b894381-e616-45d9-9299-a3ff8803ac51}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap">
       <UniqueIdentifier>{df54c384-26e5-4c7a-a739-abe5c719163c}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Shader\FullscreenQuad\Skymap\Debug">
       <UniqueIdentifier>{2a53bbc6-685f-4b4f-b184-892981aadac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport">
+      <UniqueIdentifier>{446b4d36-b0ef-4392-9438-91ae4c080529}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Skymap">
       <UniqueIdentifier>{6c972f94-11b2-4580-93a2-62da525ce224}</UniqueIdentifier>
@@ -334,42 +364,6 @@
     </Filter>
     <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State\Player\Battle\Pistol">
       <UniqueIdentifier>{94ea1d77-889b-44db-a4f0-8479f342e344}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager">
-      <UniqueIdentifier>{640d30b6-b387-4173-a0f0-fdb77c8a1808}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameMSAA">
-      <UniqueIdentifier>{b5cbca39-1412-417e-b680-a16a133213ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSprite2D">
-      <UniqueIdentifier>{ed14d48e-c047-43f5-b4f6-2ba96c8124dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameDebug">
-      <UniqueIdentifier>{6b88c333-4599-470b-8dd2-56ef229b1f01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect">
-      <UniqueIdentifier>{7f3137ef-10d7-4834-ba8e-419fb57eed62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameLastMain">
-      <UniqueIdentifier>{197f438b-1edb-4909-ae05-8d041f775d6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameThumbnails">
-      <UniqueIdentifier>{61a59a6c-1259-4894-b898-24201faa5573}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSample">
-      <UniqueIdentifier>{7f1ec2e7-c867-4d1a-a6a9-067314832099}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameTempSupport">
-      <UniqueIdentifier>{446b4d36-b0ef-4392-9438-91ae4c080529}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization">
-      <UniqueIdentifier>{22946192-2508-459e-bd57-372de506d351}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameBuffer">
-      <UniqueIdentifier>{f2a66203-b960-42ab-bb3c-d4f3f7219b1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel">
-      <UniqueIdentifier>{47084e64-2fdf-4739-b19b-21cd4f0bf4ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -487,8 +481,11 @@
     <ClInclude Include="GameEngine\Button2DManager.h">
       <Filter>GameCode\Button\Button2D</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine\FrameBuffer.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClInclude>
     <ClInclude Include="GameEngine\FrameBufferManager.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FullscreenQuad.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\FullscreenQuad</Filter>
@@ -581,19 +578,19 @@
       <Filter>GameEngine\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameMSAA.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameMSAA</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameSprite2D.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSprite2D</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameMainBlit.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameLastMain</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameLastMain</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameDebug.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameDebug</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameEffect.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\ImGuiFileDialog.h">
       <Filter>GameEngine\ImGui</Filter>
@@ -614,10 +611,13 @@
       <Filter>GameEngine\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameThumbnail.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameThumbnails</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameThumbnails</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\MeshLoaderManager.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\FramebufferNumName.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\MaterialManager.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager</Filter>
@@ -644,13 +644,16 @@
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\Sprite3DLoadManager</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameSample.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSample</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSample</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\CubeMap.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CubeMap</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Skymap.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\Skymap</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\FrameTempSupport.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameTempSupport</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\GltfModel.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
@@ -693,18 +696,6 @@
     </ClInclude>
     <ClInclude Include="GameEngine\PlayerBattleState.h">
       <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\FrameVoxelization.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\FrameBuffer.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\FramebufferNumName.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\Voxel.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -813,8 +804,11 @@
     <ClCompile Include="GameEngine\Button2DManager.cpp">
       <Filter>GameCode\Button\Button2D</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\FrameBuffer.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
+    </ClCompile>
     <ClCompile Include="GameEngine\FrameBufferManager.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FullscreenQuad.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\FullscreenQuad</Filter>
@@ -907,40 +901,40 @@
       <Filter>GameEngine\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameMSAA1.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameMSAA</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameMSAA2.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameMSAA</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameMSAA3.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameMSAA</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameMSAA</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameSprite2DEarly.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSprite2D</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameSprite2DLate.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSprite2D</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSprite2D</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameSkinnedMeshDebug.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameDebug</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameGeometricDebug.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameDebug</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectBlur.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectSoftShadowMap.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameMainBlit.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameLastMain</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameLastMain</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameMSAATempSupport.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameTempSupport</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameSceneDebug.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameDebug</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameDebug</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\ImGuiFileDialog.cpp">
       <Filter>GameEngine\ImGui</Filter>
@@ -952,7 +946,7 @@
       <Filter>GameEngine\1_Engines\DebugEngine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameThumbnail.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameThumbnails</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameThumbnails</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Log.cpp">
       <Filter>GameEngine\1_Engines\DebugEngine</Filter>
@@ -982,43 +976,46 @@
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\Sprite3DLoadManager</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameSample.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameSample</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\CubeMap.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\CubeMap</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Skymap.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\Skymap</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectMotionBlur.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectSupport.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameTempSupport</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameDummySupport.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameTempSupport</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameTempSupport</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\GltfModel.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectBloom.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\ConstantBloom.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\ConstantBuffer\Bloom</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectPSShadowMap.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffect.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectPointLightShadowMap.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Animator.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Animation\Animator</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\FrameEffectVolumetricLightScattering.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameEffect</Filter>
+      <Filter>GameEngine\1_Engines\GraphicEngine\Framebuffer\FrameEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\AnimatorManager.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\AnimatorManager</Filter>
@@ -1043,15 +1040,6 @@
     </ClCompile>
     <ClCompile Include="GameEngine\PlayerBattleState.cpp">
       <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Battle</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\FrameVoxelization.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\FrameBuffer.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameBuffer</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\Voxel.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

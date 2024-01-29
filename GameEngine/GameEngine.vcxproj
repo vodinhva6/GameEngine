@@ -69,7 +69,6 @@
     <ClInclude Include="GameEngine\FrameDebug.h" />
     <ClInclude Include="GameEngine\FrameEffect.h" />
     <ClInclude Include="GameEngine\HighResolutionTimer.h" />
-    <ClInclude Include="GameEngine\Mesh.h" />
     <ClInclude Include="GameEngine\PlayerBattleState.h" />
     <ClInclude Include="GameEngine\PlayerIdleState.h" />
     <ClInclude Include="GameEngine\InputManager.h" />
@@ -181,7 +180,6 @@
     <ClCompile Include="GameEngine\GeometricPrimitive.cpp" />
     <ClCompile Include="GameEngine\GltfModel.cpp" />
     <ClCompile Include="GameEngine\GraphicEngine.cpp" />
-    <ClCompile Include="GameEngine\Mesh.cpp" />
     <ClCompile Include="GameEngine\PlayerBattleState.cpp" />
     <ClCompile Include="GameEngine\PlayerIdleState.cpp" />
     <ClCompile Include="GameEngine\InputManager.cpp" />

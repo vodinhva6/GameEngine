@@ -371,9 +371,6 @@
     <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel">
       <UniqueIdentifier>{47084e64-2fdf-4739-b19b-21cd4f0bf4ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\MeshRaw">
-      <UniqueIdentifier>{a1afc771-31bf-4cec-9791-96e11495de19}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Framework.h">
@@ -628,6 +625,9 @@
     <ClInclude Include="GameEngine\Material.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager\Material</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine\MeshRaw.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
+    </ClInclude>
     <ClInclude Include="GameEngine\Skeleton.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\Skeleton</Filter>
     </ClInclude>
@@ -705,12 +705,6 @@
     </ClInclude>
     <ClInclude Include="GameEngine\Voxel.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\MeshRaw.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\MeshRaw</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\Mesh.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -972,6 +966,9 @@
     <ClCompile Include="GameEngine\Material.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\LoaderResouceManager\MaterialManager\Material</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\MeshRaw.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
+    </ClCompile>
     <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
       <Filter>GameEngine\ImGuizmo</Filter>
     </ClCompile>
@@ -1055,12 +1052,6 @@
     </ClCompile>
     <ClCompile Include="GameEngine\Voxel.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\MeshRaw.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\MeshRaw</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\Mesh.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

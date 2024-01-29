@@ -3,30 +3,21 @@
 #include "Mesh.h"
 
 
-class StaticMesh : public Meshes
+class StaticMesh : public Mesh
 {
 public:
     StaticMesh();
 
-    void CreateComObjects(ID3D11Device*);
-    void Render(ID3D11DeviceContext* immediate_context, const DirectX::XMFLOAT4X4& world,
-        const std::unordered_map<int64_t, std::shared_ptr<Material>>& materialList,
-        const VECTOR4& material_color,
-        Animation::Keyframe* keyFrame = nullptr) {}
-    void ShadowCaster(ID3D11DeviceContext* immediate_context, const DirectX::XMFLOAT4X4& world,
-        const std::unordered_map<int64_t, std::shared_ptr<Material>>& materialList,
-        const VECTOR4& material_color, UINT numIndex, Animation::Keyframe* keyFrame = nullptr) {}
-    void CreateNewCereal() override {}
-    bool IsCanLoadCereal(std::string local) override { return false; }
+
+protected:
+    std::vector<RawMesh> meshes;
 
 public:
     template < class T>
     void serialize(T& archive)
     {
-        archive(cereal::base_class<Meshes>(this));
+        archive(cereal::base_class<Mesh>(this), meshes);
     }
-private:
-    void UpdateVertexMaxMinInfor() override {}
 };
 
 #endif // !STATICMESH_H

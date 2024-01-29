@@ -45,11 +45,11 @@ void GraphicEngine::Init()
 	
 	
 	aac.reset(new OBJ3D);
-	std::shared_ptr<Meshes>& mesh1 = std::dynamic_pointer_cast<OBJ3D>(aac)->meshInfor.mesh_;
+	std::shared_ptr<SkinnedMesh>& mesh1 = std::dynamic_pointer_cast<OBJ3D>(aac)->meshInfor.mesh_;
 	
 	pSmartVoid pMesh = SetToPoint(mesh1);
 	CreateSkinnedMesh("Data/Asset/3DObject/Player/Lich/FreeLich.fbx", pMesh);
-	mesh1 = GetFromPoint<Meshes>(pMesh);
+	mesh1 = GetFromPoint<SkinnedMesh>(pMesh);
 	//dd->append_animations("./Data/Asset/3DObject/Player/Lich/Animation/Walk.fbx", 60, false);
 	//aac->getOBJ3DActor()->setAnimat(AnimatNum::Idle, 1);
 	aac->setScale({ 1,1,1 });
@@ -71,15 +71,15 @@ void GraphicEngine::Init()
 	//actorManager->AddListActor(test1);
 
 	test2.reset(new OBJ3D);
-	//std::shared_ptr<Meshes>& mesh2 = std::dynamic_pointer_cast<OBJ3D>(test2)->meshInfor.mesh_;
-	//pMesh = SetToPoint(mesh2);
-	//CreateSkinnedMesh("Data/Asset/3DObject/Player/DemonGirl/DemonGirlMesh.fbx", pMesh);
-	//mesh2 = GetFromPoint<Meshes>(pMesh);
+	std::shared_ptr<SkinnedMesh>& mesh2 = std::dynamic_pointer_cast<OBJ3D>(test2)->meshInfor.mesh_;
+	pMesh = SetToPoint(mesh2);
+	CreateSkinnedMesh("Data/Asset/3DObject/Player/DemonGirl/DemonGirlMesh.fbx", pMesh);
+	mesh2 = GetFromPoint<SkinnedMesh>(pMesh);
 	test2->setScale({ 1,1,1 });
 	test2->setColor({ 1,1,1,1 });
 	test2->setPosition({ 10,0,0 });
 	test2->setName("DemonGirl");
-	//actorManager->AddListActor(test2);
+	actorManager->AddListActor(test2);
 
 	//aab = new OBJ3D;
 	//shaderData = { "./Data/Shaders/skinned_mesh_vs.cso", "./Data/Shaders/skinned_mesh_ps.cso" };
@@ -187,7 +187,7 @@ GraphicEngine::~GraphicEngine()
 	test2.reset();
 }
 
-void GraphicEngine::DrawSkinnedMesh(Meshes* obj, const DirectX::XMFLOAT4X4 world,
+void GraphicEngine::DrawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 world,
 	std::unordered_map<int64_t, std::shared_ptr<Material>>* materialList,
 	const VECTOR4& color, const int& drawTurn, DrawStates& drawStates,
 	Animation::Keyframe* keyFrame, FrameBufferName slotFrameBuffer)
@@ -583,7 +583,7 @@ void GraphicEngine::DrawAllUninvisibleObject(int frameBufferSlot, DrawType type)
 
 
 		//if (data->skinnedMesh_->animation_clips.empty() != 0)
-		data->mesh->Render(immediateContext.Get(), data->world_,*data->materialList, color, data->keyFrame);
+		data->skinnedMesh_->Render(immediateContext.Get(), data->world_,*data->materialList, color, data->keyFrame);
 
 
 		break;
@@ -620,7 +620,7 @@ void GraphicEngine::DrawAllUninvisibleObject(int frameBufferSlot, DrawType type)
 
 
 			//if (data->skinnedMesh_->animation_clips.empty() != 0)
-			data->mesh->Render(immediateContext.Get(), data->world_, *data->materialList, color, data->keyFrame);
+			data->skinnedMesh_->Render(immediateContext.Get(), data->world_, *data->materialList, color, data->keyFrame);
 
 
 			break;
@@ -648,7 +648,7 @@ void GraphicEngine::DrawAllUninvisibleObject(int frameBufferSlot, DrawType type)
 			const VECTOR4& color = data->color_;
 
 			//if (data->skinnedMesh_->animation_clips.empty() != 0)
-			data->mesh->Render(immediateContext.Get(), data->world_, *data->materialList, color, data->keyFrame);
+			data->skinnedMesh_->Render(immediateContext.Get(), data->world_, *data->materialList, color, data->keyFrame);
 
 
 
@@ -689,7 +689,7 @@ void GraphicEngine::CastShadow(int frameBufferSlot, DrawType type, UINT numIndex
 			{
 				SkinnedMeshData* data = objDrawData->getSkinnedMeshData();
 				const VECTOR4& color = data->color_;
-				data->mesh->ShadowCaster(immediateContext.Get(), data->world_, *data->materialList, color, numIndex, data->keyFrame);
+				data->skinnedMesh_->ShadowCaster(immediateContext.Get(), data->world_, *data->materialList, color, numIndex, data->keyFrame);
 				break;
 			}
 

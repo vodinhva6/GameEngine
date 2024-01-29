@@ -9,28 +9,16 @@
 #include <Material.h>
 #include <RawMesh.h>
 
-class Meshes
+class Mesh
 {
 public:
-    Meshes();
-
-    virtual void CreateComObjects(ID3D11Device*);
-    virtual void Render(ID3D11DeviceContext* immediate_context, const DirectX::XMFLOAT4X4& world,
-        const std::unordered_map<int64_t, std::shared_ptr<Material>>& materialList,
-        const VECTOR4& material_color,
-        Animation::Keyframe* keyFrame = nullptr) = 0;
-    virtual void ShadowCaster(ID3D11DeviceContext* immediate_context, const DirectX::XMFLOAT4X4& world,
-        const std::unordered_map<int64_t, std::shared_ptr<Material>>& materialList,
-        const VECTOR4& material_color, UINT numIndex, Animation::Keyframe* keyFrame = nullptr) = 0;
-    virtual bool IsCanLoadCereal(std::string local) = 0;
-    virtual void CreateNewCereal() = 0;
-
-    void SetLocalPath(std::string local) { fileLocal = local; }
+    Mesh();
+    void SetLocalPath(std::string local) { fileLocal = local; }\
     VECTOR3 getVertexMin() { return VertexMinMaxInfor[1]; }
     VECTOR3 getVertexMax() { return VertexMinMaxInfor[0]; }
     DirectX::XMFLOAT4X4& getDefaultTransform() { return defaultTransform; }
     std::string& getLocalPath() { return fileLocal; }
-    std::vector<std::shared_ptr<BaseMesh>>& getMeshList() { return meshes; }
+
     void SetDefaultTransform(DirectX::XMFLOAT4X4& tfDefault);
 
 public:
@@ -65,14 +53,10 @@ public:
 
 protected:
 
-    virtual void UpdateVertexMaxMinInfor() = 0;
-
+    virtual void UpdateVertexMaxMinInfor() {}
     Microsoft::WRL::ComPtr<ID3D11Buffer> constantBuffer;
 
-    std::vector<std::shared_ptr<BaseMesh>> meshes;
     std::string fileLocal;
-
-
     VECTOR3 VertexMinMaxInfor[2];
     DirectX::XMFLOAT4X4 defaultTransform;
 

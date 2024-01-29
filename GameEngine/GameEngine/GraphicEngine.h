@@ -37,7 +37,7 @@ public:
     void EditSkymap();
     ~GraphicEngine();
 public:
-    void DrawSkinnedMesh(Meshes* obj, const DirectX::XMFLOAT4X4 world, 
+    void DrawSkinnedMesh(SkinnedMesh* obj, const DirectX::XMFLOAT4X4 world, 
         std::unordered_map<int64_t, std::shared_ptr<Material>>* materialList, 
         const VECTOR4& color, const int& drawTurn, DrawStates& drawStates, Animation::Keyframe* keyFrame, FrameBufferName slotFrameBuffer);
     void DrawEffect(std::string effName, const VECTOR3& position, const int& drawTurn, int slotFrameBuffer, float size = 1, VECTOR3 rotation = { 0,0,0 }, float angle = 0, VECTOR4 color = { 1,1,1,1 }
@@ -345,11 +345,11 @@ private:
     public:
         SkinnedMeshData* getSkinnedMeshData() override { return this; }
     
-        SkinnedMeshData(Meshes* skinnedMesh, DirectX::XMFLOAT4X4 world,
+        SkinnedMeshData(SkinnedMesh* skinnedMesh, DirectX::XMFLOAT4X4 world,
             std::unordered_map<int64_t, std::shared_ptr<Material>>* materialList,
             const VECTOR4& color, int drawTurn,
             DrawStates drawState, Animation::Keyframe* keyFrame = nullptr) :
-            mesh(skinnedMesh), world_(world), color_(color),
+            skinnedMesh_(skinnedMesh), world_(world), color_(color),
             materialList(materialList), keyFrame(keyFrame)
         {
             ObjectDrawData::drawTurn_ = drawTurn;
@@ -357,7 +357,7 @@ private:
         }
         SkinnedMeshData& operator=(const SkinnedMeshData& data)
         {
-            this->mesh = data.mesh;
+            this->skinnedMesh_ = data.skinnedMesh_;
             this->world_ = data.world_;
             this->color_ = data.color_;
             this->drawTurn_ = data.drawTurn_;
@@ -367,7 +367,7 @@ private:
             return *this;
         }
     
-        Meshes* mesh;
+        SkinnedMesh* skinnedMesh_;
         std::unordered_map<int64_t, std::shared_ptr<Material>>* materialList;
         Animation::Keyframe* keyFrame;
         DirectX::XMFLOAT4X4 world_;

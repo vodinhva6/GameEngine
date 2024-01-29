@@ -187,19 +187,17 @@ void ActorDebug::UpdateDebugMaterial(OBJ3D* obj)
 {
 #ifdef USE_IMGUI
     ImGui::Indent();
-    Meshes* pMesh = obj->meshInfor.mesh_.get();
-    if (!pMesh)
+    SkinnedMesh* pSkinnedMesh = obj->meshInfor.mesh_.get();
+    if (!pSkinnedMesh)
         return;
     static size_t itemCurrent = 0;
     static size_t selected = -1;
 
 
     std::vector<const char*> listMeshName;
-    std::vector<std::shared_ptr<BaseMesh>>& listMesh = pMesh->getMeshList();
-
-    for (auto& mesh : listMesh)
+    for (auto& mesh : pSkinnedMesh->getMeshRawList())
     {
-        listMeshName.push_back(mesh->name.c_str());
+        listMeshName.push_back(mesh.name.c_str());
     }
     
     
@@ -207,7 +205,8 @@ void ActorDebug::UpdateDebugMaterial(OBJ3D* obj)
     
         if (itemCurrent >= listMeshName.size())
             itemCurrent = listMeshName.size() - 1;
-    std::shared_ptr<BaseMesh> mesh = listMesh.at(itemCurrent);
+    BaseMesh* mesh = nullptr;
+    mesh = &pSkinnedMesh->getMeshRawList().at(itemCurrent);
     
     if (selected >= mesh->subsets.size())
         selected = mesh->subsets.size() - 1;
@@ -282,7 +281,7 @@ void ActorDebug::UpdateDebugMeshes(OBJ3D* obj)
 #ifdef USE_IMGUI
     ImGui::Indent();
     ContentBrowser* contentBrowser = GetFrom<ContentBrowser>(GameEngine::get()->getContentBrowser());
-    std::vector<std::shared_ptr<BaseMesh>>& listMesh = obj->meshInfor.mesh_->getMeshList();
+    auto& listMesh = obj->meshInfor.mesh_->getMeshRawList();
 
     int i = 0;
     int size = (int)listMesh.size();
@@ -291,7 +290,7 @@ void ActorDebug::UpdateDebugMeshes(OBJ3D* obj)
         auto mesh = listMesh.at(i);
         ImGui::Text(std::to_string(i).c_str());
         ImGui::SameLine();
-        ImGui::Button(mesh->name.c_str());
+        ImGui::Button(mesh.name.c_str());
         ImGui::SameLine();
         ImGui::PushID(i);
         if (ImGui::ImageButton(contentBrowser->getTrashFile().Get(), {20.0f,20.0f}))
@@ -311,11 +310,11 @@ void ActorDebug::UpdateDebugMeshes(OBJ3D* obj)
     {
         pSmartVoid mesh;
         GameEngine::get()->LoadSkinnedMesh(meshLocal, mesh);
-        std::shared_ptr<Meshes> pMesh = GetFromPoint<Meshes>(mesh);
-        std::vector<std::shared_ptr<BaseMesh>>& listMesh = pMesh->getMeshList();
-        for (auto& meshRaw : listMesh)
+        std::shared_ptr<SkinnedMesh> pMesh = GetFromPoint<SkinnedMesh>(mesh);
+        auto& pMeshRawList = pMesh->getMeshRawList();
+        for (auto& meshRaw : pMeshRawList)
         {
-            std::shared_ptr<BaseMesh>& raw = listMesh.emplace_back();
+            BaseMesh& raw = listMesh.emplace_back();
             raw = meshRaw;
         }
         
@@ -443,8 +442,8 @@ void ActorDebug::DebugTransform(OBJ3D* obj)
 void ActorDebug::DebugAnimation(OBJ3D* obj)
 {
 #ifdef USE_IMGUI
-    Meshes* pMesh = obj->meshInfor.mesh_.get();
-    if (!pMesh)
+    SkinnedMesh* pSkinnedMesh = obj->meshInfor.mesh_.get();
+    if (!pSkinnedMesh)
         return;
     if (ImGui::CollapsingHeader("Animator"))
     {

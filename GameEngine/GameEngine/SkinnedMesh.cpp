@@ -3,17 +3,20 @@
 void SkinnedMesh::CreateComObjects(ID3D11Device* device)
 {
     HRESULT hr = S_OK;
-
-   
-
     for (auto& mesh : meshes)
-    {
-        mesh->CreateCOM(device);
-    }
-        //
+        mesh.CreateCOM(device);
     
     UpdateVertexMaxMinInfor();
-    Meshes::CreateComObjects(device);
+    
+
+
+    D3D11_BUFFER_DESC buffer_desc{};
+    buffer_desc.ByteWidth = sizeof(Constants);
+    buffer_desc.Usage = D3D11_USAGE_DEFAULT;
+    buffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    hr = device->CreateBuffer(&buffer_desc, nullptr, constantBuffer.ReleaseAndGetAddressOf());
+    _ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
+
 
 }
 
@@ -25,13 +28,12 @@ void SkinnedMesh::Render(ID3D11DeviceContext* immediate_context,
     Animation::Keyframe* keyFrame)
 {
     
-    for (auto& it : meshes)
+    for (auto& mesh : meshes)
     {
-        std::shared_ptr<SkeletonMesh> mesh = std::dynamic_pointer_cast<SkeletonMesh>(it);
-        uint32_t stride{ sizeof(VertexBuff) };
+        uint32_t stride{ sizeof(BoneVertex) };
         uint32_t offset{ 0 };
-        immediate_context->IASetVertexBuffers(0, 1, mesh->vertexBuffer.GetAddressOf(), &stride, &offset);
-        immediate_context->IASetIndexBuffer(mesh->indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+        immediate_context->IASetVertexBuffers(0, 1, mesh.vertexBuffer.GetAddressOf(), &stride, &offset);
+        immediate_context->IASetIndexBuffer(mesh.indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
         immediate_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
         Constants data;
@@ -39,29 +41,28 @@ void SkinnedMesh::Render(ID3D11DeviceContext* immediate_context,
 
         if (keyFrame)
         {
-            Animation::Keyframe::Node& mesh_node{ keyFrame->nodes.at(mesh->nodeIndex) };
+            Animation::Keyframe::Node& mesh_node{ keyFrame->nodes.at(mesh.nodeIndex) };
 
             DirectX::XMStoreFloat4x4(&data.world, DirectX::XMLoadFloat4x4(&mesh_node.global_transform) * DirectX::XMLoadFloat4x4(&defaultTransform) * XMLoadFloat4x4(&world));
 
-            const size_t bone_count{ mesh->bindPose.bones.size() };
+            const size_t bone_count{ mesh.bindPose.bones.size() };
             _ASSERT_EXPR(bone_count < MAX_BONES, L"The value of the 'bone_count' has exceeded MAX_BONES.");
 
             for (size_t bone_index = 0; bone_index < bone_count; ++bone_index)
             {
-                Skeleton::Bone& bone{ mesh->bindPose.bones.at(bone_index) };
+                Skeleton::Bone& bone{ mesh.bindPose.bones.at(bone_index) };
                 Animation::Keyframe::Node& bone_node{ keyFrame->nodes.at(bone.nodeIndex) };
                 DirectX::XMStoreFloat4x4(&data.bone_transforms[bone_index],
                     DirectX::XMLoadFloat4x4(&bone.offsetTransform) *
                     DirectX::XMLoadFloat4x4(&bone_node.global_transform) *
-                    DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&mesh->defaultGlobalTransform))
+                    DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&mesh.defaultGlobalTransform))
                 );
 
             }
         }
         else
         {
-            DirectX::XMStoreFloat4x4(&data.world, DirectX::XMLoadFloat4x4(&mesh->defaultGlobalTransform) *
-                DirectX::XMLoadFloat4x4(&defaultTransform) * XMLoadFloat4x4(&world));
+            XMStoreFloat4x4(&data.world, XMLoadFloat4x4(&mesh.defaultGlobalTransform) * DirectX::XMLoadFloat4x4(&defaultTransform) * XMLoadFloat4x4(&world));
             for (size_t bone_index = 0; bone_index < MAX_BONES; ++bone_index)
             {
                 data.bone_transforms[bone_index] = { 1, 0, 0, 0,
@@ -71,7 +72,7 @@ void SkinnedMesh::Render(ID3D11DeviceContext* immediate_context,
 
             }
         }
-        for (const Subset& subset : mesh->subsets)
+        for (const Subset& subset : mesh.subsets)
         {
             auto it = materialList.find(subset.materialUniqueId);
             std::shared_ptr<Material> material = materialList.begin()->second;
@@ -103,42 +104,40 @@ void SkinnedMesh::ShadowCaster(ID3D11DeviceContext* immediate_context,
     const DirectX::XMFLOAT4X4& world, const std::unordered_map<int64_t, std::shared_ptr<Material>>& materialList,
     const VECTOR4& material_color, UINT numIndex, Animation::Keyframe* keyFrame)
 {
-    for (auto& it : meshes)
+    for (auto& mesh : meshes)
     {
-        std::shared_ptr<SkeletonMesh> mesh = std::dynamic_pointer_cast<SkeletonMesh>(it);
-        uint32_t stride{ sizeof(VertexBuff) };
+        uint32_t stride{ sizeof(BoneVertex) };
         uint32_t offset{ 0 };
-        immediate_context->IASetVertexBuffers(0, 1, mesh->vertexBuffer.GetAddressOf(), &stride, &offset);
-        immediate_context->IASetIndexBuffer(mesh->indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+        immediate_context->IASetVertexBuffers(0, 1, mesh.vertexBuffer.GetAddressOf(), &stride, &offset);
+        immediate_context->IASetIndexBuffer(mesh.indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
         immediate_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 
         Constants data;
         if (keyFrame)
         {
-            Animation::Keyframe::Node& mesh_node{ keyFrame->nodes.at(mesh->nodeIndex) };
+            Animation::Keyframe::Node& mesh_node{ keyFrame->nodes.at(mesh.nodeIndex) };
 
             DirectX::XMStoreFloat4x4(&data.world, DirectX::XMLoadFloat4x4(&mesh_node.global_transform) * DirectX::XMLoadFloat4x4(&defaultTransform) * XMLoadFloat4x4(&world));
 
-            const size_t bone_count{ mesh->bindPose.bones.size() };
+            const size_t bone_count{ mesh.bindPose.bones.size() };
             _ASSERT_EXPR(bone_count < MAX_BONES, L"The value of the 'bone_count' has exceeded MAX_BONES.");
 
             for (size_t bone_index = 0; bone_index < bone_count; ++bone_index)
             {
-                Skeleton::Bone& bone{ mesh->bindPose.bones.at(bone_index) };
+                Skeleton::Bone& bone{ mesh.bindPose.bones.at(bone_index) };
                 Animation::Keyframe::Node& bone_node{ keyFrame->nodes.at(bone.nodeIndex) };
                 DirectX::XMStoreFloat4x4(&data.bone_transforms[bone_index],
                     DirectX::XMLoadFloat4x4(&bone.offsetTransform) *
                     DirectX::XMLoadFloat4x4(&bone_node.global_transform) *
-                    DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&mesh->defaultGlobalTransform))
+                    DirectX::XMMatrixInverse(nullptr, DirectX::XMLoadFloat4x4(&mesh.defaultGlobalTransform))
                 );
 
             }
         }
         else
         {
-            DirectX::XMStoreFloat4x4(&data.world, DirectX::XMLoadFloat4x4(&mesh->defaultGlobalTransform) * 
-                DirectX::XMLoadFloat4x4(&defaultTransform) * XMLoadFloat4x4(&world));
+            XMStoreFloat4x4(&data.world, XMLoadFloat4x4(&mesh.defaultGlobalTransform) * DirectX::XMLoadFloat4x4(&defaultTransform) * XMLoadFloat4x4(&world));
             for (size_t bone_index = 0; bone_index < MAX_BONES; ++bone_index)
             {
                 data.bone_transforms[bone_index] = { 1, 0, 0, 0,
@@ -148,7 +147,7 @@ void SkinnedMesh::ShadowCaster(ID3D11DeviceContext* immediate_context,
 
             }
         }
-        for (const Subset& subset : mesh->subsets)
+        for (const Subset& subset : mesh.subsets)
         {
             auto it = materialList.find(subset.materialUniqueId);
             std::shared_ptr<Material> material = materialList.begin()->second;
@@ -165,23 +164,21 @@ void SkinnedMesh::ShadowCaster(ID3D11DeviceContext* immediate_context,
     }
 }
 
-
 SkinnedMesh::~SkinnedMesh()
 {
 
 }
 
-
 void SkinnedMesh::UpdateVertexMaxMinInfor()
 {
     for (auto& mesh : meshes)
     {
-        VertexMinMaxInfor[0].x = std::min<float>(VertexMinMaxInfor[0].x, mesh->boundingBox[0].x);
-        VertexMinMaxInfor[0].y = std::min<float>(VertexMinMaxInfor[0].y, mesh->boundingBox[0].y);
-        VertexMinMaxInfor[0].z = std::min<float>(VertexMinMaxInfor[0].z, mesh->boundingBox[0].z);
-        VertexMinMaxInfor[1].x = std::max<float>(VertexMinMaxInfor[1].x, mesh->boundingBox[1].x);
-        VertexMinMaxInfor[1].y = std::max<float>(VertexMinMaxInfor[1].y, mesh->boundingBox[1].y);
-        VertexMinMaxInfor[1].z = std::max<float>(VertexMinMaxInfor[1].z, mesh->boundingBox[1].z);
+        VertexMinMaxInfor[0].x = std::min<float>(VertexMinMaxInfor[0].x, mesh.boundingBox[0].x);
+        VertexMinMaxInfor[0].y = std::min<float>(VertexMinMaxInfor[0].y, mesh.boundingBox[0].y);
+        VertexMinMaxInfor[0].z = std::min<float>(VertexMinMaxInfor[0].z, mesh.boundingBox[0].z);
+        VertexMinMaxInfor[1].x = std::max<float>(VertexMinMaxInfor[1].x, mesh.boundingBox[1].x);
+        VertexMinMaxInfor[1].y = std::max<float>(VertexMinMaxInfor[1].y, mesh.boundingBox[1].y);
+        VertexMinMaxInfor[1].z = std::max<float>(VertexMinMaxInfor[1].z, mesh.boundingBox[1].z);
     }
     DirectX::XMVECTOR V = DirectX::XMLoadFloat3(&VertexMinMaxInfor[0]);
     DirectX::XMMATRIX M = DirectX::XMLoadFloat4x4(&defaultTransform);
@@ -194,11 +191,11 @@ void SkinnedMesh::UpdateVertexMaxMinInfor()
 
 void SkinnedMesh::CreateNewCereal()
 {
-    //std::filesystem::path cerealFileName(fileLocal);
-    //cerealFileName.replace_extension("mes");
-    //std::ofstream ofs(cerealFileName.c_str(), std::ios::binary);
-    //cereal::BinaryOutputArchive serialization(ofs);
-    //serialization(meshes, fileLocal, defaultTransform);
+    std::filesystem::path cerealFileName(fileLocal);
+    cerealFileName.replace_extension("mes");
+    std::ofstream ofs(cerealFileName.c_str(), std::ios::binary);
+    cereal::BinaryOutputArchive serialization(ofs);
+    serialization(meshes, fileLocal, defaultTransform);
 }
 
 bool SkinnedMesh::IsCanLoadCereal(std::string local)
@@ -208,9 +205,9 @@ bool SkinnedMesh::IsCanLoadCereal(std::string local)
     cereal_filename.replace_extension("mes");
     if (std::filesystem::exists(cereal_filename.c_str()))
     {
-        //std::ifstream ifs(cereal_filename.c_str(), std::ios::binary);
-        //cereal::BinaryInputArchive deserialization(ifs);
-        //deserialization(meshes, fileLocal, defaultTransform);
+        std::ifstream ifs(cereal_filename.c_str(), std::ios::binary);
+        cereal::BinaryInputArchive deserialization(ifs);
+        deserialization(meshes, fileLocal, defaultTransform);
         return true;
     }
   

@@ -1,6 +1,6 @@
 #ifndef OBJ3D_H
 #define OBJ3D_H
-#include <Mesh.h>
+#include "SkinnedMesh.h"
 #include "Actor.h"
 enum class OBJ3DType
 {
@@ -69,7 +69,7 @@ public:
 
     struct MeshInfor
     {
-        std::shared_ptr<Meshes> mesh_;
+        std::shared_ptr<SkinnedMesh> mesh_;
         std::shared_ptr<Animator> animator_;
         std::unordered_map<int64_t, std::shared_ptr<Material>> materials_;
 

@@ -23,8 +23,8 @@ void LightManager::Init()
     Spr3DForLight();
 #endif // !_DEBUG
     pSmartVoid pMesh = SetToPoint(shpereMesh_);
-    //GameEngine::get()->LoadSkinnedMesh("Data\\Asset\\3DObject\\Sphere\\Sphere.fbx", pMesh);
-    shpereMesh_ = GetFromPoint<Meshes>(pMesh);
+    GameEngine::get()->LoadSkinnedMesh("Data\\Asset\\3DObject\\Sphere\\Sphere.fbx", pMesh);
+    shpereMesh_ = GetFromPoint<SkinnedMesh>(pMesh);
     shadowManager.get()->Init();
     
     

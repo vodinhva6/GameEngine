@@ -28,7 +28,7 @@ void ContentBrowser::Init(std::string assetDir)
     GameEngine::get()->LoadTextureFromFile("./EngineObject/Images/trash.png", trashFile);
     GameEngine::get()->LoadTextureFromFile("./EngineObject/Images/play.png", play);
     
-    //GameEngine::get()->LoadSkinnedMesh("EngineObject/Material/materialPreviewNON.fbx", materialNONMesh);
+    GameEngine::get()->LoadSkinnedMesh("EngineObject/Material/materialPreviewNON.fbx", materialNONMesh);
 
 
 

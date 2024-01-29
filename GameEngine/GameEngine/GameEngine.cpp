@@ -220,18 +220,28 @@ void GameEngine::LoadAnimationThumbnail(std::filesystem::path fileName, pSmartVo
 	*result = GraphicEngine::get()->LoadAnimation(fileName, *Animation);
 }
 
-bool GameEngine::CreateCapsuleDebug(pSmartVoid& cap, const float& height, const float& weight, const VECTOR3& offset)
+bool GameEngine::CreateCapsuleDebug(void* cap, const float& height, const float& weight, const VECTOR3& offset)
 {
+<<<<<<< HEAD
 	//BoundingCapsule* pCap = std::static_pointer_cast<BoundingCapsule>(cap).get();
 	//pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
 	//cap.reset(pCap);
+=======
+	BoundingCapsule* pCap = static_cast<BoundingCapsule*>(cap);
+	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
+>>>>>>> parent of a31de18 (dda)
 	return true;
 }
 
-bool GameEngine::createSphereDebug(pSmartVoid& sphere, const float& radius, const VECTOR3& offset)
+bool GameEngine::createSphereDebug(void* sphere, const float& radius, const VECTOR3& offset)
 {
+<<<<<<< HEAD
 	//BoundingSphere* pSphere = std::static_pointer_cast<BoundingSphere>(sphere).get();
 	//pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
+=======
+	BoundingSphere* pSphere = static_cast<BoundingSphere*>(sphere);
+	pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
+>>>>>>> parent of a31de18 (dda)
 	return true;
 }
 
@@ -269,10 +279,15 @@ void GameEngine::DrawSprite3D(pSmartVoid sprite3D, const DirectX::XMFLOAT4X4 wor
 	GraphicEngine::get()->DrawSprite3D(pSprite3D, world, color, drawTurn, name);
 }
 
-void GameEngine::DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
+void GameEngine::DrawDebugBounding(void* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
 {
+<<<<<<< HEAD
 	//GeometricPrimitive* pGeo = std::static_pointer_cast<GeometricPrimitive>(geo).get();
 	//GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
+=======
+	GeometricPrimitive* pGeo = static_cast<GeometricPrimitive*>(geo);
+	GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
+>>>>>>> parent of a31de18 (dda)
 }
 
 void GameEngine::LoadTextureFromFileMultiThread(std::wstring fileName, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>* shader_resource_view, bool* result)

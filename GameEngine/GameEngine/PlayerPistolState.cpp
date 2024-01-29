@@ -94,7 +94,6 @@ void PlayerPistolAimState::Enter()
 
 void PlayerPistolAimState::Run(float elapsedTime)
 {
-    owner->UpdateMove(0.1f, elapsedTime);
     owner->UpdateAnimation(elapsedTime);
 }
 

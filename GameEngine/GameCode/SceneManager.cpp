@@ -73,9 +73,7 @@ void SceneManager::OpenScene(std::filesystem::path local)
 
 SceneManager::~SceneManager()
 {
-    int a = 1;
-    a = 2;
-
+   
 }
 
 

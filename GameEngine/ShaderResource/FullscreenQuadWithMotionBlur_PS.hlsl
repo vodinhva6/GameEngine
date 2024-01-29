@@ -26,8 +26,8 @@ float4 main(VS_OUT pin) : SV_TARGET
     float4 currentPos = H;
     float4 previousPos = mul(worldPos, view_projectionOld);
     previousPos /= previousPos.w;
-    float2 velocity = (currentPos - previousPos).xy / (motisonBlurSample);
-    velocity *= -1;
+    float2 velocity = (currentPos - previousPos).xy / motisonBlurSample;
+    velocity.y *= -1;
     float2 texCoord = pin.texcoord.xy;
     float4 colorb = SceneSample.Sample(sampler_states[LINEAR], texCoord);
     texCoord += velocity;

@@ -9,7 +9,7 @@ Character::Character()
 void Character::Update(float elapsedTime)
 {    
     stateMachine->Run(elapsedTime);
-    impluseMoveSpeed(elapsedTime);
+   
 }
 
 void Character::UpdateAnimation(float elapsedTime)
@@ -118,6 +118,6 @@ void Character::impluseMoveSpeed(float elapsed_time)
 {
     position_ += speed_;
     rotation_ += speedRotation_;
-    speedRotation_ *= 0;
-    speed_ *= 0.75f;
+    speedRotation_ *= 0.8f;
+    speed_ *= 0.65f;
 }

@@ -103,11 +103,24 @@ void Player::UpdateMove(float value, float elapsed_time)
     moveVec = MyMath::get()->ScaleVector3(moveVec, value);
     float plAngle = MyMath::get()->AngleBetweenVectorReturnDegrees(playerForwardVec, cameraForward);
     float factor = 1;
+<<<<<<< HEAD
     //addSpeedRotation({ 0,DirectX::XMConvertToRadians(plAngle) * factor,0 });
   
    
     addSpeed(moveVec);
     
+=======
+    addSpeedRotation({ 0,DirectX::XMConvertToRadians(plAngle) * factor,0 });
+  
+   
+    addSpeed(moveVec);
+
+    VECTOR3 speed = getSpeed();
+    if(MyMath::get()->Length(speed) > 0.5f);
+    speed = MyMath::get()->ScaleVector3(MyMath::get()->Normalize(speed),0.5f);
+    setSpeed(speed);
+    impluseMoveSpeed(elapsed_time);
+>>>>>>> parent of a31de18 (dda)
 }
 
 

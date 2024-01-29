@@ -15,6 +15,7 @@ void GameCamera::Init()
     SetDefault();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     //if (!boundingHit_.capsule_.get())
     //{
     //    pSmartVoid p;
@@ -33,6 +34,10 @@ void GameCamera::Init()
 >>>>>>> parent of a31de18 (dda)
 =======
 >>>>>>> parent of a57d50e (zz)
+=======
+    
+
+>>>>>>> parent of a31de18 (dda)
     projection2DViewNow = false;
     changeToProjection = nullptr;
     speedChange = 0;
@@ -110,7 +115,30 @@ void GameCamera::Draw()
     DirectX::XMMATRIX T = DirectX::XMMatrixTranslationFromVector(Eye);
     DirectX::XMMATRIX S = DirectX::XMMatrixScaling(1, 1, 1);
     DirectX::XMStoreFloat4x4(&worldTransform, S * R * T);
+<<<<<<< HEAD
     //Camera::Draw();
+=======
+    Camera::Draw();
+}
+
+void GameCamera::SetAimmingCamera(float disUp, float disScreenWight, float disNear)
+{
+    saveDistanceToCameraPos     = distanceToCameraPos;
+    saveDistanceFromPlayer      = distanceFromPlayer;
+    saveDistanceUpFromPlayerPos = distanceUpFromPlayerPos;
+
+
+    distanceUpFromPlayerPos = disUp;
+    distanceToCameraPos     = disNear;
+    distanceFromPlayer      = disScreenWight;
+}
+
+void GameCamera::SetDefault()
+{
+    distanceUpFromPlayerPos = saveDistanceUpFromPlayerPos;
+    distanceToCameraPos = saveDistanceToCameraPos;
+    distanceFromPlayer = saveDistanceFromPlayer;
+>>>>>>> parent of a31de18 (dda)
 }
 
 
@@ -192,7 +220,16 @@ void GameCamera::GameCameraThirdPerson()
 >>>>>>> parent of a57d50e (zz)
     //if (!FPSCameraLock)
         //rightJoy = { 0,0 };
+<<<<<<< HEAD
     vectorToSpherePivot = MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity));
+=======
+    vectorToSpherePivot = MyMath::get()->Normalize(MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity)));
+    static VECTOR3 temp;
+    temp = MyMath::get()->Lerp(temp, plPos + MyMath::get()->ScaleVector3(vectorToSpherePivot, distanceFromPlayer), 0.3f);
+    spherePivot.x = temp.x;
+    spherePivot.z = temp.z;
+    spherePivot.y = MyMath::get()->Lerp(spherePivot.y, plPos.y + distanceUpFromPlayerPos, 0.3f);
+>>>>>>> parent of a31de18 (dda)
 
 <<<<<<< HEAD
 =======

@@ -8,7 +8,12 @@ public:
     void PerspectiveFovInforUpdate() override;
     void CreateViewPortRay() override;
     void Draw() override;
+<<<<<<< HEAD
 
+=======
+    void SetAimmingCamera(float disUp, float disScreenWight, float disNear);
+    void SetDefault();
+>>>>>>> parent of a31de18 (dda)
 //public:
 //    template < class T>
 //    void serialize(T& archive)

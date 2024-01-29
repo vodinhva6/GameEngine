@@ -118,5 +118,9 @@ void Character::impluseMoveSpeed(float elapsed_time)
     //position_ += speed_;
     rotation_ += speedRotation_;
     speedRotation_ *= 0.8f;
+<<<<<<< HEAD
     speed_ *= 0.7f;
+=======
+    speed_ *= 0.65f;
+>>>>>>> parent of a31de18 (dda)
 }

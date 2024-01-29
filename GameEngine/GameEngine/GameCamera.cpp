@@ -13,6 +13,7 @@ void GameCamera::Init()
 
     SetDefault();
 <<<<<<< HEAD
+<<<<<<< HEAD
     //if (!boundingHit_.capsule_.get())
     //{
     //    pSmartVoid p;
@@ -21,6 +22,10 @@ void GameCamera::Init()
     //    p.reset();
     //}
         //OBJ3D::CreateBoundingCapsule(5, 5, { 1,1,1 });
+=======
+    
+
+>>>>>>> parent of a31de18 (dda)
 =======
     
 

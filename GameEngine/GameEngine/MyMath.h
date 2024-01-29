@@ -27,7 +27,6 @@ public:
     float Length(const VECTOR3& v);
     float Length(const VECTOR4& v);
     float Length(const VECTOR2& v);
-    float Lerp(const float& a, const float& b, float t);
     float floatEquallity(float x);
     float convertToRadian(float angle);
     float convertToDegrees(float angle);

@@ -173,19 +173,6 @@ float MyMath::Length(const VECTOR2& v)
     return length;
 }
 
-float MyMath::Lerp(const float& a, const float& b, float t)
-{
-    DirectX::XMVECTOR A = DirectX::XMLoadFloat(&a);
-    DirectX::XMVECTOR B = DirectX::XMLoadFloat(&b);
-
-    A = DirectX::XMVectorLerp(A, B, t);
-
-    float newA;
-    DirectX::XMStoreFloat(&newA, A);
-
-    return newA;
-}
-
 float MyMath::floatEquallity(float x)
 {
     return roundf(x);

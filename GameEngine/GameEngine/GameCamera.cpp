@@ -197,6 +197,7 @@ void GameCamera::GameCameraThirdPerson()
     rightJoy = MyMath::get()->Lerp(rightJoy, rightJoy+ padP->getPosRightJoy(0), 0.6f);
     std::shared_ptr<Player> player = actorManager->getPlayer();
     VECTOR3 plPos = player->getPosition();
+<<<<<<< HEAD
     //if (!FPSCameraLock)
         //rightJoy = { 0,0 };
     vectorToSpherePivot = MyMath::get()->Normalize(MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity)));
@@ -206,6 +207,11 @@ void GameCamera::GameCameraThirdPerson()
     spherePivot.z = temp.z;
     spherePivot.y = MyMath::get()->Lerp(spherePivot.y, plPos.y + distanceUpFromPlayerPos, 0.3f);
 
+=======
+    plPos.y = 0;
+    spherePivot = MyMath::get()->Lerp(spherePivot, plPos + MyMath::get()->ScaleVector3(MyMath::get()->Normalize(vectorToSpherePivot), distanceFromPlayer),0.15f);
+    spherePivot.y = distanceUpFromPlayerPos + plPos.y;
+>>>>>>> parent of 21479a7 (d)
     vectorSphereToCameraPos = MyMath::get()->Vector3Rotation(vectorSphereToCameraPos, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity));
     
     

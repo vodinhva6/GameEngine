@@ -58,7 +58,6 @@ OBJ3DType OBJ3D::getTypeOBJ3D()
 
 void OBJ3D::DrawDebug()
 {
-<<<<<<< HEAD
     //if (boundingHit_.sphere_)
     //    GameEngine::get()->DrawDebugBounding(boundingHit_.sphere_, worldTransform, color_,2);
     //if (boundingHit_.capsule_)
@@ -70,19 +69,6 @@ void OBJ3D::DrawDebug()
     //        GameEngine::get()->DrawDebugBounding(ray, worldTransform, ray->color, 3);
     //    }
     //}
-=======
-    if (boundingHit_.sphere_)
-        GameEngine::get()->DrawDebugBounding((void*)boundingHit_.sphere_, worldTransform, color_,2);
-    if (boundingHit_.capsule_)
-        GameEngine::get()->DrawDebugBounding((void*)boundingHit_.capsule_, worldTransform, color_,3);
-    for (auto& ray : boundingHit_.raylist)
-    {
-        if (ray.get())
-        {
-            GameEngine::get()->DrawDebugBounding((void*)ray.get(), worldTransform, ray->color, 3);
-        }
-    }
->>>>>>> parent of a31de18 (dda)
 }
 
 OBJ3D::~OBJ3D()
@@ -90,7 +76,6 @@ OBJ3D::~OBJ3D()
 }
 
 
-<<<<<<< HEAD
 //void OBJ3D::CreateBoundingCapsule(const float& height, const float& weight, const VECTOR3& offset)
 //{
 //    pSmartVoid p = SetToPoint(boundingHit_.capsule_);
@@ -113,23 +98,3 @@ OBJ3D::~OBJ3D()
 //    ray = std::static_pointer_cast<Ray>(pRayVoid);
 //    boundingHit_.raylist.push_back(ray);
 //}
-=======
-void OBJ3D::CreateBoundingCapsule(const float& height, const float& weight, const VECTOR3& offset)
-{
-    GameEngine::get()->CreateCapsuleDebug((void*)boundingHit_.capsule_, height, weight, offset);
-}
-
-void OBJ3D::CreateBoundingSphere(const float& radius, const VECTOR3& offset)
-{
-    GameEngine::get()->createSphereDebug(boundingHit_.sphere_, radius, offset);
-}
-
-void OBJ3D::CreateRay(const VECTOR3& begin, const VECTOR3& end, const VECTOR4& color, RayType Type)
-{
-    std::shared_ptr<void> pRayVoid;
-    GameEngine::get()->CreateRay(pRayVoid, begin, end, color, Type);
-    std::shared_ptr<Ray> ray(nullptr);
-    ray = std::static_pointer_cast<Ray>(pRayVoid);
-    boundingHit_.raylist.push_back(ray);
-}
->>>>>>> parent of a31de18 (dda)

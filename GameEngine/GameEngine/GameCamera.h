@@ -10,6 +10,7 @@ public:
     void Draw() override;
     void SetAimmingCamera(float disUp, float disScreenWight, float disNear);
     void SetDefault();
+    ~GameCamera() override;
 //public:
 //    template < class T>
 //    void serialize(T& archive)

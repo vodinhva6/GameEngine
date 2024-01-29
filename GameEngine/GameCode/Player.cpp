@@ -106,19 +106,18 @@ void Player::UpdateMove(float value, float elapsed_time)
     VECTOR3 moveVec = MyMath::get()->Vector3Rotation(cameraForward, { 0,1,0 }, angle);
 
     moveVec = MyMath::get()->Normalize(moveVec);
-    moveVec = MyMath::get()->ScaleVector3(moveVec, value);
+    moveVec = MyMath::get()->ScaleVector3(moveVec, value * MyMath::get()->Length(leftJoy));
     float plAngle = MyMath::get()->AngleBetweenVectorReturnDegrees(playerForwardVec, cameraForward);
-    float factor = 1;
-    addSpeedRotation({ 0,DirectX::XMConvertToRadians(plAngle) * factor,0 });
-  
-   
+    VECTOR3 rot = getRotation();
+    rot = MyMath::get()->Lerp(rot, rot + VECTOR3{ 0,plAngle,0 }, 0.25f) - rot;
+    addSpeedRotation(rot);
+    
     addSpeed(moveVec);
-
     VECTOR3 speed = getSpeed();
-    if(MyMath::get()->Length(speed) > 0.5f);
-    speed = MyMath::get()->ScaleVector3(MyMath::get()->Normalize(speed),0.5f);
+    if (MyMath::get()->Length(speed) > 0.34f)
+    speed = MyMath::get()->ScaleVector3(MyMath::get()->Normalize(speed), 0.34f);
     setSpeed(speed);
-    impluseMoveSpeed(elapsed_time);
+  
 }
 
 

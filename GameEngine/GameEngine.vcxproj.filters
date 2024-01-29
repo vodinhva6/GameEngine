@@ -329,7 +329,6 @@
     <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State\Player\Walk">
       <UniqueIdentifier>{a6007ed2-3bbb-4875-833d-f2a6dbd52154}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
     <Filter Include="GameEngine\1_Engines\AISystem\StateMachine\State\Player\Battle">
       <UniqueIdentifier>{9e246664-5767-4c97-a4d0-fbc4aa6b8f64}</UniqueIdentifier>
     </Filter>
@@ -375,8 +374,6 @@
     <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\RawMesh">
       <UniqueIdentifier>{a1afc771-31bf-4cec-9791-96e11495de19}</UniqueIdentifier>
     </Filter>
-=======
->>>>>>> parent of a57d50e (zz)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Framework.h">
@@ -691,7 +688,6 @@
     <ClInclude Include="GameEngine\PLayerWalkState.h">
       <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Walk</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="GameEngine\PlayerPistolState.h">
       <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Battle\Pistol</Filter>
     </ClInclude>
@@ -719,8 +715,6 @@
     <ClInclude Include="GameEngine\ObjModel.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
     </ClInclude>
-=======
->>>>>>> parent of a57d50e (zz)
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine\Framework.cpp">
@@ -1050,7 +1044,6 @@
     <ClCompile Include="GameEngine\PLayerWalkState.cpp">
       <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Walk</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="GameEngine\PlayerPistolState.cpp">
       <Filter>GameEngine\1_Engines\AISystem\StateMachine\State\Player\Battle\Pistol</Filter>
     </ClCompile>
@@ -1075,8 +1068,6 @@
     <ClCompile Include="GameEngine\ObjModel.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
     </ClCompile>
-=======
->>>>>>> parent of a57d50e (zz)
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc">

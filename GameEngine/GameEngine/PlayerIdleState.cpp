@@ -12,13 +12,15 @@ void PlayerIdleState::Enter()
 	stateStep = 0;
 	owner->SetAnimation("IDLE", "IDLE_FREE");
 	owner->meshInfor.animator_->SetNextBlendAnimation(nullptr, nullptr, nullptr);
-	owner->BeginBlendingAnimation();
+	owner->BeginBlendingAnimation(0.1f);
 	owner->setSpeed({ 0,0,0 });
 }
 
 void PlayerIdleState::Run(float elapedTime)
 {
-	std::string moveState = OwnerMove();
+	std::string moveState = "";
+	PlayerMove(moveState);
+	PlayerBattle(moveState);
 	owner->meshInfor.animator_->SetNowBlendAnimation(nullptr, nullptr, nullptr);
 	owner->UpdateAnimation(elapedTime);
 	switch (stateStep)
@@ -28,8 +30,8 @@ void PlayerIdleState::Run(float elapedTime)
 			stateStep++;
 		else break;
 	case 1:
-		if (moveState == "WALK")
-			owner->getStateMachine()->ChangeState("WALK");
+		if (moveState != "")
+			owner->getStateMachine()->ChangeState(moveState);
 	default:
 		break;
 	}
@@ -45,9 +47,8 @@ PlayerIdleState::~PlayerIdleState()
 {
 }
 
-std::string PlayerIdleState::OwnerMove()
+void PlayerIdleState::PlayerMove(std::string& result)
 {
-	std::string result = "";
 	ControlPad* controlPad = GetFrom<ControlPad>(GameEngine::get()->getControlPad());
 	CameraManager* cameraManager = GetFrom<CameraManager>(GameEngine::get()->getCameraManager());
 	ActorManager* actorManager = GetFrom<ActorManager>(GameEngine::get()->getActorManager());
@@ -73,6 +74,11 @@ std::string PlayerIdleState::OwnerMove()
 			if (/*lengthJoy < 0.7f && */lengthJoy > 0.05f)
 				result = "WALK";
 	
+}
 
-	return result;
+void PlayerIdleState::PlayerBattle(std::string& result)
+{
+	ControlPad* controlPad = GetFrom<ControlPad>(GameEngine::get()->getControlPad());
+	if (controlPad->getTriggerLeft(0) > 0.05f)
+		result = "BATTLE";
 }

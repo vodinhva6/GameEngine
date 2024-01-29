@@ -30,7 +30,7 @@ public:
     bool GetBlending() { return blending; }
     void SetBlending(bool blend) { blending = blend; }
 
-    void BeginBlendingAnimation();
+    void BeginBlendingAnimation(float blenderTimeStep);
 
 
     VECTOR3 getVectorForward();
@@ -46,6 +46,7 @@ protected:
     float blendTime;
     int frameAnimationNow;
     int frameAnimationOld;
+    float blenderTimeStep;
 protected:
     std::shared_ptr<StateMachine> stateMachine;
 };

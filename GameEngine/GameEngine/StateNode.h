@@ -18,14 +18,16 @@ public:
     virtual std::vector<VECTOR4>&getlistQua       () { return listQua; }
     virtual std::vector<int>    &getlistNodeIndex() { return listNodeIndex; }
     virtual std::vector<float>  &getlistValue() { return listValue; }
-
-
+    std::shared_ptr<StateNode> SearchNode(std::string name);
+    bool UpdateState(std::string result);
     std::unordered_map<std::string, std::shared_ptr<StateNode>>& getNodes() { return subNodes; }
     ~StateNode();
 
 protected:
     Character* owner;
     std::unordered_map<std::string, std::shared_ptr<StateNode>> subNodes;
+    std::shared_ptr<StateNode> runningSubNode;
+    std::shared_ptr<StateNode> runOldSubNode;
     int stateStep;
     float moveSpeed;
 public:

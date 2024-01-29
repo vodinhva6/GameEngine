@@ -6,7 +6,6 @@
 void GameCamera::Init()
 {
     Camera::Init();
-<<<<<<< HEAD
 
     saveDistanceToCameraPos = 40;
     saveDistanceFromPlayer = -8;
@@ -31,17 +30,12 @@ void GameCamera::Init()
     
 
 >>>>>>> parent of a31de18 (dda)
-=======
->>>>>>> parent of a57d50e (zz)
     projection2DViewNow = false;
     changeToProjection = nullptr;
     speedChange = 0;
     project2DSize = 100;
     projectionChangeSpeedUpRate = 1;
     color_ = { 5,5,5,1 };
-    distanceToCameraPos = 40;
-    distanceFromPlayer = -8;
-    distanceUpFromPlayerPos = 1;
     firstPersonGameCameraMode = false;
     vectorToSpherePivot = { 1,0,0 };
     vectorSphereToCameraPos = { 0,0,1 };
@@ -113,6 +107,25 @@ void GameCamera::Draw()
     //Camera::Draw();
 }
 
+void GameCamera::SetAimmingCamera(float disUp, float disScreenWight, float disNear)
+{
+    saveDistanceToCameraPos     = distanceToCameraPos;
+    saveDistanceFromPlayer      = distanceFromPlayer;
+    saveDistanceUpFromPlayerPos = distanceUpFromPlayerPos;
+
+
+    distanceUpFromPlayerPos = disUp;
+    distanceToCameraPos     = disNear;
+    distanceFromPlayer      = disScreenWight;
+}
+
+void GameCamera::SetDefault()
+{
+    distanceUpFromPlayerPos = saveDistanceUpFromPlayerPos;
+    distanceToCameraPos = saveDistanceToCameraPos;
+    distanceFromPlayer = saveDistanceFromPlayer;
+}
+
 
 
 void GameCamera::GameCameraFirstPerson()
@@ -181,38 +194,30 @@ void GameCamera::GameCameraThirdPerson()
 
     static VECTOR2 rightJoy;
     
-<<<<<<< HEAD
     rightJoy = MyMath::get()->Lerp(rightJoy, rightJoy+ padP->getPosRightJoy(0), 0.6f);
     std::shared_ptr<Player> player = actorManager->getPlayer();
     VECTOR3 plPos = player->getPosition();
 <<<<<<< HEAD
-=======
-    rightJoy += padP->getPosRightJoy(0);
-
->>>>>>> parent of a57d50e (zz)
     //if (!FPSCameraLock)
         //rightJoy = { 0,0 };
-    vectorToSpherePivot = MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity));
+    vectorToSpherePivot = MyMath::get()->Normalize(MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity)));
+    static VECTOR3 temp;
+    temp = MyMath::get()->Lerp(temp, plPos + MyMath::get()->ScaleVector3(vectorToSpherePivot, distanceFromPlayer), 0.3f);
+    spherePivot.x = temp.x;
+    spherePivot.z = temp.z;
+    spherePivot.y = MyMath::get()->Lerp(spherePivot.y, plPos.y + distanceUpFromPlayerPos, 0.3f);
 
-<<<<<<< HEAD
 =======
     plPos.y = 0;
     spherePivot = MyMath::get()->Lerp(spherePivot, plPos + MyMath::get()->ScaleVector3(MyMath::get()->Normalize(vectorToSpherePivot), distanceFromPlayer),0.15f);
     spherePivot.y = distanceUpFromPlayerPos + plPos.y;
 >>>>>>> parent of 21479a7 (d)
-=======
-    std::shared_ptr<Player> player = actorManager->getPlayer();
-    VECTOR3 plPos = player->getPosition();
-    plPos.y = 0;
-    spherePivot = MyMath::get()->Lerp(spherePivot, plPos + MyMath::get()->ScaleVector3(MyMath::get()->Normalize(vectorToSpherePivot), distanceFromPlayer),0.15f);
-    spherePivot.y = MyMath::get()->Lerp(spherePivot.y, distanceUpFromPlayerPos, 0.15f);
->>>>>>> parent of a57d50e (zz)
     vectorSphereToCameraPos = MyMath::get()->Vector3Rotation(vectorSphereToCameraPos, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity));
     
     
     VECTOR3 right = MyMath::get()->Cross(cameraUp, vectorSphereToCameraPos);
     vectorSphereToCameraPos = MyMath::get()->Vector3Rotation(vectorSphereToCameraPos, right, MyMath::get()->convertToRadian(rightJoy.y * sensitivity));
-    vectorSphereToCameraPos = MyMath::get()->ScaleVector3(vectorSphereToCameraPos, distanceToCameraPos);
+    vectorSphereToCameraPos = MyMath::get()->Lerp(vectorSphereToCameraPos, MyMath::get()->ScaleVector3(vectorSphereToCameraPos, distanceToCameraPos), 0.3f);
 
     position_ = spherePivot + vectorSphereToCameraPos;
     cameraTarget = spherePivot - vectorSphereToCameraPos;

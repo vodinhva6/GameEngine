@@ -71,121 +71,125 @@ VECTOR3 Collision::RayCastReturnPoint(OBJ3D& obj, const VECTOR3& Begin, const VE
     
 
     DirectX::XMStoreFloat(&worldRayLength, RayLengthWorld);
-    SkinnedMesh* pSkinnedMesh = GetFrom<SkinnedMesh>(obj.meshInfor.mesh_.get());
-    if(pSkinnedMesh)
-    for (auto& mesh : pSkinnedMesh->getMeshRawList())
+    Meshes* pMesh = GetFrom<Meshes>(obj.meshInfor.mesh_.get());
+    if (pMesh)
     {
-        DirectX::XMMATRIX WorldTransform = DirectX::XMLoadFloat4x4(&mesh.defaultGlobalTransform) * DirectX::XMLoadFloat4x4(&pSkinnedMesh->getDefaultTransform()) * DirectX::XMLoadFloat4x4(&obj.worldTransform);
-        DirectX::XMMATRIX InverseWorldTransform = DirectX::XMMatrixInverse(nullptr, WorldTransform);
-    
-        DirectX::XMVECTOR S = DirectX::XMVector3TransformCoord(beginWorld, InverseWorldTransform);
-        DirectX::XMVECTOR E = DirectX::XMVector3TransformCoord(endWorld, InverseWorldTransform);
-        DirectX::XMVECTOR SE = DirectX::XMVectorSubtract(E, S);
-        DirectX::XMVECTOR V = DirectX::XMVector3Normalize(SE);
-        DirectX::XMVECTOR Length = DirectX::XMVector3Length(SE);
-    
-        float neart;
-        DirectX::XMStoreFloat(&neart, Length);
-    
-        const auto& vertices = mesh.vertices;
-        const std::vector<UINT> indices = mesh.indices;
-    
-        int64_t materialIndex = -1;
-        DirectX::XMVECTOR HitPosition;
-        //DirectX::XMVECTOR HitNormal;
-        for (auto& subset : mesh.subsets)
+        std::vector<std::shared_ptr<BaseMesh>>& listMesh = pMesh->getMeshList();
+        for (auto& mesh : listMesh)
         {
-            for (UINT i = 0; i < subset.indexCount; i += 3)
+            DirectX::XMMATRIX WorldTransform = DirectX::XMLoadFloat4x4(&mesh->defaultGlobalTransform) * DirectX::XMLoadFloat4x4(&pMesh->getDefaultTransform()) * DirectX::XMLoadFloat4x4(&obj.worldTransform);
+            DirectX::XMMATRIX InverseWorldTransform = DirectX::XMMatrixInverse(nullptr, WorldTransform);
+
+            DirectX::XMVECTOR S = DirectX::XMVector3TransformCoord(beginWorld, InverseWorldTransform);
+            DirectX::XMVECTOR E = DirectX::XMVector3TransformCoord(endWorld, InverseWorldTransform);
+            DirectX::XMVECTOR SE = DirectX::XMVectorSubtract(E, S);
+            DirectX::XMVECTOR V = DirectX::XMVector3Normalize(SE);
+            DirectX::XMVECTOR Length = DirectX::XMVector3Length(SE);
+
+            float neart;
+            DirectX::XMStoreFloat(&neart, Length);
+
+            std::vector<VertexBuff>& listVertex = mesh->GetVertexList();
+            const std::vector<UINT> indices = mesh->indices;
+
+            int64_t materialIndex = -1;
+            DirectX::XMVECTOR HitPosition;
+            //DirectX::XMVECTOR HitNormal;
+            for (auto& subset : mesh->subsets)
             {
-                UINT index = subset.startIndexLocation + i;
-                const RawVertex& a = vertices.at(indices.at(index));
-                const RawVertex& b = vertices.at(indices.at(index + 1));
-                const RawVertex& c = vertices.at(indices.at(index + 2));
-    
-                DirectX::XMVECTOR A = DirectX::XMLoadFloat3(&a.position);
-                DirectX::XMVECTOR B = DirectX::XMLoadFloat3(&b.position);
-                DirectX::XMVECTOR C = DirectX::XMLoadFloat3(&c.position);
-    
-                DirectX::XMVECTOR AB = DirectX::XMVectorSubtract(B, A);
-                DirectX::XMVECTOR BC = DirectX::XMVectorSubtract(C, B);
-                DirectX::XMVECTOR CA = DirectX::XMVectorSubtract(A, C);
-    
-                DirectX::XMVECTOR N = DirectX::XMVector3Cross(AB, BC);
-                N = DirectX::XMVector3Normalize(N);
-    
-                DirectX::XMVECTOR Dot = DirectX::XMVector3Dot(V, N);
-                float dot;
-                DirectX::XMStoreFloat(&dot, Dot);
-                if (dot >= 0) continue;
-    
-                DirectX::XMVECTOR SA = DirectX::XMVectorSubtract(A, S);
-    
-                ///
-                float d1;
-                DirectX::XMStoreFloat(&d1, DirectX::XMVector3Dot(SA, N));
-                float d2;
-                DirectX::XMVECTOR D2 = DirectX::XMVector3Dot(V, N);
-                DirectX::XMStoreFloat(&d2, D2);
-                float x = (d1 / d2);
-                if (x<0.0f || x > neart) continue;
-                DirectX::XMVECTOR P = DirectX::XMVectorAdd(S, DirectX::XMVectorScale(V, x));
-                DirectX::XMFLOAT3 p;
-                DirectX::XMStoreFloat3(&p, P);
-    
-                ///
-                DirectX::XMVECTOR PA = DirectX::XMVectorSubtract(A, P);
-                DirectX::XMVECTOR Cross1 = DirectX::XMVector3Cross(PA, AB);
-                DirectX::XMVECTOR Dot1 = DirectX::XMVector3Dot(N, Cross1);
-                DirectX::XMStoreFloat(&dot, Dot1);
-    
-                if (dot < 0) continue;
-    
-                DirectX::XMVECTOR PB = DirectX::XMVectorSubtract(B, P);
-                DirectX::XMVECTOR Cross2 = DirectX::XMVector3Cross(PB, BC);
-                DirectX::XMVECTOR Dot2 = DirectX::XMVector3Dot(N, Cross2);
-                DirectX::XMStoreFloat(&dot, Dot2);
-    
-                if (dot < 0) continue;
-    
-                DirectX::XMVECTOR PC = DirectX::XMVectorSubtract(C, P);
-                DirectX::XMVECTOR Cross3 = DirectX::XMVector3Cross(PC, CA);
-                DirectX::XMVECTOR Dot3 = DirectX::XMVector3Dot(N, Cross3);
-                DirectX::XMStoreFloat(&dot, Dot3);
-    
-                if (dot < 0) continue;
-    
-    
-                neart = x;
-                HitPosition = P;
-                //HitNormal = N;
-                materialIndex = subset.materialUniqueId;
+                for (UINT i = 0; i < subset.indexCount; i += 3)
+                {
+                    UINT index = subset.startIndexLocation + i;
+                    VertexBuff& a = listVertex.at(indices.at(index));
+                    VertexBuff& b = listVertex.at(indices.at(index + 1));
+                    VertexBuff& c = listVertex.at(indices.at(index + 2));
+
+                    DirectX::XMVECTOR A = DirectX::XMLoadFloat3(&a.position);
+                    DirectX::XMVECTOR B = DirectX::XMLoadFloat3(&b.position);
+                    DirectX::XMVECTOR C = DirectX::XMLoadFloat3(&c.position);
+
+                    DirectX::XMVECTOR AB = DirectX::XMVectorSubtract(B, A);
+                    DirectX::XMVECTOR BC = DirectX::XMVectorSubtract(C, B);
+                    DirectX::XMVECTOR CA = DirectX::XMVectorSubtract(A, C);
+
+                    DirectX::XMVECTOR N = DirectX::XMVector3Cross(AB, BC);
+                    N = DirectX::XMVector3Normalize(N);
+
+                    DirectX::XMVECTOR Dot = DirectX::XMVector3Dot(V, N);
+                    float dot;
+                    DirectX::XMStoreFloat(&dot, Dot);
+                    if (dot >= 0) continue;
+
+                    DirectX::XMVECTOR SA = DirectX::XMVectorSubtract(A, S);
+
+                    ///
+                    float d1;
+                    DirectX::XMStoreFloat(&d1, DirectX::XMVector3Dot(SA, N));
+                    float d2;
+                    DirectX::XMVECTOR D2 = DirectX::XMVector3Dot(V, N);
+                    DirectX::XMStoreFloat(&d2, D2);
+                    float x = (d1 / d2);
+                    if (x<0.0f || x > neart) continue;
+                    DirectX::XMVECTOR P = DirectX::XMVectorAdd(S, DirectX::XMVectorScale(V, x));
+                    DirectX::XMFLOAT3 p;
+                    DirectX::XMStoreFloat3(&p, P);
+
+                    ///
+                    DirectX::XMVECTOR PA = DirectX::XMVectorSubtract(A, P);
+                    DirectX::XMVECTOR Cross1 = DirectX::XMVector3Cross(PA, AB);
+                    DirectX::XMVECTOR Dot1 = DirectX::XMVector3Dot(N, Cross1);
+                    DirectX::XMStoreFloat(&dot, Dot1);
+
+                    if (dot < 0) continue;
+
+                    DirectX::XMVECTOR PB = DirectX::XMVectorSubtract(B, P);
+                    DirectX::XMVECTOR Cross2 = DirectX::XMVector3Cross(PB, BC);
+                    DirectX::XMVECTOR Dot2 = DirectX::XMVector3Dot(N, Cross2);
+                    DirectX::XMStoreFloat(&dot, Dot2);
+
+                    if (dot < 0) continue;
+
+                    DirectX::XMVECTOR PC = DirectX::XMVectorSubtract(C, P);
+                    DirectX::XMVECTOR Cross3 = DirectX::XMVector3Cross(PC, CA);
+                    DirectX::XMVECTOR Dot3 = DirectX::XMVector3Dot(N, Cross3);
+                    DirectX::XMStoreFloat(&dot, Dot3);
+
+                    if (dot < 0) continue;
+
+
+                    neart = x;
+                    HitPosition = P;
+                    //HitNormal = N;
+                    materialIndex = subset.materialUniqueId;
+                }
             }
-        }
-        if (materialIndex >= 0)
-        {
-            DirectX::XMVECTOR WorldPosition = DirectX::XMVector3TransformCoord(HitPosition, WorldTransform);
-            
-            DirectX::XMVECTOR WorldCrossVec = DirectX::XMVectorSubtract(WorldPosition, beginWorld);
-            DirectX::XMVECTOR WorldCrossLength = DirectX::XMVector3Length(WorldCrossVec);
-            float distance;
-            DirectX::XMStoreFloat(&distance, WorldCrossLength);
-    
-            if (worldRayLength > distance)
+            if (materialIndex >= 0)
             {
-                //DirectX::XMVECTOR WorldNormal = DirectX::XMVector3TransformNormal(HitNormal, WorldTransform);
-    
-                //result.distance = distance;
-                //result.materialIndex = materialIndex;
-                //DirectX::XMStoreFloat3(&result.position, WorldPosition);
-                // DirectX::XMStoreFloat3(&result.normal, DirectX::XMVector3Normalize(WorldNormal));
-                hit = true;
-                VECTOR3 pos;
-                DirectX::XMStoreFloat3(&pos, WorldPosition);
-                return pos;
+                DirectX::XMVECTOR WorldPosition = DirectX::XMVector3TransformCoord(HitPosition, WorldTransform);
+
+                DirectX::XMVECTOR WorldCrossVec = DirectX::XMVectorSubtract(WorldPosition, beginWorld);
+                DirectX::XMVECTOR WorldCrossLength = DirectX::XMVector3Length(WorldCrossVec);
+                float distance;
+                DirectX::XMStoreFloat(&distance, WorldCrossLength);
+
+                if (worldRayLength > distance)
+                {
+                    //DirectX::XMVECTOR WorldNormal = DirectX::XMVector3TransformNormal(HitNormal, WorldTransform);
+
+                    //result.distance = distance;
+                    //result.materialIndex = materialIndex;
+                    //DirectX::XMStoreFloat3(&result.position, WorldPosition);
+                    // DirectX::XMStoreFloat3(&result.normal, DirectX::XMVector3Normalize(WorldNormal));
+                    hit = true;
+                    VECTOR3 pos;
+                    DirectX::XMStoreFloat3(&pos, WorldPosition);
+                    return pos;
+                }
             }
+
         }
-    
     }
+   
     else 
     if (obj.sprite3D_)
     {

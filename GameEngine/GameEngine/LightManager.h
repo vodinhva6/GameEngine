@@ -2,6 +2,7 @@
 #include "SpotLight.h"
 #include "PointLight.h"
 #include "ShadowManager.h"
+#include <Mesh.h>
 #include <memory>
 #define MAX_SUPP_LIGHTS 10
 
@@ -47,6 +48,6 @@ private:
     std::vector< std::shared_ptr<SpotLight>> listSpotLights;
     std::unique_ptr<ShadowManager> shadowManager;
     std::shared_ptr<Sprite3D> pointLightSpr3D;
-    std::shared_ptr<SkinnedMesh> shpereMesh_;
+    std::shared_ptr<Meshes> shpereMesh_;
 };
 

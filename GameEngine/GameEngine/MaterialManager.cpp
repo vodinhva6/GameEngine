@@ -45,11 +45,12 @@ std::shared_ptr<Material> MaterialManager::CreateNewDummyMaterial(std::filesyste
 
 void MaterialManager::RegisterAllMaterialsFromMeshData(pSmartVoid& mesh, std::unordered_map<int64_t, std::shared_ptr<Material>>& materialMap)
 {
-    std::shared_ptr<SkinnedMesh> pSkinnedMesh = GetFromPoint<SkinnedMesh>(mesh);
+    std::shared_ptr<Meshes> pMesh = GetFromPoint<Meshes>(mesh);
     std::filesystem::path fixed;
-    CreateFolder(pSkinnedMesh->getLocalPath(), fixed);
-    for (BaseMesh& mesh : pSkinnedMesh->getMeshRawList())
-        for (auto& subset : mesh.subsets)
+    CreateFolder(pMesh->getLocalPath(), fixed);
+    std::vector<std::shared_ptr<BaseMesh>>& listMesh = pMesh->getMeshList();
+    for (auto& mesh : listMesh)
+        for (auto& subset : mesh->subsets)
         {
             auto it = materialMap.find(subset.materialUniqueId);
             if (it == materialMap.end())

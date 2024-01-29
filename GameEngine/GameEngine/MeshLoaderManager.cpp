@@ -1,9 +1,16 @@
-#include "MeshLoaderManager.h"
-#include "MaterialManager.h"
-#include "AnimatorManager.h"
-#include "GameEngine.h"
-#include "Log.h"
+#include <MeshLoaderManager.h>
+#include <SkinnedMesh.h>
+#include <StaticMesh.h>
+#include <MaterialManager.h>
+#include <AnimatorManager.h>
+#include <GameEngine.h>
+#include <Log.h>
 
+
+MeshLoaderManager::MeshLoaderManager()
+{
+    fbxManager = FbxManager::Create();
+}
 
 bool MeshLoaderManager::CreateMesh(pSmartVoid& mesh, std::filesystem::path local)
 {
@@ -14,16 +21,16 @@ bool MeshLoaderManager::CreateMesh(pSmartVoid& mesh, std::filesystem::path local
         return false;
 
 
-    std::shared_ptr<SkinnedMesh> pSkinnedMesh = GetFromPoint<SkinnedMesh>(mesh);
+    std::shared_ptr<Meshes> pMesh = GetFromPoint<Meshes>(mesh);
     //pSkinnedMesh.reset(new SkinnedMesh(GameEngine::get()->getDevice(), loadMeshInfor.local.string().c_str(), loadMeshInfor.createNewCereal, loadMeshInfor.shaderData));
     
     
-    skinnedMeshes.insert(std::make_pair(local, std::make_shared<SkinnedMesh>(*pSkinnedMesh)));
-    mesh = SetToPoint<SkinnedMesh>(pSkinnedMesh);
+    skinnedMeshes.insert(std::make_pair(local, pMesh));
+    mesh = SetToPoint<Meshes>(pMesh);
     return true;
 }
 
-bool MeshLoaderManager::ReleaseMesh(std::shared_ptr<SkinnedMesh>& mesh)
+bool MeshLoaderManager::ReleaseMesh(std::shared_ptr<Meshes>& mesh)
 {
     for (auto& it : skinnedMeshes)
     {
@@ -89,7 +96,7 @@ bool MeshLoaderManager::SetDefaultTransform(std::filesystem::path fileLocal, con
         if (rebuildThread.get())
             rebuildThread->join();
         rebuildThread.reset();
-        rebuildThread = std::make_unique<std::thread>(&SkinnedMesh::CreateNewCereal, it->second);
+        rebuildThread = std::make_unique<std::thread>(&Meshes::CreateNewCereal, it->second);
         return true;
     }
   
@@ -119,7 +126,9 @@ MeshLoaderManager::~MeshLoaderManager()
         rebuildThread->join();
     rebuildThread.reset();
     DeleteAllMesh();
-   
+
+    if (fbxManager)
+        fbxManager->Destroy();
 }
 
 void MeshLoaderManager::DeleteAllMesh()
@@ -130,14 +139,14 @@ void MeshLoaderManager::DeleteAllMesh()
 bool MeshLoaderManager::CheckHadMesh(pSmartVoid& mesh, std::filesystem::path pathh)
 {
     bool result = false;
-    std::shared_ptr<SkinnedMesh> pSkinnedMesh = GetFromPoint<SkinnedMesh>(mesh);
+    std::shared_ptr<Meshes> pSkinnedMesh = GetFromPoint<Meshes>(mesh);
     auto it = skinnedMeshes.find(pathh);
     if (it != skinnedMeshes.end())
     {
         pSkinnedMesh = it->second;
         result = true;
     }
-    mesh = SetToPoint<SkinnedMesh>(pSkinnedMesh);
+    mesh = SetToPoint<Meshes>(pSkinnedMesh);
     return result;
 }
 
@@ -145,102 +154,46 @@ bool MeshLoaderManager::IsCanToLoadMesh(std::filesystem::path local, pSmartVoid&
 {
     AnimatorManager* animatorManager = GetFrom<AnimatorManager>(GameEngine::get()->getAnimatorManager());
     MaterialManager* materialmanager = GetFrom<MaterialManager>(GameEngine::get()->getMaterialManager());
-    std::unordered_map<int64_t, std::shared_ptr<Material>> materialMap;
-    std::shared_ptr<SkinnedMesh> pSkinnedMesh = GetFromPoint<SkinnedMesh>(mesh);
-    pSkinnedMesh.reset(new SkinnedMesh);
-    if (pSkinnedMesh->IsCanLoadCereal(local.string()))
-    {
-        //animatorManager->CreateNewAnimatorFormModelFile(fbx_scene, sceneView, local, 0);
-
-        pSkinnedMesh->CreateComObjects(GameEngine::get()->getDevice());
-        mesh = SetToPoint<SkinnedMesh>(pSkinnedMesh);
-
-        materialmanager->RegisterAllMaterialsFromMeshData(mesh, materialMap);
-        return true;
-    }
-
   
-    FbxManager* fbx_manager{ FbxManager::Create() };
-    FbxScene* fbx_scene{ FbxScene::Create(fbx_manager, "") };
-
-    FbxImporter* fbx_importer{ FbxImporter::Create(fbx_manager, "") };
-    bool import_status{ false };
-    import_status = fbx_importer->Initialize(local.string().c_str());
-#ifdef USE_IMGUI
-    SUCCEEDEDRESULTTEXT(import_status, fbx_importer->GetStatus().GetErrorString());
-#else
-#endif // USE_IMGUI
-    import_status = fbx_importer->Import(fbx_scene);
-#ifdef USE_IMGUI
-    SUCCEEDEDRESULTTEXT(import_status, fbx_importer->GetStatus().GetErrorString());
-#endif // USE_IMGUI
-
-
-    bool Ismesh = false;
-    
-    for (int i = 0; i < fbx_scene->GetNodeCount(); i++)
+    FbxScene* fbxScene = nullptr;
+    std::unordered_map<int64_t, std::shared_ptr<Material>> materialMap;
+    std::shared_ptr<Meshes> pMesh = GetFromPoint<Meshes>(mesh);
+    pMesh.reset(new SkinnedMesh);
+    bool Ismesh = true;
+    if (pMesh->IsCanLoadCereal(local.string()))
     {
-        FbxNodeAttribute* nodeAtt = fbx_scene->GetNode(i)->GetNodeAttribute();
-        if (nodeAtt && nodeAtt->GetAttributeType() == FbxNodeAttribute::EType::eMesh)
-        {
-            Ismesh = true;
-        }
-            
+        mesh = SetToPoint<Meshes>(pMesh);
     }
-    if (Ismesh)
+    else
     {
-        sceneView = new SceneMesh;
-        std::shared_ptr<SkinnedMesh> pSkinnedMesh = GetFromPoint<SkinnedMesh>(mesh);
-       
-        pSkinnedMesh.reset(new SkinnedMesh);
-
-        if (!pSkinnedMesh->IsCanLoadCereal(local.string()))
+        Ismesh = IsFbxHasMesh(local, fbxScene);
+        if (Ismesh)
         {
-            FbxGeometryConverter fbx_converter(fbx_manager);
-            fbx_converter.Triangulate(fbx_scene, true/*replace*/, false/*legacy*/);
-            fbx_converter.RemoveBadPolygonsFromMeshes(fbx_scene);
-    
-            std::function<void(FbxNode*)> traverse
-            { [&](FbxNode* fbx_node)
-                {
-                    SceneMesh::Node& node{ sceneView->nodes.emplace_back() };
-                    node.attribute = fbx_node->GetNodeAttribute() ? fbx_node->GetNodeAttribute()->GetAttributeType() : FbxNodeAttribute::EType::eUnknown;
-                    node.name = fbx_node->GetName();
-                    node.unique_id = fbx_node->GetUniqueID();
-                    node.parent_index = sceneView->indexof(fbx_node->GetParent() ? fbx_node->GetParent()->GetUniqueID() : 0);
-    
-                    for (int child_index = 0; child_index < fbx_node->GetChildCount(); ++child_index)
-                    {
-                        traverse(fbx_node->GetChild(child_index));
-                    }
-            }
-            };
-            traverse(fbx_scene->GetRootNode());
-    
-    
-            FetchMeshes(fbx_scene, pSkinnedMesh->getMeshRawList());
-    
-            FetchMaterials(fbx_scene, local.string().c_str(), materialMap);
+            sceneView = new SceneMesh;
+
+            LoadScene(fbxScene);
+            FetchSkeletonMeshes(fbxScene, pMesh);
+            FetchMaterials(fbxScene, local.string().c_str(), materialMap);
+
+            mesh = SetToPoint<Meshes>(pMesh);
+            materialmanager->RegisterAllMaterialsFromMeshData(mesh, materialMap);
+
             
+            pMesh->CreateNewCereal();
+
         }
-   
-        animatorManager->CreateNewAnimatorFormModelFile(fbx_scene, sceneView, local, 0);
 
-        pSkinnedMesh->CreateComObjects(GameEngine::get()->getDevice());
-        pSkinnedMesh->CreateNewCereal();
-        mesh = SetToPoint<SkinnedMesh>(pSkinnedMesh);
-    
-        materialmanager->RegisterAllMaterialsFromMeshData(mesh, materialMap);
-        delete sceneView;
-       
     }
-
-    fbx_manager->Destroy();
+    animatorManager->CreateNewAnimatorFormModelFile(fbxScene, sceneView, local, 0);
+    pMesh->CreateComObjects(GameEngine::get()->getDevice());
+    delete sceneView;
     return Ismesh;
 }
 
-void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMesh>& meshes)
+void MeshLoaderManager::FetchRawMeshes(FbxScene* fbx_scene, std::shared_ptr<Meshes>& mesh)
 {
+    std::vector<std::shared_ptr<BaseMesh>>& listMesh = mesh->getMeshList();
+    
     for (const SceneMesh::Node& node : sceneView->nodes)
     {
         if (node.attribute != FbxNodeAttribute::EType::eMesh)
@@ -254,16 +207,147 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
         {
             continue;
         }
-        auto& mesh{ meshes.emplace_back() };
-        mesh.uniqueId = fbx_mesh->GetNode()->GetUniqueID();
-        mesh.name = fbx_mesh->GetNode()->GetName();
-        mesh.nodeIndex = sceneView->indexof(mesh.uniqueId);
-        mesh.defaultGlobalTransform = to_xmfloat4x4(fbx_mesh->GetNode()->EvaluateGlobalTransform());
+        std::shared_ptr<BaseMesh>& mesh{ listMesh.emplace_back() };
+        mesh.reset(new RawMesh);
+        mesh->uniqueId = fbx_mesh->GetNode()->GetUniqueID();
+        mesh->name = fbx_mesh->GetNode()->GetName();
+        mesh->nodeIndex = sceneView->indexof(mesh->uniqueId);
+        mesh->defaultGlobalTransform = to_xmfloat4x4(fbx_mesh->GetNode()->EvaluateGlobalTransform());
+
+        std::vector<Subset>& subsets{ mesh->subsets };
+        const int material_count{ fbx_mesh->GetNode()->GetMaterialCount() };
+        subsets.resize(material_count > 0 ? material_count : 1);
+
+
+        for (int material_index = 0; material_index < material_count; ++material_index)
+        {
+            const FbxSurfaceMaterial* fbx_material{ fbx_mesh->GetNode()->GetMaterial(material_index) };
+            subsets.at(material_index).materialUniqueId = fbx_material->GetUniqueID();
+        }
+        if (material_count > 0)
+        {
+            const int polygon_count{ fbx_mesh->GetPolygonCount() };
+            for (int polygon_index = 0; polygon_index < polygon_count; ++polygon_index)
+            {
+                const int material_index{ fbx_mesh->GetElementMaterial()->GetIndexArray().GetAt(polygon_index) };
+                subsets.at(material_index).indexCount += 3;
+            }
+            uint32_t offset{ 0 };
+            for (Subset& subset : subsets)
+            {
+                subset.startIndexLocation = offset;
+                offset += subset.indexCount;
+                subset.indexCount = 0;
+            }
+        }
+
+        const int polygon_count{ fbx_mesh->GetPolygonCount() };
+        std::vector<VertexBuff>& listVertex = mesh->GetVertexList();
+
+        listVertex.resize(polygon_count * 3LL);
+        mesh->indices.resize(polygon_count * 3LL);
+
+        FbxStringList uv_names;
+        fbx_mesh->GetUVSetNames(uv_names);
+
+        const FbxVector4* control_points{ fbx_mesh->GetControlPoints() };
+        for (int polygon_index = 0; polygon_index < polygon_count; ++polygon_index)
+        {
+            const int material_index{ material_count > 0 ? fbx_mesh->GetElementMaterial()->GetIndexArray().GetAt(polygon_index) : 0 };
+            Subset& subset{ subsets.at(material_index) };
+            const uint32_t offset{ subset.startIndexLocation + subset.indexCount };
+        
+            for (int position_in_polygon = 0; position_in_polygon < 3; ++position_in_polygon)
+            {
+                const int vertex_index{ polygon_index * 3 + position_in_polygon };
+        
+                VertexBuff vertex;
+
+                const int polygon_vertex{ fbx_mesh->GetPolygonVertex(polygon_index, position_in_polygon) };
+                VECTOR3 pos = { 
+                    static_cast<float>(control_points[polygon_vertex][0]),
+                    static_cast<float>(control_points[polygon_vertex][1]),
+                    static_cast<float>(control_points[polygon_vertex][2])
+                };
+                vertex.position = pos;
+              
+                if (fbx_mesh->GetElementNormalCount() > 0)
+                {
+                    FbxVector4 normal;
+                    fbx_mesh->GetPolygonVertexNormal(polygon_index, position_in_polygon, normal);
+                    VECTOR3 nor = { 
+                         static_cast<float>(normal[0]),
+                         static_cast<float>(normal[1]),
+                         static_cast<float>(normal[2])
+                    };
+                    vertex.normal = nor;
+                }
+                if (fbx_mesh->GenerateTangentsData(0, false))
+                {
+                    const FbxGeometryElementTangent* tangent = fbx_mesh->GetElementTangent(0);
+                    VECTOR4 tan = {
+                       static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[0]),
+                       static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[1]),
+                       static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[2]),
+                       static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[3]),
+                    };
+                    vertex.tangent = tan;
+                }
+                if (fbx_mesh->GetElementUVCount() > 0)
+                {
+                    FbxVector2 uv;
+                    bool unmapped_uv;
+                    fbx_mesh->GetPolygonVertexUV(polygon_index, position_in_polygon,
+                        uv_names[0], uv, unmapped_uv);
+                    VECTOR2 UV = {
+                       static_cast<float>(uv[0]),
+                       static_cast<float>(uv[1]),
+                    };
+                    vertex.texcoord = UV;
+        
+                }
+                listVertex.at(vertex_index) = vertex;
+                mesh->indices.at(static_cast<size_t>(offset) + position_in_polygon) = vertex_index;
+        
+        
+                subset.indexCount++;
+            }
+        }
+
+        FetchBouding(fbx_mesh, mesh);
+    }
+
+}
+
+void MeshLoaderManager::FetchSkeletonMeshes(FbxScene* fbx_scene, std::shared_ptr<Meshes>& mesh)
+{
+    std::vector<std::shared_ptr<BaseMesh>>& listMesh = mesh->getMeshList();
+
+    for (const SceneMesh::Node& node : sceneView->nodes)
+    {
+        if (node.attribute != FbxNodeAttribute::EType::eMesh)
+        {
+            continue;
+        }
+
+        FbxNode* fbx_node{ fbx_scene->FindNodeByName(node.name.c_str()) };
+        FbxMesh* fbx_mesh{ fbx_node->GetMesh() };
+        if (fbx_mesh->GetPolygonCount() == 0)
+        {
+            continue;
+        }
+        std::shared_ptr<SkeletonMesh> skeMesh = std::make_shared<SkeletonMesh>();
+        listMesh.push_back(skeMesh);
+
+        skeMesh->uniqueId = fbx_mesh->GetNode()->GetUniqueID();
+        skeMesh->name = fbx_mesh->GetNode()->GetName();
+        skeMesh->nodeIndex = sceneView->indexof(skeMesh->uniqueId);
+        skeMesh->defaultGlobalTransform = to_xmfloat4x4(fbx_mesh->GetNode()->EvaluateGlobalTransform());
         std::vector<std::vector<Skeleton::BoneInfluence>> bone_influences;
         FetchBoneInfluences(fbx_mesh, bone_influences);
-        FetchSkeleton(fbx_mesh, mesh.bindPose);
+        FetchSkeleton(fbx_mesh, skeMesh->bindPose);
 
-        std::vector<Subset>& subsets{ mesh.subsets };
+        std::vector<Subset>& subsets{ skeMesh->subsets };
         const int material_count{ fbx_mesh->GetNode()->GetMaterialCount() };
         subsets.resize(material_count > 0 ? material_count : 1);
 
@@ -292,13 +376,11 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
         }
 
         const int polygon_count{ fbx_mesh->GetPolygonCount() };
-        mesh.vertices.resize(polygon_count * 3LL);
-        mesh.indices.resize(polygon_count * 3LL);
-        if (mesh.vertices.size() == 0)
-        {
-            int a = 1;
-            a = 2;
-        }
+        std::vector<VertexBuff>& listVertex = skeMesh->GetVertexList();
+
+        listVertex.resize(polygon_count * 3LL);
+        skeMesh->indices.resize(polygon_count * 3LL);
+
         FbxStringList uv_names;
         fbx_mesh->GetUVSetNames(uv_names);
 
@@ -313,11 +395,15 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
             {
                 const int vertex_index{ polygon_index * 3 + position_in_polygon };
 
-                BoneVertex vertex;
+                VertexBuff vertex;
                 const int polygon_vertex{ fbx_mesh->GetPolygonVertex(polygon_index, position_in_polygon) };
-                vertex.position.x = static_cast<float>(control_points[polygon_vertex][0]);
-                vertex.position.y = static_cast<float>(control_points[polygon_vertex][1]);
-                vertex.position.z = static_cast<float>(control_points[polygon_vertex][2]);
+                VECTOR3 pos = {
+                    static_cast<float>(control_points[polygon_vertex][0]),
+                    static_cast<float>(control_points[polygon_vertex][1]),
+                    static_cast<float>(control_points[polygon_vertex][2])
+                };
+                vertex.position = pos;
+
                 const std::vector<Skeleton::BoneInfluence>& influences_per_control_point
                 { bone_influences.at(polygon_vertex) };
 
@@ -346,25 +432,23 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
                         vertex.boneWeights[i] += influences_per_control_point.at(influence_index).boneWeight;
                         vertex.boneIndices[i] = influences_per_control_point.at(influence_index).boneIndex;
 
-                       /* vertex.bone_weights[0] += influences_per_control_point.at(influence_index).bone_weight / 4;
-                        vertex.bone_weights[1] += influences_per_control_point.at(influence_index).bone_weight / 4;
-                        vertex.bone_weights[2] += influences_per_control_point.at(influence_index).bone_weight / 4;
-                        vertex.bone_weights[3] += influences_per_control_point.at(influence_index).bone_weight / 4;
-                        vertex.bone_indices[influence_index] = influences_per_control_point.at(influence_index).bone_index;*/
                     }
                 }
-                if(total_weight != 0)
-                for (size_t i = 0; i < MAX_BONE_INFLUENCES; ++i)
-                {
-                    vertex.boneWeights[i] /= total_weight;
-                }
+                if (total_weight != 0)
+                    for (size_t i = 0; i < MAX_BONE_INFLUENCES; ++i)
+                    {
+                        vertex.boneWeights[i] /= total_weight;
+                    }
                 if (fbx_mesh->GetElementNormalCount() > 0)
                 {
                     FbxVector4 normal;
                     fbx_mesh->GetPolygonVertexNormal(polygon_index, position_in_polygon, normal);
-                    vertex.normal.x = static_cast<float>(normal[0]);
-                    vertex.normal.y = static_cast<float>(normal[1]);
-                    vertex.normal.z = static_cast<float>(normal[2]);
+                    VECTOR3 nor = {
+                          static_cast<float>(normal[0]),
+                          static_cast<float>(normal[1]),
+                          static_cast<float>(normal[2])
+                    };
+                    vertex.normal = nor;
                 }
                 if (fbx_mesh->GetElementUVCount() > 0)
                 {
@@ -372,29 +456,34 @@ void MeshLoaderManager::FetchMeshes(FbxScene* fbx_scene, std::vector<SkeletonMes
                     bool unmapped_uv;
                     fbx_mesh->GetPolygonVertexUV(polygon_index, position_in_polygon,
                         uv_names[0], uv, unmapped_uv);
-                    vertex.texcoord.x = static_cast<float>(uv[0]);
-                    vertex.texcoord.y = 1.0f - static_cast<float>(uv[1]);
+                    VECTOR2 UV = {
+                        static_cast<float>(uv[0]),
+                        static_cast<float>(uv[1]),
+                    };
+                    vertex.texcoord = UV;
 
                 }
                 if (fbx_mesh->GenerateTangentsData(0, false))
                 {
                     const FbxGeometryElementTangent* tangent = fbx_mesh->GetElementTangent(0);
-                    vertex.tangent.x = static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[0]);
-                    vertex.tangent.y = static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[1]);
-                    vertex.tangent.z = static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[2]);
-                    vertex.tangent.w = static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[3]);
+                    VECTOR4 tan = {
+                        static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[0]),
+                        static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[1]),
+                        static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[2]),
+                        static_cast<float>(tangent->GetDirectArray().GetAt(vertex_index)[3]),
+                    };
+                    vertex.tangent = tan;
                 }
-                mesh.vertices.at(vertex_index) = std::move(vertex);
-                mesh.indices.at(static_cast<size_t>(offset) + position_in_polygon) = vertex_index;
+                listVertex.at(vertex_index) = vertex;
+                skeMesh->indices.at(static_cast<size_t>(offset) + position_in_polygon) = vertex_index;
 
 
                 subset.indexCount++;
             }
         }
 
-        FetchBouding(fbx_mesh, mesh);
+        FetchBouding(fbx_mesh, skeMesh);
     }
-
 }
 
 void MeshLoaderManager::FetchSkeleton(FbxMesh* fbx_mesh, Skeleton& bind_pose)
@@ -588,20 +677,77 @@ void MeshLoaderManager::FetchMaterials(FbxScene* fbx_scene, std::filesystem::pat
 
 }
 
-void MeshLoaderManager::FetchBouding(FbxMesh* fbx_mesh, BaseMesh& mesh)
+void MeshLoaderManager::FetchBouding(FbxMesh* fbx_mesh, std::shared_ptr<BaseMesh> mesh)
 {
     fbx_mesh->ComputeBBox();
     const FbxDouble3 bbMax = fbx_mesh->BBoxMax;
     const FbxDouble3 bbMin = fbx_mesh->BBoxMin;
-    mesh.boundingBox[0].x = std::min<float>(mesh.boundingBox[0].x, static_cast<float>(bbMin.mData[0]));
-    mesh.boundingBox[0].y = std::min<float>(mesh.boundingBox[0].y, static_cast<float>(bbMin.mData[1]));
-    mesh.boundingBox[0].z = std::min<float>(mesh.boundingBox[0].z, static_cast<float>(bbMin.mData[2]));
-    mesh.boundingBox[1].x = std::max<float>(mesh.boundingBox[1].x, static_cast<float>(bbMax.mData[0]));
-    mesh.boundingBox[1].y = std::max<float>(mesh.boundingBox[1].y, static_cast<float>(bbMax.mData[1]));
-    mesh.boundingBox[1].z = std::max<float>(mesh.boundingBox[1].z, static_cast<float>(bbMax.mData[2]));
-    DirectX::XMVECTOR V = DirectX::XMLoadFloat3(&mesh.boundingBox[0]);
-    DirectX::XMMATRIX M = DirectX::XMLoadFloat4x4(&mesh.defaultGlobalTransform);
-    DirectX::XMStoreFloat3(&mesh.boundingBox[0], DirectX::XMVector3TransformCoord(V, M));
-    V = DirectX::XMLoadFloat3(&mesh.boundingBox[1]);
-    DirectX::XMStoreFloat3(&mesh.boundingBox[1], DirectX::XMVector3TransformCoord(V, M));
+    mesh->boundingBox[0].x = std::min<float>(mesh->boundingBox[0].x, static_cast<float>(bbMin.mData[0]));
+    mesh->boundingBox[0].y = std::min<float>(mesh->boundingBox[0].y, static_cast<float>(bbMin.mData[1]));
+    mesh->boundingBox[0].z = std::min<float>(mesh->boundingBox[0].z, static_cast<float>(bbMin.mData[2]));
+    mesh->boundingBox[1].x = std::max<float>(mesh->boundingBox[1].x, static_cast<float>(bbMax.mData[0]));
+    mesh->boundingBox[1].y = std::max<float>(mesh->boundingBox[1].y, static_cast<float>(bbMax.mData[1]));
+    mesh->boundingBox[1].z = std::max<float>(mesh->boundingBox[1].z, static_cast<float>(bbMax.mData[2]));
+    DirectX::XMVECTOR V = DirectX::XMLoadFloat3(&mesh->boundingBox[0]);
+    DirectX::XMMATRIX M = DirectX::XMLoadFloat4x4(&mesh->defaultGlobalTransform);
+    DirectX::XMStoreFloat3(&mesh->boundingBox[0], DirectX::XMVector3TransformCoord(V, M));
+    V = DirectX::XMLoadFloat3(&mesh->boundingBox[1]);
+    DirectX::XMStoreFloat3(&mesh->boundingBox[1], DirectX::XMVector3TransformCoord(V, M));
+}
+
+bool MeshLoaderManager::IsFbxHasMesh(std::filesystem::path local, FbxScene*& fbxScene)
+{
+    
+    fbxScene = FbxScene::Create(fbxManager, "");
+
+    FbxImporter* fbx_importer = FbxImporter::Create(fbxManager, "");
+    bool import_status{ false };
+    import_status = fbx_importer->Initialize(local.string().c_str());
+#ifdef USE_IMGUI
+    SUCCEEDEDRESULTTEXT(import_status, fbx_importer->GetStatus().GetErrorString());
+#else
+#endif // USE_IMGUI
+    import_status = fbx_importer->Import(fbxScene);
+#ifdef USE_IMGUI
+    SUCCEEDEDRESULTTEXT(import_status, fbx_importer->GetStatus().GetErrorString());
+#endif // USE_IMGUI
+
+
+    bool Ismesh = false;
+
+    for (int i = 0; i < fbxScene->GetNodeCount(); i++)
+    {
+        FbxNodeAttribute* nodeAtt = fbxScene->GetNode(i)->GetNodeAttribute();
+        if (nodeAtt && nodeAtt->GetAttributeType() == FbxNodeAttribute::EType::eMesh)
+        {
+            Ismesh = true;
+        }
+
+    }
+    return Ismesh;
+}
+
+void MeshLoaderManager::LoadScene(FbxScene* fbxScene)
+{
+    FbxGeometryConverter fbxConverter(fbxManager);
+    fbxConverter.Triangulate(fbxScene, true/*replace*/, false/*legacy*/);
+    fbxConverter.RemoveBadPolygonsFromMeshes(fbxScene);
+
+    std::function<void(FbxNode*)> traverse
+    { [&](FbxNode* fbx_node)
+        {
+            SceneMesh::Node& node{ sceneView->nodes.emplace_back() };
+            node.attribute = fbx_node->GetNodeAttribute() ? fbx_node->GetNodeAttribute()->GetAttributeType() : FbxNodeAttribute::EType::eUnknown;
+            node.name = fbx_node->GetName();
+            node.unique_id = fbx_node->GetUniqueID();
+            node.parent_index = sceneView->indexof(fbx_node->GetParent() ? fbx_node->GetParent()->GetUniqueID() : 0);
+
+            for (int child_index = 0; child_index < fbx_node->GetChildCount(); ++child_index)
+            {
+                traverse(fbx_node->GetChild(child_index));
+            }
+    }
+    };
+    traverse(fbxScene->GetRootNode());
+
 }

@@ -32,8 +32,8 @@ void GameCamera::Init()
     vectorSphereToCameraPos = { 0,0,1 };
 #if _DEBUG
     pSmartVoid pMesh = SetToPoint(meshInfor.mesh_);
-    GameEngine::get()->LoadSkinnedMesh("./EngineObject/Camera/camera.fbx", pMesh);
-    meshInfor.mesh_ = GetFromPoint<SkinnedMesh>(pMesh);
+    //GameEngine::get()->LoadSkinnedMesh("./EngineObject/Camera/camera.fbx", pMesh);
+    //meshInfor.mesh_ = GetFromPoint<SkinnedMesh>(pMesh);
 #else
     while (ShowCursor(false) >= 0) {}
 #endif // _DEBUG
@@ -95,7 +95,7 @@ void GameCamera::Draw()
     DirectX::XMMATRIX T = DirectX::XMMatrixTranslationFromVector(Eye);
     DirectX::XMMATRIX S = DirectX::XMMatrixScaling(1, 1, 1);
     DirectX::XMStoreFloat4x4(&worldTransform, S * R * T);
-    Camera::Draw();
+    //Camera::Draw();
 }
 
 void GameCamera::SetAimmingCamera(float disUp, float disScreenWight, float disNear)

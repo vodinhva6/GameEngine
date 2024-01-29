@@ -3,44 +3,71 @@
 
 void RawMesh::CreateCOM(ID3D11Device* device)
 {
-    HRESULT hr{ S_OK };
-    D3D11_BUFFER_DESC buffer_desc{};
-    D3D11_SUBRESOURCE_DATA subresource_data{};
-    buffer_desc.ByteWidth = static_cast<UINT>(sizeof(RawVertex) * vertices.size());
-    buffer_desc.Usage = D3D11_USAGE_DEFAULT;
-    buffer_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-    buffer_desc.CPUAccessFlags = 0;
-    buffer_desc.MiscFlags = 0;
-    buffer_desc.StructureByteStride = 0;
-    subresource_data.pSysMem = vertices.data();
-    subresource_data.SysMemPitch = 0;
-    subresource_data.SysMemSlicePitch = 0;
-    hr = device->CreateBuffer(&buffer_desc, &subresource_data, vertexBuffer.ReleaseAndGetAddressOf());
-
-    _ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
-
-    buffer_desc.ByteWidth = static_cast<UINT>(sizeof(uint32_t) * indices.size());
-    buffer_desc.Usage = D3D11_USAGE_DEFAULT;
-    buffer_desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    subresource_data.pSysMem = indices.data();
-    hr = device->CreateBuffer(&buffer_desc, &subresource_data,
-        indexBuffer.ReleaseAndGetAddressOf());
-    _ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
+    //std::vector<RawVertex> rawVertices;
+    //
+    //std::transform(vertices.begin(), vertices.end(), std::back_inserter(rawVertices),
+    //    [](const auto& rawVertex) {
+    //        return *std::static_pointer_cast<RawVertex>(rawVertex).get();
+    //    });
+    //
+    //HRESULT hr{ S_OK };
+    //D3D11_BUFFER_DESC buffer_desc{};
+    //D3D11_SUBRESOURCE_DATA subresource_data{};
+    //buffer_desc.ByteWidth = static_cast<UINT>(sizeof(RawVertex) * vertices.size());
+    //buffer_desc.Usage = D3D11_USAGE_DEFAULT;
+    //buffer_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    //buffer_desc.CPUAccessFlags = 0;
+    //buffer_desc.MiscFlags = 0;
+    //buffer_desc.StructureByteStride = 0;
+    //subresource_data.pSysMem = rawVertices.data();
+    //subresource_data.SysMemPitch = 0;
+    //subresource_data.SysMemSlicePitch = 0;
+    //hr = device->CreateBuffer(&buffer_desc, &subresource_data, vertexBuffer.ReleaseAndGetAddressOf());
+    //
+    //_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
+    //
+    //buffer_desc.ByteWidth = static_cast<UINT>(sizeof(uint32_t) * indices.size());
+    //buffer_desc.Usage = D3D11_USAGE_DEFAULT;
+    //buffer_desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    //subresource_data.pSysMem = indices.data();
+    //hr = device->CreateBuffer(&buffer_desc, &subresource_data,
+    //    indexBuffer.ReleaseAndGetAddressOf());
+    //_ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
 
 }
 
 void SkeletonMesh::CreateCOM(ID3D11Device* device)
 {
     HRESULT hr{ S_OK };
+
+   
+
+   
+    //boneVertices.resize(vertices.size());
+    //for (size_t i = 0; i < vertices.size(); i++) 
+    //{
+    //    auto rawVertex = std::dynamic_pointer_cast<BoneVertex>(vertices[i]);
+    //    boneVertices[i].position = rawVertex->getPosition();
+    //    boneVertices[i].normal   = rawVertex->getNormal();
+    //    boneVertices[i].tangent  = rawVertex->getTangent();
+    //    boneVertices[i].texcoord = rawVertex->getTexcoord();
+    //    for (size_t j = 0; j < MAX_BONE_INFLUENCES; j++)
+    //    {
+    //        boneVertices[i].boneIndices[j] = rawVertex->boneIndices[j];
+    //        boneVertices[i].boneWeights[j] = rawVertex->boneWeights[j];
+    //    }
+    //   
+    //}
+
     D3D11_BUFFER_DESC buffer_desc{};
     D3D11_SUBRESOURCE_DATA subresource_data{};
-    buffer_desc.ByteWidth = static_cast<UINT>(sizeof(BoneVertex) * vertices.size());
+    buffer_desc.ByteWidth = static_cast<UINT>(sizeof(VertexBuff) *boneVertices.size());
     buffer_desc.Usage = D3D11_USAGE_DEFAULT;
     buffer_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     buffer_desc.CPUAccessFlags = 0;
     buffer_desc.MiscFlags = 0;
     buffer_desc.StructureByteStride = 0;
-    subresource_data.pSysMem = vertices.data();
+    subresource_data.pSysMem = boneVertices.data();
     subresource_data.SysMemPitch = 0;
     subresource_data.SysMemSlicePitch = 0;
     hr = device->CreateBuffer(&buffer_desc, &subresource_data, vertexBuffer.ReleaseAndGetAddressOf());
@@ -55,6 +82,7 @@ void SkeletonMesh::CreateCOM(ID3D11Device* device)
         indexBuffer.ReleaseAndGetAddressOf());
     _ASSERT_EXPR(SUCCEEDED(hr), hr_trace(hr));
 }
+
 
 BaseMesh::BaseMesh()
 {

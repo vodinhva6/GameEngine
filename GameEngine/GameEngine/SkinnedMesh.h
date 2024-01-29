@@ -4,7 +4,7 @@
 
 #include "Mesh.h"
 
-class SkinnedMesh : public Mesh
+class SkinnedMesh : public Meshes
 {
 public:
     SkinnedMesh() {}
@@ -17,24 +17,16 @@ public:
     void ShadowCaster(ID3D11DeviceContext* immediate_context, const DirectX::XMFLOAT4X4& world,
         const std::unordered_map<int64_t, std::shared_ptr<Material>>& materialList,
         const VECTOR4& material_color, UINT numIndex, Animation::Keyframe* keyFrame = nullptr);
-    void CreateNewCereal();
-    bool IsCanLoadCereal(std::string local);
+    void CreateNewCereal() override;
+    bool IsCanLoadCereal(std::string local) override;
     virtual ~SkinnedMesh();
 
-public:
-    
-    std::vector<SkeletonMesh>& getMeshRawList() { return meshes; }
-
-    
 public:
     template < class T>
     void serialize(T& archive)
     {
-        archive(cereal::base_class<Mesh>(this), meshes);
+        archive(cereal::base_class<Meshes>(this));
     }
-
-protected:
-    std::vector<SkeletonMesh> meshes;
 
 private:
     void UpdateVertexMaxMinInfor() override;

@@ -4,8 +4,7 @@
 #include "CameraManager.h"
 #include "PlayerIdleState.h"
 #include "PLayerWalkState.h"
-#include "PLayerPistolState.h"
-#include "PlayerBattleState.h"
+
 Player::Player()
 {
     moveSpeed = 5;
@@ -14,7 +13,7 @@ Player::Player()
     
     stateMachine->RegisterNode("IDLE", std::make_shared<PlayerIdleState>(this));
     stateMachine->RegisterNode("WALK", std::make_shared<PLayerWalkState>(this));
-   
+
     stateMachine->RegisterSubNode("WALK_FORWARD", "WALK", std::make_shared<PlayerWalkForwardState>(this));
     stateMachine->RegisterSubNode("WALK_BACK", "WALK", std::make_shared<PlayerWalkBackState>(this));
     stateMachine->RegisterSubNode("WALK_STRAFERIGHT", "WALK", std::make_shared<PlayerWalkStrafeRightState>(this));
@@ -24,11 +23,6 @@ Player::Player()
     stateMachine->RegisterSubNode("WALK_LEFTBACK", "WALK", std::make_shared<PlayerWalkLeftBackState>(this));
     stateMachine->RegisterSubNode("WALK_RIGHTFRONT", "WALK", std::make_shared<PlayerWalkRightFrontState>(this));
     stateMachine->RegisterSubNode("WALK_RIGHTBACK", "WALK", std::make_shared<PlayerWalkRightBackState>(this));
-
-    stateMachine->RegisterNode("BATTLE", std::make_shared<PlayerBattleState>(this));
-    stateMachine->RegisterSubNode("PISTOL", "BATTLE", std::make_shared<PlayerPistolState>(this));
-    stateMachine->RegisterSubNode("PISTOL_AIM", "PISTOL", std::make_shared<PlayerPistolAimState>(this));
-
 
 
     stateMachine->Init("IDLE");
@@ -109,16 +103,11 @@ void Player::UpdateMove(float value, float elapsed_time)
     moveVec = MyMath::get()->ScaleVector3(moveVec, value);
     float plAngle = MyMath::get()->AngleBetweenVectorReturnDegrees(playerForwardVec, cameraForward);
     float factor = 1;
-    addSpeedRotation({ 0,DirectX::XMConvertToRadians(plAngle) * factor,0 });
+    //addSpeedRotation({ 0,DirectX::XMConvertToRadians(plAngle) * factor,0 });
   
    
     addSpeed(moveVec);
-
-    VECTOR3 speed = getSpeed();
-    if(MyMath::get()->Length(speed) > 0.5f);
-    speed = MyMath::get()->ScaleVector3(MyMath::get()->Normalize(speed),0.5f);
-    setSpeed(speed);
-    impluseMoveSpeed(elapsed_time);
+    
 }
 
 

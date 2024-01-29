@@ -18,9 +18,6 @@ public:
 
 
     float getTriggerRight(int playerNum);
-    float getTriggerLeft(int playerNum);
-
-
     bool PressT(int PlayerNum);
     bool PressS(int PlayerNum);
     bool PressE(int PlayerNum);
@@ -70,8 +67,7 @@ private:
         VECTOR2 OldPositionLeftJoy;
         VECTOR2 OldPositionRightJoy;
 
-        float triggerRight;
-        float triggerLeft;
+        float TriggerRight;
         int PressTRG;
         int Release;
         int StatePress;

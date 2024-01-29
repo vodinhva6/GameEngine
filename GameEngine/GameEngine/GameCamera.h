@@ -8,8 +8,7 @@ public:
     void PerspectiveFovInforUpdate() override;
     void CreateViewPortRay() override;
     void Draw() override;
-    void SetAimmingCamera(float disUp, float disScreenWight, float disNear);
-    void SetDefault();
+
 //public:
 //    template < class T>
 //    void serialize(T& archive)
@@ -36,19 +35,13 @@ private:
     float speedChange;
     float project2DSize;
     float projectionChangeSpeedUpRate;
-
     float distanceToCameraPos;
     float distanceFromPlayer;
     float distanceUpFromPlayerPos;
 
-    float saveDistanceToCameraPos;
-    float saveDistanceFromPlayer;
-    float saveDistanceUpFromPlayerPos;
-
     VECTOR3 spherePivot;
     VECTOR3 vectorToSpherePivot;
     VECTOR3 vectorSphereToCameraPos;
-
 
 private:
     DirectX::XMMATRIX* changeToProjection;

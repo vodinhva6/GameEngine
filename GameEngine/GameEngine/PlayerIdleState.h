@@ -12,8 +12,8 @@ public:
     ~PlayerIdleState();
 
 private:
-    void PlayerMove(std::string& result);
-    void PlayerBattle(std::string& result);
+    std::string OwnerMove();
+    
 };
 
 #endif // !IDLESTATE_H

@@ -48,7 +48,7 @@ void Character::BlendAnimation(float elapsedTime)
     frameAnimationOld = frameAnimationNow;
     animation.key = meshInfor.animator_->BlendAnimations(animationClipOld,animationClipSubOld, animation.timeLine,
         animationClip,animationClipSub, blendTime, frameAnimationNow);
-    blendTime += blenderTimeStep;
+    blendTime += 0.13f;
     if (blendTime >= 1)
     {
         animationClipOld = animationClip;
@@ -88,11 +88,10 @@ void Character::GravityImpuse(float elapsed_time)
         speed_.y += speed_.y * gravityRate;
 }
 
-void Character::BeginBlendingAnimation(float blenderTimeStep)
+void Character::BeginBlendingAnimation()
 {
     blendTime = 0;
     blending = true;
-    this->blenderTimeStep = blenderTimeStep;
 }
 
 VECTOR3 Character::getVectorForward()
@@ -116,8 +115,8 @@ void Character::HorizoncalUpdate(float elapsed_time)
 
 void Character::impluseMoveSpeed(float elapsed_time)
 {
-    position_ += speed_;
+    //position_ += speed_;
     rotation_ += speedRotation_;
     speedRotation_ *= 0.8f;
-    speed_ *= 0.65f;
+    speed_ *= 0.7f;
 }

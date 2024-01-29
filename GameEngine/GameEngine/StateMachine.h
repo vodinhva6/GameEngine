@@ -18,7 +18,7 @@ public:
     ~StateMachine();
 
 private:
-    void SearchAndPush(std::string subName, std::string nodeName, std::shared_ptr<StateNode>& node, std::shared_ptr<StateNode>& pushNode);
+    void SearchAndPush(std::string subName, std::string nodeName, std::shared_ptr<StateNode>& node);
 
     std::unordered_map<std::string, std::shared_ptr<StateNode>> nodes;
 

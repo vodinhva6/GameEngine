@@ -28,8 +28,8 @@ void StateMachine::RegisterSubNode(std::string subName, std::string nodeName, st
     if (it != nodes.end())
         it->second->getNodes().insert(std::make_pair(subName, node));
     else
-        for (auto& pnode : nodes)
-            SearchAndPush(subName, nodeName, pnode.second, node);
+        for (auto& node : nodes)
+            SearchAndPush(subName, nodeName, node.second);
 }
 
 void StateMachine::ChangeState(std::string stateName)
@@ -47,7 +47,7 @@ StateMachine::~StateMachine()
 {
 }
 
-void StateMachine::SearchAndPush(std::string subName, std::string nodeName, std::shared_ptr<StateNode>& node, std::shared_ptr<StateNode>& pushNode)
+void StateMachine::SearchAndPush(std::string subName, std::string nodeName, std::shared_ptr<StateNode>& node)
 {
     static bool result = false;
     if (result) return;
@@ -56,10 +56,10 @@ void StateMachine::SearchAndPush(std::string subName, std::string nodeName, std:
     if (it != nodes.end())
     {
         result = true;
-        it->second->getNodes().insert(std::make_pair(subName, pushNode));
+        nodes.insert(std::make_pair(subName, node));
     }
     else
         for (auto& pNode : nodes)
             if (result) break;
-            else SearchAndPush(subName, nodeName, pNode.second, pushNode);
+            else SearchAndPush(subName, nodeName, node);
 }

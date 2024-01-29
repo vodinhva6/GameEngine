@@ -27,15 +27,8 @@ float ControlPad::getTriggerRight(int playerNum)
 {
     if (!enableUsing)
         return false;
-    return playerNum_[playerNum].triggerRight;
+    return playerNum_[playerNum].TriggerRight;
     
-}
-
-float ControlPad::getTriggerLeft(int playerNum)
-{
-    if (!enableUsing)
-        return false;
-    return playerNum_[playerNum].triggerLeft;
 }
 
 bool ControlPad::PressT(int PlayerNum)
@@ -244,8 +237,7 @@ void ControlPad::Update()
             playerNum_[i].PositionRightJoy.x = inputMana->getPadAddress()[i].rightX;
             playerNum_[i].PositionRightJoy.y = inputMana->getPadAddress()[i].rightY;
     
-            playerNum_[i].triggerRight = inputMana->getPadAddress()[i].right;
-            playerNum_[i].triggerLeft = inputMana->getPadAddress()[i].left;
+            playerNum_[i].TriggerRight = inputMana->getPadAddress()[i].right;
             playerNum_[i].PressTRG = inputMana->getPadAddress()[i].trigger;
             playerNum_[i].Release = inputMana->getPadAddress()[i].triggerUp;
         }
@@ -264,7 +256,7 @@ void ControlPad::Update()
             playerNum_[i].PositionRightJoy.x = Vec.x;
             playerNum_[i].PositionRightJoy.y = Vec.y;
 
-            playerNum_[i].triggerRight = 0;
+            playerNum_[i].TriggerRight = 0;
             playerNum_[i].PressTRG = 0;
             int stateInput = inputMana->getPadAddress()[i].state;
             playerNum_[i].StatePress = stateInput;
@@ -301,7 +293,7 @@ void ControlPad::Update()
 
             }
             if (stateInput & PAD_TRG1)
-                playerNum_[i].triggerRight = 1;
+                playerNum_[i].TriggerRight = 1;
             playerNum_[i].Release = inputMana->getPadAddress()[i].triggerUp;
             playerNum_[i].PressTRG = inputMana->getPadAddress()[i].trigger;
         }

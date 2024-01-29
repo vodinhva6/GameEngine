@@ -69,9 +69,12 @@
     <ClInclude Include="GameEngine\FrameDebug.h" />
     <ClInclude Include="GameEngine\FrameEffect.h" />
     <ClInclude Include="GameEngine\HighResolutionTimer.h" />
+<<<<<<< HEAD
     <ClInclude Include="GameEngine\Mesh.h" />
     <ClInclude Include="GameEngine\ObjModel.h" />
     <ClInclude Include="GameEngine\PlayerBattleState.h" />
+=======
+>>>>>>> parent of a57d50e (zz)
     <ClInclude Include="GameEngine\PlayerIdleState.h" />
     <ClInclude Include="GameEngine\InputManager.h" />
     <ClInclude Include="GameEngine\LightConstant.h" />
@@ -86,7 +89,6 @@
     <ClInclude Include="GameEngine\OBJ2D.h" />
     <ClInclude Include="GameEngine\OBJ3D.h" />
     <ClInclude Include="GameEngine\PlayerAnimator.h" />
-    <ClInclude Include="GameEngine\PlayerPistolState.h" />
     <ClInclude Include="GameEngine\PLayerWalkState.h" />
     <ClInclude Include="GameEngine\PointLight.h" />
     <ClInclude Include="GameEngine\RasterizerStateManager.h" />
@@ -182,9 +184,12 @@
     <ClCompile Include="GameEngine\GeometricPrimitive.cpp" />
     <ClCompile Include="GameEngine\GltfModel.cpp" />
     <ClCompile Include="GameEngine\GraphicEngine.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="GameEngine\Mesh.cpp" />
     <ClCompile Include="GameEngine\ObjModel.cpp" />
     <ClCompile Include="GameEngine\PlayerBattleState.cpp" />
+=======
+>>>>>>> parent of a57d50e (zz)
     <ClCompile Include="GameEngine\PlayerIdleState.cpp" />
     <ClCompile Include="GameEngine\InputManager.cpp" />
     <ClCompile Include="GameEngine\LightConstant.cpp" />
@@ -199,7 +204,6 @@
     <ClCompile Include="GameEngine\OBJ2D.cpp" />
     <ClCompile Include="GameEngine\OBJ3D.cpp" />
     <ClCompile Include="GameEngine\PlayerAnimator.cpp" />
-    <ClCompile Include="GameEngine\PlayerPistolState.cpp" />
     <ClCompile Include="GameEngine\PLayerWalkState.cpp" />
     <ClCompile Include="GameEngine\PointLight.cpp" />
     <ClCompile Include="GameEngine\RasterizerStateManager.cpp" />

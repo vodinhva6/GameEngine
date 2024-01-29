@@ -220,8 +220,9 @@ void GameEngine::LoadAnimationThumbnail(std::filesystem::path fileName, pSmartVo
 	*result = GraphicEngine::get()->LoadAnimation(fileName, *Animation);
 }
 
-bool GameEngine::CreateCapsuleDebug(pSmartVoid& cap, const float& height, const float& weight, const VECTOR3& offset)
+bool GameEngine::CreateCapsuleDebug(void* cap, const float& height, const float& weight, const VECTOR3& offset)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -247,11 +248,16 @@ bool GameEngine::CreateCapsuleDebug(pSmartVoid& cap, const float& height, const 
 	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
 	cap.reset(pCap);
 >>>>>>> parent of 3687b95 (fixx)
+=======
+	BoundingCapsule* pCap = static_cast<BoundingCapsule*>(cap);
+	pCap = GraphicEngine::get()->createCapsuleDebug(height, weight, offset);
+>>>>>>> parent of a31de18 (dda)
 	return true;
 }
 
-bool GameEngine::createSphereDebug(pSmartVoid& sphere, const float& radius, const VECTOR3& offset)
+bool GameEngine::createSphereDebug(void* sphere, const float& radius, const VECTOR3& offset)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -270,6 +276,9 @@ bool GameEngine::createSphereDebug(pSmartVoid& sphere, const float& radius, cons
 >>>>>>> parent of 97e62d9 (qd)
 =======
 	BoundingSphere* pSphere = std::static_pointer_cast<BoundingSphere>(sphere).get();
+=======
+	BoundingSphere* pSphere = static_cast<BoundingSphere*>(sphere);
+>>>>>>> parent of a31de18 (dda)
 	pSphere = GraphicEngine::get()->createSphereDebug(radius, offset);
 >>>>>>> parent of 3687b95 (fixx)
 	return true;
@@ -309,8 +318,9 @@ void GameEngine::DrawSprite3D(pSmartVoid sprite3D, const DirectX::XMFLOAT4X4 wor
 	GraphicEngine::get()->drawSprite3D(pSprite3D, world, color, drawTurn, name);
 }
 
-void GameEngine::DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
+void GameEngine::DrawDebugBounding(void* geo, const DirectX::XMFLOAT4X4 world, const VECTOR4& color, const int& type)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -329,6 +339,9 @@ void GameEngine::DrawDebugBounding(pSmartVoid geo, const DirectX::XMFLOAT4X4 wor
 >>>>>>> parent of 97e62d9 (qd)
 =======
 	GeometricPrimitive* pGeo = std::static_pointer_cast<GeometricPrimitive>(geo).get();
+=======
+	GeometricPrimitive* pGeo = static_cast<GeometricPrimitive*>(geo);
+>>>>>>> parent of a31de18 (dda)
 	GraphicEngine::get()->drawDebugBounding(pGeo, world, color, type);
 >>>>>>> parent of 3687b95 (fixx)
 }

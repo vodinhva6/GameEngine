@@ -7,8 +7,8 @@
 
 struct Bounding
 {
-    std::shared_ptr<BoundingSphere >sphere_ ;
-    std::shared_ptr<BoundingCapsule> capsule_;
+    BoundingSphere* sphere_ = nullptr;
+    BoundingCapsule* capsule_ = nullptr;
     std::vector<std::shared_ptr<Ray>> raylist;
 };
 #endif // !1

@@ -155,8 +155,6 @@ VECTOR3 CameraManager::getGameCameraRightVector()
 
 CameraManager::~CameraManager()
 {
-    int a = 1;
-    a = 2;
 }
 
 CameraManager::CameraManager()

@@ -3,7 +3,6 @@
 #include "MousePoint.h"
 #include "ControlPad.h"
 #include "ActorManager.h"
-#include "Collision.h"
 void GameCamera::Init()
 {
     Camera::Init();
@@ -13,6 +12,7 @@ void GameCamera::Init()
     saveDistanceUpFromPlayerPos = 10;
 
     SetDefault();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -47,6 +47,10 @@ void GameCamera::Init()
 >>>>>>> parent of a31de18 (dda)
 =======
 >>>>>>> parent of 97e62d9 (qd)
+=======
+    
+
+>>>>>>> parent of a31de18 (dda)
     projection2DViewNow = false;
     changeToProjection = nullptr;
     speedChange = 0;
@@ -143,12 +147,6 @@ void GameCamera::SetDefault()
     distanceFromPlayer = saveDistanceFromPlayer;
 }
 
-GameCamera::~GameCamera()
-{
-    int a = 1;
-    a = 2;
-}
-
 
 
 void GameCamera::GameCameraFirstPerson()
@@ -224,7 +222,7 @@ void GameCamera::GameCameraThirdPerson()
         //rightJoy = { 0,0 };
     vectorToSpherePivot = MyMath::get()->Normalize(MyMath::get()->Vector3Rotation(vectorToSpherePivot, cameraUp, MyMath::get()->convertToRadian(rightJoy.x * sensitivity)));
     static VECTOR3 temp;
-    temp = MyMath::get()->Lerp(temp, plPos + MyMath::get()->ScaleVector3(vectorToSpherePivot, distanceFromPlayer), 0.7f);
+    temp = MyMath::get()->Lerp(temp, plPos + MyMath::get()->ScaleVector3(vectorToSpherePivot, distanceFromPlayer), 0.3f);
     spherePivot.x = temp.x;
     spherePivot.z = temp.z;
     spherePivot.y = MyMath::get()->Lerp(spherePivot.y, plPos.y + distanceUpFromPlayerPos, 0.3f);

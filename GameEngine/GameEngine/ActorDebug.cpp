@@ -205,7 +205,7 @@ void ActorDebug::UpdateDebugMaterial(OBJ3D* obj)
     
         if (itemCurrent >= listMeshName.size())
             itemCurrent = listMeshName.size() - 1;
-    BaseMesh* mesh = nullptr;
+    MeshRaw* mesh = nullptr;
     mesh = &pSkinnedMesh->getMeshRawList().at(itemCurrent);
     
     if (selected >= mesh->subsets.size())
@@ -314,7 +314,7 @@ void ActorDebug::UpdateDebugMeshes(OBJ3D* obj)
         auto& pMeshRawList = pMesh->getMeshRawList();
         for (auto& meshRaw : pMeshRawList)
         {
-            BaseMesh& raw = listMesh.emplace_back();
+            MeshRaw& raw = listMesh.emplace_back();
             raw = meshRaw;
         }
         

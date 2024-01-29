@@ -306,7 +306,7 @@ private:
     {
     public:
         StaticMeshData* getStaticMeshData() override { return this; }
-        StaticMeshData(RawMesh* staticMesh, const VECTOR3& position,
+        StaticMeshData(StaticMesh* staticMesh, const VECTOR3& position,
             const VECTOR3& rotation,
             const VECTOR3& size, const VECTOR4& color, int drawTurn, DrawStates drawState,
             const bool& drawBoudingBox
@@ -330,7 +330,7 @@ private:
             return *this;
         }
 
-        RawMesh* staticMesh_;
+        StaticMesh* staticMesh_;
         VECTOR3 position_;
         VECTOR3 rotation_;
         VECTOR3 size_;

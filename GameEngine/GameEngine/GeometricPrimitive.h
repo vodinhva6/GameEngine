@@ -2,8 +2,8 @@
 #include <wrl.h>
 #include <d3d11.h>
 #include <directxmath.h>
-#include <RawMesh.h>
-class GeometricPrimitive : public RawMesh
+#include <MeshRaw.h>
+class GeometricPrimitive : public StaticMesh
 {
  
 public:

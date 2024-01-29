@@ -48,7 +48,7 @@ void MaterialManager::RegisterAllMaterialsFromMeshData(pSmartVoid& mesh, std::un
     std::shared_ptr<SkinnedMesh> pSkinnedMesh = GetFromPoint<SkinnedMesh>(mesh);
     std::filesystem::path fixed;
     CreateFolder(pSkinnedMesh->getLocalPath(), fixed);
-    for (BaseMesh& mesh : pSkinnedMesh->getMeshRawList())
+    for (MeshRaw& mesh : pSkinnedMesh->getMeshRawList())
         for (auto& subset : mesh.subsets)
         {
             auto it = materialMap.find(subset.materialUniqueId);

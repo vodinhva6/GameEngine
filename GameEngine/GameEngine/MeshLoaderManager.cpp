@@ -588,7 +588,7 @@ void MeshLoaderManager::FetchMaterials(FbxScene* fbx_scene, std::filesystem::pat
 
 }
 
-void MeshLoaderManager::FetchBouding(FbxMesh* fbx_mesh, BaseMesh& mesh)
+void MeshLoaderManager::FetchBouding(FbxMesh* fbx_mesh, MeshRaw& mesh)
 {
     fbx_mesh->ComputeBBox();
     const FbxDouble3 bbMax = fbx_mesh->BBoxMax;

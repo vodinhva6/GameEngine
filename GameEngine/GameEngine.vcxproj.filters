@@ -371,7 +371,7 @@
     <Filter Include="GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel">
       <UniqueIdentifier>{47084e64-2fdf-4739-b19b-21cd4f0bf4ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\RawMesh">
+    <Filter Include="GameEngine\1_Engines\GraphicEngine\Mesh\MeshRaw">
       <UniqueIdentifier>{a1afc771-31bf-4cec-9791-96e11495de19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -706,14 +706,11 @@
     <ClInclude Include="GameEngine\Voxel.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\RawMesh.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\RawMesh</Filter>
+    <ClInclude Include="GameEngine\MeshRaw.h">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\MeshRaw</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Mesh.h">
       <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\ObjModel.h">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1059,14 +1056,11 @@
     <ClCompile Include="GameEngine\Voxel.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\FramebufferManager\FrameVoxelization\Voxel</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\RawMesh.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\RawMesh</Filter>
+    <ClCompile Include="GameEngine\MeshRaw.cpp">
+      <Filter>GameEngine\1_Engines\GraphicEngine\Mesh\MeshRaw</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Mesh.cpp">
       <Filter>GameEngine\1_Engines\GraphicEngine\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\ObjModel.cpp">
-      <Filter>GameEngine\1_Engines\GraphicEngine\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

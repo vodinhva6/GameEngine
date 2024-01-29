@@ -13,15 +13,11 @@ class Mesh
 {
 public:
     Mesh();
-    void SetLocalPath(std::string local) { fileLocal = local; }\
-    VECTOR3 getVertexMin() { return VertexMinMaxInfor[1]; }
-    VECTOR3 getVertexMax() { return VertexMinMaxInfor[0]; }
+
     DirectX::XMFLOAT4X4& getDefaultTransform() { return defaultTransform; }
     std::string& getLocalPath() { return fileLocal; }
-
+    void SetLocalPath(std::string local) { fileLocal = local; }
     void SetDefaultTransform(DirectX::XMFLOAT4X4& tfDefault);
-
-public:
     struct Constants
     {
         DirectX::XMFLOAT4X4 world =
